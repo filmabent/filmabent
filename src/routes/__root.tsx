@@ -78,14 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "filmabent — Film Production" },
+      { name: "description", content: "filmabent is a film production company with a vintage soul — Super 8 weddings, retro documentaries and product films with real character." },
+      { name: "author", content: "filmabent" },
+      { property: "og:title", content: "filmabent — Film Production" },
+      { property: "og:description", content: "Vintage-style film production: Super 8 weddings, documentaries, retro product shoots." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "filmabent" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
