@@ -6,7 +6,7 @@
 
 /*
  * filmabent design system — retro / vintage film aesthetic.
- * Warm sepia paper background, deep ink, burnt-orange accent,
+ * Deep navy ground, cool blue signal accent, warm brass hairline,
  * film grain texture and serif display typography.
  */
 
@@ -46,32 +46,33 @@
 
 :root {
   --radius: 0.125rem;
-  /* near-black, warm undertone */
-  --background: oklch(0.13 0.008 60);
-  --foreground: oklch(0.88 0.02 80);
-  --card: oklch(0.16 0.008 60);
-  --card-foreground: oklch(0.88 0.02 80);
-  --popover: oklch(0.16 0.008 60);
-  --popover-foreground: oklch(0.88 0.02 80);
-  /* muted ember — tungsten glow */
-  --primary: oklch(0.62 0.13 45);
-  --primary-foreground: oklch(0.12 0.01 60);
-  --secondary: oklch(0.2 0.01 60);
-  --secondary-foreground: oklch(0.85 0.02 80);
-  --muted: oklch(0.19 0.008 60);
-  --muted-foreground: oklch(0.58 0.02 70);
-  --accent: oklch(0.22 0.015 55);
-  --accent-foreground: oklch(0.88 0.02 80);
+  /* deep navy — the house ground */
+  --background: oklch(0.16 0.045 258);
+  --foreground: oklch(0.9 0.02 235);
+  --card: oklch(0.2 0.05 258);
+  --card-foreground: oklch(0.9 0.02 235);
+  --popover: oklch(0.19 0.05 258);
+  --popover-foreground: oklch(0.9 0.02 235);
+  /* cool blue — the signal accent */
+  --primary: oklch(0.72 0.11 236);
+  --primary-foreground: oklch(0.14 0.04 258);
+  --secondary: oklch(0.24 0.05 258);
+  --secondary-foreground: oklch(0.88 0.02 235);
+  --muted: oklch(0.22 0.045 258);
+  --muted-foreground: oklch(0.66 0.035 240);
+  --accent: oklch(0.27 0.055 256);
+  --accent-foreground: oklch(0.9 0.02 235);
   --destructive: oklch(0.5 0.18 28);
   --destructive-foreground: oklch(0.96 0.02 85);
-  --border: oklch(0.26 0.01 60);
-  --input: oklch(0.26 0.01 60);
-  --ring: oklch(0.62 0.13 45);
-  --reel: oklch(0.09 0.005 60);
-  --reel-foreground: oklch(0.85 0.02 80);
-  --ember: oklch(0.62 0.13 45);
-  --cream: oklch(0.88 0.02 80);
-  --vignette: radial-gradient(ellipse at center, transparent 35%, oklch(0.06 0.005 60 / 0.85) 100%);
+  --border: oklch(0.3 0.05 256);
+  --input: oklch(0.3 0.05 256);
+  --ring: oklch(0.72 0.11 236);
+  --reel: oklch(0.1 0.04 265);
+  --reel-foreground: oklch(0.88 0.02 235);
+  /* warm brass — used sparingly, like a tungsten bulb */
+  --ember: oklch(0.74 0.1 65);
+  --cream: oklch(0.9 0.02 235);
+  --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
 }
 
 @layer base {
@@ -122,9 +123,11 @@
 @keyframes flicker { 0%,100% {opacity:1} 50% {opacity:.92} 52% {opacity:.8} 54% {opacity:.95} }
 @utility animate-flicker { animation: flicker 4s infinite; }
 
-/* vintage photo treatment */
-@utility photo-vintage {
-  filter: sepia(0.3) contrast(1.1) saturate(0.7) brightness(0.8);
+/* deep-blue light leak, glows behind the dark screens */
+@utility navy-leak {
+  background:
+    radial-gradient(60% 55% at 12% 100%, oklch(0.34 0.12 250 / 0.6) 0%, transparent 70%),
+    radial-gradient(55% 45% at 88% 0%, oklch(0.28 0.1 268 / 0.5) 0%, transparent 70%);
 }
 
 /* dashed film-perforation divider */
