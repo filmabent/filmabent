@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Camera, Clapperboard, Film, Heart, Instagram, Mail, MapPin, Youtube } from "lucide-react";
+import { Camera, Clapperboard, Film, Heart, Instagram, Mail, MapPin, Play, Youtube } from "lucide-react";
 
 import bts1 from "@/assets/bts/000049460017.jpg.asset.json";
 import bts2 from "@/assets/bts/000049460020.jpg.asset.json";
@@ -37,10 +38,10 @@ export const Route = createFileRoute("/")({
 });
 
 const videos = [
-  { id: "TeE6CvUIg0E", title: "Project 01" },
-  { id: "pNX1XCQijRQ", title: "Project 02" },
-  { id: "qBle2vkQjCg", title: "Project 03" },
-  { id: "ifzdD7G0ugA", title: "Project 04" },
+  { id: "TeE6CvUIg0E", title: "Reel I" },
+  { id: "pNX1XCQijRQ", title: "Reel II" },
+  { id: "qBle2vkQjCg", title: "Reel III" },
+  { id: "ifzdD7G0ugA", title: "Reel IV" },
 ];
 
 const services = [
@@ -83,7 +84,7 @@ function Index() {
   return (
     <div className="grain min-h-screen bg-background text-foreground">
       {/* Nav */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/85 backdrop-blur-sm">
+      <header className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-background/90 to-transparent">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a href="#top" className="font-display text-2xl tracking-tight">
             filmabent
@@ -96,7 +97,7 @@ function Index() {
           </nav>
           <a
             href="mailto:filmabent@gmail.com"
-            className="border border-foreground px-4 py-2 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-foreground hover:text-background"
+            className="border border-foreground/40 px-4 py-2 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-foreground hover:text-background"
           >
             Get in touch
           </a>
@@ -104,98 +105,32 @@ function Index() {
       </header>
 
       {/* Hero */}
-      <section id="top" className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-24">
-        <div className="mx-auto w-full max-w-6xl px-6">
-          <p className="mb-6 text-xs uppercase tracking-[0.35em] text-primary">
-            Est. on film · Berlin
-          </p>
-          <h1 className="font-display text-[13vw] leading-[0.9] tracking-tight md:text-[9rem]">
-            filmabent
-          </h1>
-          <p className="mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">
-            A film production company with a vintage soul. We shoot stories the
-            way they deserve to be remembered — warm, grainy, honest, and
-            impossible to scroll past.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#work"
-              className="bg-primary px-8 py-4 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-opacity hover:opacity-85"
-            >
-              Watch the work
-            </a>
-            <a
-              href="#contact"
-              className="border border-foreground px-8 py-4 text-xs uppercase tracking-[0.25em] transition-colors hover:bg-foreground hover:text-background"
-            >
-              Book a shoot
-            </a>
-          </div>
-        </div>
-
-        {/* marquee strip */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden border-y border-border bg-reel py-3 text-reel-foreground">
-          <div className="animate-marquee flex w-max whitespace-nowrap text-xs uppercase tracking-[0.3em]">
-            {Array.from({ length: 2 }).map((_, i) => (
-              <span key={i} className="flex">
-                {["Super 8", "Weddings", "Documentaries", "Product Films", "Music Videos", "Analog Soul", "16mm", "Retro Commercials"].map((w) => (
-                  <span key={w} className="mx-6 flex items-center gap-6">
-                    {w} <span className="text-primary">✦</span>
-                  </span>
-                ))}
+      <section id="top" className="relative flex min-h-screen items-end overflow-hidden">
+        <img src={bts7.url} alt="Two cinema cameras in red light" className="photo-vintage animate-flicker absolute inset-0 h-full w-full object-cover opacity-60" />
+        <div className="vignette absolute inset-0" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
+          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-primary">Est. on film · Berlin</p>
+          <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
+          <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+              Films with a vintage soul. Grainy, warm, honest —
+              made to be remembered, not scrolled past.
+            </p>
+            <a href="#work" className="group flex items-center gap-4 text-xs uppercase tracking-[0.3em]">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full border border-foreground/40 transition-colors group-hover:border-primary group-hover:text-primary">
+                <Play className="h-4 w-4" />
               </span>
-            ))}
+              Watch
+            </a>
           </div>
         </div>
       </section>
 
       {/* Work */}
-      <section id="work" className="mx-auto max-w-6xl px-6 py-28">
-        <div className="mb-14 flex items-end justify-between">
-          <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">Selected work</p>
-            <h2 className="font-display text-5xl md:text-7xl">The Reel</h2>
-          </div>
-          <span className="hidden text-xs uppercase tracking-[0.25em] text-muted-foreground md:block">
-            01 — 04
-          </span>
-        </div>
-        <div className="grid gap-10 md:grid-cols-2">
-          {videos.map((v) => (
-            <figure key={v.id} className="group">
-              <div className="relative overflow-hidden border border-border bg-reel shadow-[8px_8px_0_0_var(--color-foreground)]">
-                <div className="aspect-video">
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${v.id}`}
-                    title={v.title}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full"
-                  />
-                </div>
-              </div>
-              <figcaption className="mt-4 flex items-center justify-between text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                <span>{v.title}</span>
-                <span className="text-primary">▶ Play</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-10 text-center text-xs uppercase tracking-[0.25em] text-muted-foreground">
-          More on{" "}
-          <a
-            href="https://www.youtube.com/@filmabent"
-            target="_blank"
-            rel="noreferrer"
-            className="text-primary underline underline-offset-4"
-          >
-            YouTube
-          </a>
-        </p>
-      </section>
+      <WorkSection />
 
-      <div className="sprocket mx-auto max-w-6xl" />
+      
 
       {/* Services */}
       <section id="services" className="mx-auto max-w-6xl px-6 py-28">
@@ -206,9 +141,9 @@ function Index() {
           makes people feel something before they know why. Here's what that
           can look like for you:
         </p>
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2">
+        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
-            <div key={s.title} className="group bg-card p-10 transition-colors hover:bg-secondary">
+            <div key={s.title} className="group bg-background p-8 transition-colors hover:bg-card">
               <s.icon className="mb-6 h-8 w-8 text-primary" strokeWidth={1.5} />
               <h3 className="mb-3 font-display text-2xl">{s.title}</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{s.text}</p>
@@ -218,7 +153,7 @@ function Index() {
       </section>
 
       {/* Behind the scenes */}
-      <section id="bts" className="bg-reel py-28 text-reel-foreground">
+      <section id="bts" className="border-y border-border bg-reel py-28 text-reel-foreground">
         <div className="mx-auto max-w-6xl px-6">
           <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">On set</p>
           <h2 className="mb-14 font-display text-5xl md:text-7xl">Behind the scenes</h2>
@@ -293,5 +228,69 @@ function Index() {
         </div>
       </footer>
     </div>
+  );
+}
+
+
+function WorkSection() {
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const v = videos[active] ?? videos[0]!;
+  return (
+    <section id="work" className="mx-auto max-w-6xl px-6 py-32">
+      <div className="grid gap-10 md:grid-cols-[1fr_220px]">
+        <div className="relative aspect-video overflow-hidden bg-reel">
+          {playing ? (
+            <iframe
+              key={v.id}
+              src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1`}
+              title={v.title}
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          ) : (
+            <button onClick={() => setPlaying(true)} className="group absolute inset-0 h-full w-full" aria-label={`Play ${v.title}`}>
+              <img
+                src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`}
+                alt=""
+                className="photo-vintage h-full w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-[1.03] group-hover:opacity-90"
+              />
+              <div className="vignette absolute inset-0" />
+              <span className="absolute inset-0 flex items-center justify-center">
+                <span className="flex h-20 w-20 items-center justify-center rounded-full border border-foreground/50 backdrop-blur-sm transition-colors group-hover:border-primary group-hover:text-primary">
+                  <Play className="h-6 w-6" />
+                </span>
+              </span>
+              <span className="absolute bottom-5 left-6 text-[10px] uppercase tracking-[0.4em] text-foreground/80">
+                {String(active + 1).padStart(2, "0")} — {v.title}
+              </span>
+            </button>
+          )}
+        </div>
+        <div className="flex flex-col justify-between">
+          <div>
+            <p className="mb-3 text-[10px] uppercase tracking-[0.4em] text-primary">Selected work</p>
+            <h2 className="mb-10 font-display text-4xl">The Reel</h2>
+            <ol className="space-y-1">
+              {videos.map((item, i) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => { setActive(i); setPlaying(false); }}
+                    className={`flex w-full items-baseline gap-4 border-b border-border py-3 text-left text-xs uppercase tracking-[0.25em] transition-colors ${i === active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                  >
+                    <span className={i === active ? "text-primary" : ""}>{String(i + 1).padStart(2, "0")}</span>
+                    {item.title}
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <a href="https://www.youtube.com/@filmabent" target="_blank" rel="noreferrer" className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground hover:text-primary">
+            More on YouTube →
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }

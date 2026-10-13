@@ -45,33 +45,33 @@
 }
 
 :root {
-  --radius: 0.25rem;
-  /* sepia paper */
-  --background: oklch(0.935 0.028 85);
-  --foreground: oklch(0.22 0.03 60);
-  --card: oklch(0.955 0.025 88);
-  --card-foreground: oklch(0.22 0.03 60);
-  --popover: oklch(0.955 0.025 88);
-  --popover-foreground: oklch(0.22 0.03 60);
-  /* burnt orange — vintage Kodak warmth */
-  --primary: oklch(0.52 0.16 45);
-  --primary-foreground: oklch(0.96 0.02 85);
-  --secondary: oklch(0.88 0.035 80);
-  --secondary-foreground: oklch(0.28 0.04 55);
-  --muted: oklch(0.89 0.03 82);
-  --muted-foreground: oklch(0.45 0.04 60);
-  --accent: oklch(0.84 0.06 70);
-  --accent-foreground: oklch(0.24 0.03 60);
+  --radius: 0.125rem;
+  /* near-black, warm undertone */
+  --background: oklch(0.13 0.008 60);
+  --foreground: oklch(0.88 0.02 80);
+  --card: oklch(0.16 0.008 60);
+  --card-foreground: oklch(0.88 0.02 80);
+  --popover: oklch(0.16 0.008 60);
+  --popover-foreground: oklch(0.88 0.02 80);
+  /* muted ember — tungsten glow */
+  --primary: oklch(0.62 0.13 45);
+  --primary-foreground: oklch(0.12 0.01 60);
+  --secondary: oklch(0.2 0.01 60);
+  --secondary-foreground: oklch(0.85 0.02 80);
+  --muted: oklch(0.19 0.008 60);
+  --muted-foreground: oklch(0.58 0.02 70);
+  --accent: oklch(0.22 0.015 55);
+  --accent-foreground: oklch(0.88 0.02 80);
   --destructive: oklch(0.5 0.18 28);
   --destructive-foreground: oklch(0.96 0.02 85);
-  --border: oklch(0.78 0.035 75);
-  --input: oklch(0.78 0.035 75);
-  --ring: oklch(0.52 0.16 45);
-  /* dark film-reel band */
-  --reel: oklch(0.2 0.025 55);
-  --reel-foreground: oklch(0.93 0.028 85);
-  --ember: oklch(0.6 0.17 42);
-  --cream: oklch(0.955 0.025 88);
+  --border: oklch(0.26 0.01 60);
+  --input: oklch(0.26 0.01 60);
+  --ring: oklch(0.62 0.13 45);
+  --reel: oklch(0.09 0.005 60);
+  --reel-foreground: oklch(0.85 0.02 80);
+  --ember: oklch(0.62 0.13 45);
+  --cream: oklch(0.88 0.02 80);
+  --vignette: radial-gradient(ellipse at center, transparent 35%, oklch(0.06 0.005 60 / 0.85) 100%);
 }
 
 @layer base {
@@ -94,24 +94,37 @@
   }
 }
 
-/* film grain overlay */
+/* animated film grain, fixed over the whole viewport */
+@keyframes grain-shift {
+  0%,100% { transform: translate(0,0); }
+  20% { transform: translate(-3%,2%); }
+  40% { transform: translate(2%,-3%); }
+  60% { transform: translate(-2%,-1%); }
+  80% { transform: translate(3%,3%); }
+}
 @utility grain {
   position: relative;
-
   &::after {
     content: "";
-    position: absolute;
-    inset: 0;
+    position: fixed;
+    inset: -10%;
+    z-index: 60;
     pointer-events: none;
-    opacity: 0.5;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+    opacity: 0.16;
+    mix-blend-mode: screen;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain-shift 0.6s steps(4) infinite;
   }
 }
+@utility vignette {
+  background: var(--vignette);
+}
+@keyframes flicker { 0%,100% {opacity:1} 50% {opacity:.92} 52% {opacity:.8} 54% {opacity:.95} }
+@utility animate-flicker { animation: flicker 4s infinite; }
 
 /* vintage photo treatment */
 @utility photo-vintage {
-  filter: sepia(0.22) contrast(1.02) saturate(0.92);
+  filter: sepia(0.3) contrast(1.1) saturate(0.7) brightness(0.8);
 }
 
 /* dashed film-perforation divider */
