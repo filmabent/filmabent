@@ -106,10 +106,9 @@ function Index() {
 
       {/* Hero */}
       <section id="top" className="relative flex min-h-screen items-end overflow-hidden">
-        <img src={bts7.url} alt="Two cinema cameras in red light" className="animate-flicker absolute inset-0 h-full w-full object-cover opacity-90" />
-        <div className="navy-leak pointer-events-none absolute inset-0 mix-blend-screen" />
-        <div className="vignette absolute inset-0" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/55 to-transparent" />
+        <img src={bts7.url} alt="Two cinema cameras in red light" className="animate-flicker absolute inset-0 h-full w-full object-cover" />
+        <div className="vignette absolute inset-0 opacity-50" />
+        <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
           <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">Est. on film · Berlin</p>
           <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
@@ -258,7 +257,7 @@ function WorkSection() {
                 alt=""
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              <div className="vignette absolute inset-0" />
+              <div className="vignette absolute inset-0 opacity-50" />
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-reel via-reel/50 to-transparent" />
               <span className="absolute inset-0 flex items-center justify-center">
                 <span className="flex h-20 w-20 items-center justify-center rounded-full border border-foreground/50 backdrop-blur-sm transition-colors group-hover:border-primary group-hover:text-primary">
