@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Camera, Clapperboard, Film, Heart, Instagram, Mail, MapPin, Play, Youtube } from "lucide-react";
+import { Camera, Clapperboard, Heart, Instagram, Mail, MapPin, Music, Play, Sparkles, Youtube } from "lucide-react";
 
 import bts1 from "@/assets/bts/000049460017.jpg.asset.json";
 import bts2 from "@/assets/bts/000049460020.jpg.asset.json";
@@ -21,13 +21,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "filmabent crafts films with a retro heart: Super 8 weddings, vintage-style documentaries and retro product shoots. Based in Berlin.",
+          "filmabent crafts films with a retro heart: narrative films, Super 8 weddings, music videos, image films and documentaries. Based in Berlin.",
       },
       { property: "og:title", content: "filmabent — Film Production with a Vintage Soul" },
       {
         property: "og:description",
         content:
-          "Super 8 weddings, vintage-style documentaries and retro product shoots — film with real character.",
+          "Narrative films, Super 8 weddings, music videos, image films, documentaries and events — film with real character.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -46,24 +46,29 @@ const videos = [
 
 const services = [
   {
-    icon: Heart,
-    title: "Weddings on Super 8",
-    text: "Your day, captured on real film. Grain, warmth and light leaks included — a memory that feels like it was always there.",
+    icon: Clapperboard,
+    title: "Narrative Films",
+    text: "Short films and story work with a vintage pulse — written, shot and cut with real texture.",
   },
   {
-    icon: Film,
-    title: "Vintage Documentaries",
-    text: "Stories told with a retro eye. Documentary work that trades sterile sharpness for texture, soul and honesty.",
+    icon: Heart,
+    title: "Weddings on Super 8",
+    text: "Your day on real film. Grain, warmth and light leaks included — a memory that feels like it was always there.",
+  },
+  {
+    icon: Music,
+    title: "Music Videos",
+    text: "Ideas built around the song, with a look nobody mistakes for stock footage.",
   },
   {
     icon: Camera,
-    title: "Retro Product Shoots",
-    text: "Products with character. Analog-inspired visuals that make brands feel timeless instead of disposable.",
+    title: "Image Films & Documentaries",
+    text: "Brands and true stories told with a retro eye — honest, textured, worth a second watch.",
   },
   {
-    icon: Clapperboard,
-    title: "Music & Commercial Film",
-    text: "From music videos to brand spots — cinematic craft with a look nobody can mistake for stock footage.",
+    icon: Sparkles,
+    title: "Events",
+    text: "Concerts, launches and gatherings — covered properly, edited into something worth keeping.",
   },
 ];
 
@@ -141,11 +146,14 @@ function Index() {
           makes people feel something before they know why. Here's what that
           can look like for you:
         </p>
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((s) => (
-            <div key={s.title} className="group bg-background p-8 transition-colors hover:bg-card">
+        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-5">
+          {services.map((s, i) => (
+            <div
+              key={s.title}
+              className={`group bg-background p-6 transition-colors hover:bg-card xl:p-8 ${i === services.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""}`}
+            >
               <s.icon className="mb-6 h-8 w-8 text-primary" strokeWidth={1.5} />
-              <h3 className="mb-3 font-display text-2xl">{s.title}</h3>
+              <h3 className="mb-3 font-display text-xl xl:text-2xl">{s.title}</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">{s.text}</p>
             </div>
           ))}
@@ -177,7 +185,7 @@ function Index() {
         <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">Roll camera</p>
         <h2 className="font-display text-5xl md:text-7xl">Let's make something</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-          A wedding, a documentary, a product with a story — tell us what
+          A wedding, a record, a short film, an event — tell us what
           you're dreaming of and we'll bring the film.
         </p>
         <a
