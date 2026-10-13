@@ -235,7 +235,7 @@ function Index() {
 function WorkSection() {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const v = videos[active];
+  const v = videos[active] ?? videos[0]!;
   return (
     <section id="work" className="mx-auto max-w-6xl px-6 py-32">
       <div className="grid gap-10 md:grid-cols-[1fr_220px]">
