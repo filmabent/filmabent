@@ -1,7 +1,9 @@
 # filmabent site
 
 - [x] Retro/vintage design system (styles.css)
-- [x] Homepage: hero, 4 YouTube project videos, services (Narrative Films, Weddings on Super 8, Music Videos, Image Films & Documentaries, Events), BTS photo gallery
+- [x] Homepage: hero, 4 YouTube project videos, services, BTS photo gallery
+- [ ] Split Image Films and Documentaries into six evenly arranged service squares
+- [ ] Interactive behind-the-scenes gallery with full-screen viewing
 - [x] Socials: Instagram @filmabent, YouTube filmabent
 - [ ] TikTok link — user will send it; add to footer when received
 - [x] Google Maps link: https://maps.app.goo.gl/whusxa1zkMY6TPmX8
