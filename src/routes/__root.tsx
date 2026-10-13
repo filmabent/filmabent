@@ -85,6 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Vintage-style film production: Super 8 weddings, documentaries, retro product shoots." },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "filmabent" },
+      { name: "theme-color", content: "#101a2e" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
