@@ -112,10 +112,10 @@
 /* Coarse background grain stays beneath every content/media layer. */
 @keyframes grain-shift {
   0%,100% { transform: translate(0,0); }
-  20% { transform: translate(-3%,2%); }
-  40% { transform: translate(2%,-3%); }
-  60% { transform: translate(-2%,-1%); }
-  80% { transform: translate(3%,3%); }
+  20% { transform: translate(-1.5%,1%); }
+  40% { transform: translate(1%,-1.5%); }
+  60% { transform: translate(-1%,-0.5%); }
+  80% { transform: translate(1.5%,1.5%); }
 }
 @utility grain {
   position: relative;
@@ -129,7 +129,7 @@
     opacity: var(--grain-opacity);
     mix-blend-mode: screen;
     background-image: var(--ink-grain);
-    animation: grain-shift 0.6s steps(4) infinite;
+    animation: grain-shift 1s steps(4) infinite;
   }
 }
 @utility vignette {
@@ -186,7 +186,7 @@
 .scroll-light-leak[data-variant="4"] { background: var(--scroll-leak-bottom); }
 .scroll-light-leak[data-variant="5"] { background: var(--scroll-leak-bottom-right); }
 .scroll-light-leak.is-scrolling { opacity: 0.8; transition-duration: 90ms; }
-.grain > section:not(#bts), .grain > footer { position: relative; z-index: 1; }
+.grain > section:not(#top), .grain > footer { position: relative; z-index: 1; }
 #bts { position: relative; }
 .grain > footer, #bts, #services a.bg-background {
   background-image: var(--ink-grain);
