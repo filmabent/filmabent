@@ -240,7 +240,7 @@ function BehindTheScenes() {
         travel.current -= distance;
       } else {
         travel.current = 0;
-        if (!motion.matches && !stopped.current && !hovering.current && !focused.current) distance = dt * 0.03;
+        if (!motion.matches && !stopped.current && !hovering.current && !focused.current) distance = dt * 0.033;
       }
       if (width > 0) {
         if (distance) el.scrollLeft += distance;
