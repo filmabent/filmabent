@@ -124,14 +124,14 @@ function Index() {
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Studio</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Based in</p>
             <a
               href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
             >
-              <MapPin className="h-4 w-4 text-primary" /> Berlin — on the map
+              <MapPin className="h-4 w-4 text-primary" /> Berlin — filming across all of Europe
             </a>
           </div>
           <div>
@@ -184,7 +184,7 @@ function Index() {
             </a>
           </div>
           <span className="text-xs uppercase tracking-[0.2em] text-reel-foreground/60">
-            © {new Date().getFullYear()} filmabent — shot with love
+            © 2022 filmabent — shot with love
           </span>
         </div>
       </footer>
