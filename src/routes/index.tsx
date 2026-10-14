@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PortfolioGallery } from "@/components/portfolio-gallery";
@@ -39,13 +39,23 @@ export const Route = createFileRoute("/")({
 const gallery = [
   { src: "/bts/new-dsc8801.jpg", alt: "Behind the scenes on a filmabent set" },
   { src: "/bts/new-1.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8469.jpg", alt: "Behind the scenes on a filmabent set" },
   { src: "/bts/new-000049460017-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8894.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8469.jpg", alt: "Behind the scenes on a filmabent set" },
   { src: "/bts/new-dsc7497.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8596.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8814.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000163320024-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000049460020-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8894.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-img_4676-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000049460021-2.jpg", alt: "Behind the scenes on a filmabent set" },
   { src: "/bts/new-dsc8471.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8596.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000163320022-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000163320033-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8814.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dscf8670.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-img_4677-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000163320027-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-img_4719-2.jpg", alt: "Behind the scenes on a filmabent set" },
   { src: "/bts/new-dsc8808.jpg", alt: "Behind the scenes on a filmabent set" },
 ];
 
@@ -189,6 +199,8 @@ function BehindTheScenes() {
   const [paused, setPaused] = useState(false);
   const [open, setOpen] = useState<number | null>(null);
   const n = gallery.length;
+  const strip = useRef<HTMLDivElement>(null);
+  const slide = (d: number) => strip.current?.scrollBy({ left: d * strip.current.clientWidth * 0.6, behavior: "smooth" });
   const go = (d: number) => setOpen(i => i === null ? i : (i + d + n) % n);
   useEffect(() => {
     if (open === null) return;
@@ -201,7 +213,10 @@ function BehindTheScenes() {
       <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
       <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
     </div>
-    <div className={`bts-strip ${paused || open !== null ? "is-paused" : ""}`}>
+    <div className="relative">
+    <Button variant="outline" size="icon" aria-label="Scroll photos left" className="absolute left-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(-1)}><ChevronLeft /></Button>
+    <Button variant="outline" size="icon" aria-label="Scroll photos right" className="absolute right-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(1)}><ChevronRight /></Button>
+    <div ref={strip} className={`bts-strip overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${paused || open !== null ? "is-paused" : ""}`}>
       <div className="bts-track">
         {[0, 1].map(copy => <div className="bts-group" key={copy} aria-hidden={copy === 1}>
           {gallery.map((img, i) => <button key={img.src} type="button" tabIndex={copy === 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={`Open photo ${i + 1}`} className="shrink-0 cursor-zoom-in">
@@ -209,6 +224,7 @@ function BehindTheScenes() {
           </button>)}
         </div>)}
       </div>
+    </div>
     </div>
     {open !== null && <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
       <img src={gallery[open]!.src} alt={gallery[open]!.alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />

@@ -37,13 +37,13 @@ function CategoryGallery({ category, featured }: { category: typeof categories[n
   const [playing, setPlaying] = useState(false);
   const source = videoSource(featured);
   return <article id={category.slug} className="scroll-mt-24 border-b border-border py-10 md:py-12">
-    <div className="grid items-center gap-8 md:grid-cols-[1fr_1.65fr] md:gap-14">
+    <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.65fr)] md:gap-14">
       <div>
         <h3 className="font-display text-4xl md:text-5xl">{category.title}</h3>
         <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{category.text}</p>
       </div>
       <div>
-        <div className="relative aspect-video max-h-[60vh] border border-border bg-reel">
+        <div className="relative aspect-video w-full border border-border bg-reel">
           {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={`Play ${category.title}`} className="group relative h-full w-full overflow-hidden rounded-none p-0">{thumb(featured) && <img src={thumb(featured)!} alt="" className="absolute inset-0 h-full w-full object-cover" />}<span className="relative flex size-16 items-center justify-center rounded-full bg-reel/70 transition-transform group-hover:scale-110"><Play className="size-8 text-primary" /></span></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
         </div>
         <a
