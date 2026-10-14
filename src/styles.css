@@ -136,7 +136,16 @@
 @utility vignette {
   background: var(--vignette);
 }
-@keyframes flicker { 0%,100% {opacity:1} 50% {opacity:.92} 52% {opacity:.8} 54% {opacity:.95} }
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  19% { opacity: .93; }
+  21% { opacity: .82; }
+  23% { opacity: .96; }
+  58% { opacity: .9; }
+  60% { opacity: .79; }
+  63% { opacity: .95; }
+  85% { opacity: .94; }
+}
 @utility animate-flicker { animation: flicker 4s infinite; }
 
 /* deep-blue light leak, glows behind the dark screens */
@@ -199,19 +208,23 @@
 .group:hover .film-reel, a.group:focus-visible .film-reel { animation: reel-spin 1.6s linear infinite; }
 .film-unroll {
   pointer-events: none; position: absolute; left: 50%; bottom: 0;
-  height: 13px; width: 112px; transform: scaleX(0); transform-origin: left center;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  border-block: 1px solid currentColor;
+  height: 20px; width: 140px; clip-path: inset(0 100% 0 0);
+  transition: clip-path 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  border-block: 1px solid currentColor; border-right: 1px solid currentColor;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px);
+  mask-image: linear-gradient(to right, transparent 0, #000 14px);
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 2px, currentColor 2px 4px, transparent 4px 6px),
-    repeating-linear-gradient(90deg, transparent 0 2px, currentColor 2px 4px, transparent 4px 6px),
-    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 18px);
-  background-size: 100% 1.5px, 100% 1.5px, 100% 5px;
-  background-repeat: no-repeat;
-  background-position: 0 1.5px, 0 8.5px, 0 3px;
+    repeating-linear-gradient(90deg, transparent 0 3px, currentColor 3px 7px, transparent 7px 10px),
+    repeating-linear-gradient(90deg, transparent 0 3px, currentColor 3px 7px, transparent 7px 10px),
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 40px);
+  background-size: 100% 3px, 100% 3px, 160px 8px;
+  background-repeat: repeat-x;
+  background-position: 0 2px, 0 15px, 0 6px;
 }
-@keyframes film-feed { to { background-position: 6px 1.5px, 6px 8.5px, 18px 3px; } }
-.group:hover .film-unroll, a.group:focus-visible .film-unroll { transform: translateY(-50%) scaleX(1); animation: film-feed 0.9s linear infinite; }
+/* revealed with a clip so holes and frames stay full size the whole way out;
+   four sprocket holes per frame, all layers travelling the same 40px per cycle — one speed, seamless loop */
+@keyframes film-feed { to { background-position: 40px 2px, 40px 15px, 40px 6px; } }
+.group:hover .film-unroll, a.group:focus-visible .film-unroll { clip-path: inset(0 0 0 0); animation: film-feed 1.5s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
