@@ -33,3 +33,4 @@
 - [x] Top photo film flicker a little more often
 - [x] Bigger film strip with sprocket holes and frame lines travelling at one speed
 - [x] Film strip at the reel's height, its bottom edge level with the reel's bottom, holes visible the whole way out
+- [ ] Hero line 'Stories with character · Shot on feeling' in the filmabent logo red from the imagefilms/events thumbnail
