@@ -394,3 +394,4 @@
   .clapperboard .cb-arm, .clapper-slate .slate-arm { animation: none; }
   html { scroll-behavior: auto; }
 }
+@media (max-width: 639px), (hover: none) { .film-unroll { display: none; } }
