@@ -286,26 +286,28 @@ function ScrollLightLeak() {
     let timer: ReturnType<typeof setTimeout>;
     let lastY = window.scrollY;
     let lastTrigger = -Infinity;
-    let variation = -1;
-    const selectors = ["#work", "#weddings", "#imagefilms", "#contact"];
+    const spots = [
+      { progress: 0.04, variant: 0 },
+      { progress: 0.2, variant: 2 },
+      { progress: 0.39, variant: 4 },
+      { progress: 0.57, variant: 1 },
+      { progress: 0.74, variant: 3 },
+      { progress: 0.91, variant: 5 },
+    ];
     const onScroll = () => {
       const y = window.scrollY;
       const previous = lastY;
       lastY = y;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || performance.now() - lastTrigger < 2200) return;
-      const hero = document.querySelector("#top");
-      const heroPoint = hero ? hero.getBoundingClientRect().top + y + hero.clientHeight * 0.24 : -1;
-      const crossedHero = heroPoint > 0 && ((previous < heroPoint && y >= heroPoint) || (previous > heroPoint && y <= heroPoint));
-      const crossed = crossedHero || selectors.some(selector => {
-        const section = document.querySelector(selector);
-        if (!section) return false;
-        const point = section.getBoundingClientRect().top + y - window.innerHeight * 0.55;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || performance.now() - lastTrigger < 1400) return;
+      const distance = document.documentElement.scrollHeight - window.innerHeight;
+      if (distance <= 0) return;
+      const crossed = spots.find(spot => {
+        const point = distance * spot.progress;
         return (previous < point && y >= point) || (previous > point && y <= point);
       });
       if (!crossed || !leak.current) return;
       lastTrigger = performance.now();
-      variation = (variation + 1) % 5;
-      leak.current.dataset["variant"] = String(variation);
+      leak.current.dataset["variant"] = String(crossed.variant);
       leak.current.classList.add("is-scrolling");
       clearTimeout(timer);
       timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 260);

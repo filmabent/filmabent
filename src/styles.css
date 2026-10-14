@@ -73,11 +73,12 @@
   --ember: oklch(0.74 0.1 65);
   --cream: oklch(0.9 0.02 235);
   --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
-  --scroll-leak: linear-gradient(106deg, transparent 1%, oklch(0.7 0.24 49 / 0.42) 5%, oklch(0.74 0.22 53 / 0.2) 9%, transparent 20%);
-  --scroll-leak-right: linear-gradient(76deg, transparent 76%, oklch(0.71 0.24 48 / 0.22) 90%, oklch(0.74 0.23 54 / 0.44) 97%, transparent);
-  --scroll-leak-sweep: linear-gradient(165deg, transparent 40%, oklch(0.7 0.24 50 / 0.15) 48%, oklch(0.74 0.23 53 / 0.3) 51%, transparent 59%);
-  --scroll-leak-top: linear-gradient(176deg, oklch(0.73 0.24 51 / 0.4), oklch(0.7 0.23 48 / 0.16) 6%, transparent 17%);
-  --scroll-leak-bottom: linear-gradient(12deg, oklch(0.72 0.24 50 / 0.42), oklch(0.74 0.23 54 / 0.18) 8%, transparent 23%);
+  --scroll-leak: linear-gradient(106deg, oklch(0.66 0.26 32 / 0.7), oklch(0.72 0.24 43 / 0.62) 6%, oklch(0.7 0.24 39 / 0.3) 14%, transparent 32%);
+  --scroll-leak-right: linear-gradient(76deg, transparent 66%, oklch(0.69 0.25 36 / 0.3) 82%, oklch(0.72 0.24 44 / 0.65) 94%, oklch(0.65 0.26 31 / 0.75));
+  --scroll-leak-sweep: linear-gradient(148deg, oklch(0.66 0.26 33 / 0.65), oklch(0.72 0.24 43 / 0.42) 12%, transparent 37%);
+  --scroll-leak-top: linear-gradient(52deg, transparent 64%, oklch(0.7 0.25 38 / 0.4) 84%, oklch(0.67 0.26 32 / 0.72));
+  --scroll-leak-bottom: linear-gradient(24deg, oklch(0.68 0.26 34 / 0.72), oklch(0.72 0.24 44 / 0.4) 11%, transparent 34%);
+  --scroll-leak-bottom-right: linear-gradient(326deg, oklch(0.67 0.26 33 / 0.74), oklch(0.72 0.24 42 / 0.42) 13%, transparent 36%);
 }
 
 @layer base {
@@ -169,7 +170,8 @@
 .scroll-light-leak[data-variant="2"] { background: var(--scroll-leak-sweep); }
 .scroll-light-leak[data-variant="3"] { background: var(--scroll-leak-top); }
 .scroll-light-leak[data-variant="4"] { background: var(--scroll-leak-bottom); }
-.scroll-light-leak.is-scrolling { opacity: 0.5; transition-duration: 90ms; }
+.scroll-light-leak[data-variant="5"] { background: var(--scroll-leak-bottom-right); }
+.scroll-light-leak.is-scrolling { opacity: 0.8; transition-duration: 90ms; }
 .grain > section:not(#bts), .grain > footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
