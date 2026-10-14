@@ -341,12 +341,34 @@
   opacity: 0.7;
 }
 
+/* contact form as a full clapperboard — striped arm claps shut over the slate */
+@keyframes slate-clap {
+  0%, 78%, 100% { transform: rotate(0deg); }
+  84% { transform: rotate(-9deg); }
+  88% { transform: rotate(0deg); }
+}
+.clapper-slate { position: relative; }
+.clapper-slate .slate-arm {
+  height: 24px;
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+  background: repeating-linear-gradient(-58deg, var(--color-foreground) 0 14px, var(--color-reel) 14px 28px);
+  transform-origin: 8px 100%;
+  animation: slate-clap 7s ease-in-out infinite;
+}
+.clapper-slate .slate-body {
+  border: 1px solid var(--color-border);
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(var(--color-card), var(--color-card));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
   .bts-track { animation: none; }
    .scroll-light-leak { display: none; }
   .grain::after, .animate-flicker { animation: none; }
   .film-reel, .film-unroll { animation: none; }
-  .clapperboard .cb-arm { animation: none; }
+  .clapperboard .cb-arm, .clapper-slate .slate-arm { animation: none; }
   html { scroll-behavior: auto; }
 }

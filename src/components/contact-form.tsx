@@ -10,7 +10,8 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please write a message").max(3000),
 });
 
-const field = "w-full border border-border bg-transparent px-4 py-3 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none";
+const field = "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-3 text-sm placeholder:text-muted-foreground focus:border-b-2 focus:border-primary focus:outline-none";
+const slateLabel = "font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground";
 
 export function ContactForm() {
   const { t } = useLanguage();
@@ -36,15 +37,28 @@ export function ContactForm() {
 
   if (status === "sent") return <p className="mx-auto mt-10 max-w-md text-sm text-primary">{t("Thank you — your message is on its way. We’ll get back to you soon.", "Vielen Dank — deine Nachricht ist unterwegs. Wir melden uns bald.")}</p>;
 
-  return <form onSubmit={onSubmit} className="mx-auto mt-10 grid max-w-xl gap-3 text-left" noValidate>
-    <div className="grid gap-3 sm:grid-cols-2">
-      <input name="name" placeholder={t("Your name", "Dein Name")} aria-label={t("Your name", "Dein Name")} className={field} maxLength={100} />
-      <input name="email" type="email" placeholder={t("Your email", "Deine E-Mail")} aria-label={t("Your email", "Deine E-Mail")} className={field} maxLength={255} />
-    </div>
-    <textarea name="message" rows={5} placeholder={t("Tell us about your project", "Erzähl uns von deinem Projekt")} aria-label={t("Message", "Nachricht")} className={field} maxLength={3000} />
-    {(error || status === "error") && <p className="text-xs text-destructive">{error ? error === "name" ? t("Please add your name", "Bitte gib deinen Namen an") : error === "email" ? t("Please enter a valid email", "Bitte gib eine gültige E-Mail-Adresse ein") : t("Please write a message", "Bitte schreibe eine Nachricht") : t("Something went wrong — please try again or email filmabent@gmail.com.", "Etwas ist schiefgelaufen — bitte versuche es erneut oder schreibe an filmabent@gmail.com.")}</p>}
-    <Button type="submit" disabled={status === "sending"} className="h-auto rounded-none inline-flex items-center justify-center gap-3 bg-primary px-10 py-4 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-opacity hover:opacity-85 disabled:opacity-50">
-      <Send className="h-4 w-4" /> {status === "sending" ? t("Sending…", "Wird gesendet…") : t("Send message", "Nachricht senden")}
-    </Button>
-  </form>;
+  return <div className="clapper-slate mx-auto mt-10 max-w-xl text-left">
+    <div className="slate-arm" aria-hidden="true" />
+    <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-7 sm:px-8" noValidate>
+      <p className={slateLabel}>{t("Production — filmabent · Scene — your idea", "Produktion — filmabent · Szene — deine Idee")}</p>
+      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+        <label className="grid gap-1.5">
+          <span className={slateLabel}>{t("Name", "Name")}</span>
+          <input name="name" placeholder={t("Your name", "Dein Name")} aria-label={t("Your name", "Dein Name")} className={field} maxLength={100} />
+        </label>
+        <label className="grid gap-1.5">
+          <span className={slateLabel}>{t("Email", "E-Mail")}</span>
+          <input name="email" type="email" placeholder={t("Your email", "Deine E-Mail")} aria-label={t("Your email", "Deine E-Mail")} className={field} maxLength={255} />
+        </label>
+      </div>
+      <label className="grid gap-1.5">
+        <span className={slateLabel}>{t("Scene", "Szene")}</span>
+        <textarea name="message" rows={5} placeholder={t("Tell us about your project", "Erzähl uns von deinem Projekt")} aria-label={t("Message", "Nachricht")} className={field} maxLength={3000} />
+      </label>
+      {(error || status === "error") && <p className="text-xs text-destructive">{error ? error === "name" ? t("Please add your name", "Bitte gib deinen Namen an") : error === "email" ? t("Please enter a valid email", "Bitte gib eine gültige E-Mail-Adresse ein") : t("Please write a message", "Bitte schreibe eine Nachricht") : t("Something went wrong — please try again or email filmabent@gmail.com.", "Etwas ist schiefgelaufen — bitte versuche es erneut oder schreibe an filmabent@gmail.com.")}</p>}
+      <Button type="submit" disabled={status === "sending"} className="h-auto rounded-none inline-flex items-center justify-center gap-3 bg-primary px-10 py-4 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-opacity hover:opacity-85 disabled:opacity-50">
+        <Send className="h-4 w-4" /> {status === "sending" ? t("Sending…", "Wird gesendet…") : t("Send message", "Nachricht senden")}
+      </Button>
+    </form>
+  </div>;
 }
