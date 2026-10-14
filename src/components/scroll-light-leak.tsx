@@ -24,7 +24,7 @@ export function ScrollLightLeak() {
       element.style.setProperty("--leak-x", `${baseX + shift * 0.3}px`);
       element.style.setProperty("--leak-y", `${baseY - shift}px`);
       element.style.setProperty("--leak-angle", `${shift * 0.035}deg`);
-      if (performance.now() - lastTrigger < 2400) return;
+      if (performance.now() - lastTrigger < 2760) return;
       const distance = document.documentElement.scrollHeight - window.innerHeight;
       if (distance <= 0) return;
       const crossed = spots.find(point => (previous < distance * point && y >= distance * point) || (previous > distance * point && y <= distance * point));

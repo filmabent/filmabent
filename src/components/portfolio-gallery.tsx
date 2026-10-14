@@ -61,14 +61,14 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
         <div className="relative aspect-video w-full border border-border bg-reel">
           {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={t(`Play ${category.title}`, `${category.title} abspielen`)} className="group relative h-full w-full overflow-hidden rounded-none p-0">{thumbnail && <img src={thumbnail} alt="" className="absolute inset-0 h-full w-full object-cover" />}<span className="relative flex size-14 items-center justify-center rounded-full bg-reel/70 transition-transform group-hover:scale-110"><Play className="size-7 text-primary" /></span></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
         </div>
-        <a
+        {category.slug !== "imagefilms" && <a
           href="https://www.youtube.com/@filmabent"
           target="_blank"
           rel="noreferrer"
           className="mt-4 inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
         >
           <Youtube className="h-4 w-4 text-primary" /> {t("Full gallery on YouTube", "Mehr auf YouTube")}
-        </a>
+        </a>}
       </div>
     </div>
   </article>;
