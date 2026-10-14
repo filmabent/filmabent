@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { Send } from "lucide-react";
 import { useLanguage } from "@/components/language";
@@ -16,6 +16,17 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
   const { t } = useLanguage();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
+  const armRef = useRef<HTMLDivElement>(null);
+
+  // restart the clap animation on every mouse entry — a CSS :hover switch alone
+  // doesn't always retrigger it (quick exits/entries can keep the same animation)
+  function retriggerClap() {
+    const el = armRef.current;
+    if (!el) return;
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.animation = "";
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
