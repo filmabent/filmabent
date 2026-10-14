@@ -25,12 +25,12 @@ export function PortfolioGallery() {
   const { t } = useLanguage();
   const localizedCategories = categories.map(category => ({ ...category, title: t(category.title, germanCategories[category.slug].title), text: t(category.text, germanCategories[category.slug].text) }));
   const { data } = useSuspenseQuery(portfolioQuery);
-  return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+  return <section id="services" className="mx-auto max-w-6xl px-6 pb-16 pt-6 md:pb-20 md:pt-8">
     <div id="work" className="scroll-mt-24">
-      <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
       <ProjectionHeadline title={t("Shot on feeling", "Mit Gefühl gedreht")} />
+      <p className="mt-6 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
     </div>
-    <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-5 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
         const Icon = icons[i] ?? Film;
         return <a key={category.slug} href={`#${category.slug}`} className="flex flex-col border-b border-r border-border p-6 transition-colors hover:bg-foreground/5">

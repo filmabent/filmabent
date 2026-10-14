@@ -56,3 +56,5 @@
 - [x] Classical projector: taller redraw, warm amber beam (no grey)
 - [x] Wordmark glow: stronger and less yellow
 - [ ] Contact form submissions emailed to filmabent@gmail.com
+- [x] "What we do" moved below the projected headline, directly above the category boxes
+- [x] Smaller distance between the hero intro line and the "Shot on feeling" headline
