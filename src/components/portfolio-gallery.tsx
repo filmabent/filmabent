@@ -55,6 +55,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
       <div>
         <div className="flex items-start gap-4"><Icon className="mt-2 size-7 shrink-0 text-primary" strokeWidth={1.5} aria-hidden="true" /><h3 className="font-display text-3xl lg:text-4xl">{category.title}</h3></div>
         <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{category.text}</p>
+        <FilmRollButton />
       </div>
       <div className="w-full max-w-md md:justify-self-end">
         <div className="relative aspect-video w-full border border-border bg-reel">
