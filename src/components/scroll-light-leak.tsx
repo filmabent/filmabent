@@ -34,8 +34,8 @@ export function ScrollLightLeak() {
       baseX = (Math.random() - 0.5) * 70;
       baseY = (Math.random() - 0.5) * 140;
       lastVariant = chooseLeak(crossed, lastVariant);
-      element.dataset.variant = String(lastVariant);
-      element.dataset.flare = Math.random() < 0.45 ? "true" : "false";
+      element.dataset["variant"] = String(lastVariant);
+      element.dataset["flare"] = Math.random() < 0.45 ? "true" : "false";
       element.style.setProperty("--leak-x", `${baseX}px`);
       element.style.setProperty("--leak-y", `${baseY}px`);
       element.style.setProperty("--leak-angle", "0deg");
