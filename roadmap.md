@@ -1,5 +1,9 @@
 # filmabent site
 
+- [x] Longer scroll-moving randomized light leaks and occasional flares
+- [x] Get in touch scrolls to the contact form
+- [x] English/German language switch across the site
+
 - [x] Smaller equal right-side videos and category icons
 - [x] Hover-paused banner with manual left/right scrolling
 - [x] Strong, quick reddish-orange light leaks: varied left spots in the upper half and right spots in the lower half, continuing over the camera photo

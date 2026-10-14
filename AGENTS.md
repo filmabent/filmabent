@@ -15,3 +15,5 @@
 - Authentication identity events are subscribed to once in the root; owner views receive scoped events rather than competing auth subscriptions.
 - BTS autoplay and manual arrows share one scrollLeft-based animation loop with duplicated image groups, so manual movement and seamless looping never compete.
 - Scroll light leaks use global effect tokens and a pointer-transparent screen-blended overlay above page imagery but below navigation and viewers, so effects continue over the hero without applying media filters; respect reduced motion.
+- English/German display text uses a shared root language context with English SSR defaults and a hydration-safe saved preference; canonical portfolio slugs and data stay language-independent.
+- Scroll-effect shape selection lives in a browser-safe helper with placement tests; effect motion uses transient CSS custom properties, while all effect colors remain global tokens.
