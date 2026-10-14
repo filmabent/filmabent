@@ -189,8 +189,10 @@
 .bts-track { display: flex; width: max-content; }
 .bts-group { display: flex; flex-shrink: 0; gap: 12px; padding-right: 12px; }
 .scroll-light-leak { --flare-left: -10%; --flare-top: 36%; position: fixed; inset: -15%; z-index: 40; pointer-events: none; background: var(--scroll-leak); mix-blend-mode: screen; filter: blur(16px); opacity: 0; transform: translate3d(var(--leak-x, 0px), var(--leak-y, 0px), 0) rotate(var(--leak-angle, 0deg)); transition: opacity 650ms ease-out, transform 180ms linear; }
-.scroll-light-leak::after { content: ""; position: absolute; left: var(--flare-left); top: var(--flare-top); width: 65%; height: 2px; background: var(--flare-streak); box-shadow: 0 0 18px 5px oklch(0.72 0.23 40 / 0.24); opacity: 0; transform: rotate(-12deg); transition: opacity 500ms; }
-.scroll-light-leak[data-flare="true"].is-scrolling::after { opacity: 0.85; }
+.scroll-light-leak::after { content: ""; position: absolute; left: var(--flare-left); top: var(--flare-top); width: 65%; height: 3px; border-radius: 999px; background: linear-gradient(90deg, transparent 0%, oklch(0.78 0.17 45 / 0.5) 20%, oklch(0.93 0.08 72) 50%, oklch(0.78 0.17 45 / 0.5) 80%, transparent 100%); box-shadow: 0 0 22px 7px oklch(0.72 0.23 40 / 0.28); opacity: 0; transform: rotate(-12deg); transition: opacity 500ms; }
+.scroll-light-leak::before { content: ""; position: absolute; left: var(--flare-left); top: var(--flare-top); width: 38%; height: 84px; border-radius: 999px; background: radial-gradient(45% 50% at 50% 50%, oklch(0.9 0.1 68 / 0.5) 0%, transparent 70%), linear-gradient(90deg, transparent, oklch(0.76 0.18 45 / 0.2) 30%, oklch(0.76 0.18 45 / 0.2) 70%, transparent); filter: blur(10px); opacity: 0; transform: translate(-12%, -50%) rotate(-12deg); transition: opacity 500ms; }
+.scroll-light-leak[data-flare="true"].is-scrolling::after { opacity: 0.7; }
+.scroll-light-leak[data-flare="true"].is-scrolling::before { opacity: 0.55; }
 .scroll-light-leak[data-variant="1"], .scroll-light-leak[data-variant="3"], .scroll-light-leak[data-variant="5"] { --flare-left: 45%; }
 .scroll-light-leak[data-variant="2"], .scroll-light-leak[data-variant="3"] { --flare-top: 24%; }
 .scroll-light-leak[data-variant="4"], .scroll-light-leak[data-variant="5"] { --flare-top: 70%; }
@@ -349,13 +351,19 @@
 }
 .clapper-slate { position: relative; }
 .clapper-slate .slate-arm {
-  height: 24px;
+  height: 26px;
   border: 1px solid var(--color-border);
   border-bottom: none;
   border-radius: 3px 3px 0 0;
-  background: repeating-linear-gradient(-58deg, var(--color-foreground) 0 14px, var(--color-reel) 14px 28px);
+  background: repeating-linear-gradient(-58deg, var(--color-foreground) 0 18px, var(--color-reel) 18px 36px);
   transform-origin: 8px 100%;
   animation: slate-clap 7s ease-in-out infinite;
+}
+.clapper-slate .slate-arm-fixed {
+  height: 20px;
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  background: repeating-linear-gradient(58deg, var(--color-foreground) 0 18px, var(--color-reel) 18px 36px);
 }
 .clapper-slate .slate-body {
   border: 1px solid var(--color-border);
