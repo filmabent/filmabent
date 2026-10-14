@@ -230,26 +230,26 @@
 @keyframes film-feed { to { background-position: 40px 2px, 40px 15px, 40px 6px; } }
 .group:hover .film-unroll, a.group:focus-visible .film-unroll { clip-path: inset(0 0 0 0); animation: film-feed 1.5s linear infinite; }
 
-/* cinema-ticket contact button — punched end notches, dashed tear line, brass stub */
+/* cinema-ticket contact button — punched end notches, dashed tear line, admit-one print */
 .cinema-ticket {
-  --notch: 6px;
-  --stub: 26px;
+  --notch: 9px;
+  --stub: 38px;
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 0.9rem 0.5rem calc(var(--stub) + 0.7rem);
-  border: 1px solid color-mix(in oklab, var(--color-foreground) 40%, transparent);
-  background-color: transparent;
-  /* notch outlines drawn just outside the punched holes, so the cut reads as a curve */
-  background-image:
-    radial-gradient(circle at 0 50%, transparent 0 6px, currentColor 6px 6.8px, transparent 6.8px),
-    radial-gradient(circle at 100% 50%, transparent 0 6px, currentColor 6px 6.8px, transparent 6.8px);
-  background-repeat: no-repeat;
+  padding: 0.55rem 1.15rem 0.55rem calc(var(--stub) + 0.9rem);
+  border: 2px solid color-mix(in oklab, var(--color-foreground) 70%, transparent);
+  background-color: color-mix(in oklab, var(--color-card) 70%, transparent);
   color: var(--color-foreground);
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: 11px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   white-space: nowrap;
+  /* notch outlines drawn just outside the punched holes, so the cut reads as a curve */
+  background-image:
+    radial-gradient(circle at 0 50%, transparent 0 var(--notch), currentColor var(--notch) calc(var(--notch) + 1.3px), transparent calc(var(--notch) + 1.3px)),
+    radial-gradient(circle at 100% 50%, transparent 0 var(--notch), currentColor var(--notch) calc(var(--notch) + 1.3px), transparent calc(var(--notch) + 1.3px));
+  background-repeat: no-repeat;
   -webkit-mask-image:
     radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
     radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
@@ -262,22 +262,36 @@
   mask-composite: intersect;
   transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
+/* the second hairline frame, like vintage letterpress ticket printing */
+.cinema-ticket::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid currentColor;
+  opacity: 0.3;
+  pointer-events: none;
+}
 /* the tear line between the stub and the ticket */
 .cinema-ticket::before {
   content: "";
   position: absolute;
   left: var(--stub);
-  top: 5px;
-  bottom: 5px;
-  width: 1px;
-  background: repeating-linear-gradient(180deg, currentColor 0 3px, transparent 3px 6px);
-  opacity: 0.5;
+  top: 7px;
+  bottom: 7px;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, currentColor 0 4px, transparent 4px 8px);
+  opacity: 0.65;
 }
 .ticket-stub {
   position: absolute;
-  left: 9px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
+}
+.ticket-admit {
+  font-size: 7px;
+  letter-spacing: 0.34em;
+  color: var(--color-logo);
 }
 .cinema-ticket:hover,
 .cinema-ticket:focus-visible {
@@ -286,11 +300,17 @@
   border-color: var(--color-foreground);
   transform: translateY(-1px);
 }
-@keyframes ticket-tear { to { background-position: 0 6px; } }
+@keyframes ticket-tear { to { background-position: 0 8px; } }
 .cinema-ticket:hover::before { animation: ticket-tear 900ms linear infinite; }
 @media (max-width: 639px) {
-  .cinema-ticket { --stub: 22px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.55rem); font-size: 9px; letter-spacing: 0.13em; }
-  .ticket-stub { left: 7px; width: 10px; height: 10px; }
+  .cinema-ticket { --notch: 7px; --stub: 30px; padding: 0.45rem 0.75rem 0.45rem calc(var(--stub) + 0.65rem); font-size: 10px; letter-spacing: 0.14em; }
+  .ticket-stub { left: 9px; width: 13px; height: 13px; }
+  .ticket-admit { font-size: 6px; letter-spacing: 0.26em; }
+}
+@media (max-width: 479px) {
+  .cinema-ticket { --stub: 24px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
+  .ticket-stub { left: 7px; width: 11px; height: 11px; }
+  .ticket-admit { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
