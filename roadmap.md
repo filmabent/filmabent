@@ -38,3 +38,4 @@
 - [ ] Ticket button more prominent/thicker with an old-school cinema ticket feel
 - [ ] Hero line bigger and thicker
 - [ ] Ticket stub icon: cinema-related, in the logo red
+- [ ] Remove the animation from the ticket button
