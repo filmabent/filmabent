@@ -79,6 +79,7 @@
   --scroll-leak-top: linear-gradient(52deg, transparent 64%, oklch(0.7 0.25 38 / 0.4) 84%, oklch(0.67 0.26 32 / 0.72));
   --scroll-leak-bottom: linear-gradient(24deg, oklch(0.68 0.26 34 / 0.72), oklch(0.72 0.24 44 / 0.4) 11%, transparent 34%);
   --scroll-leak-bottom-right: linear-gradient(326deg, oklch(0.67 0.26 33 / 0.74), oklch(0.72 0.24 42 / 0.42) 13%, transparent 36%);
+  --flare-streak: linear-gradient(90deg, transparent, oklch(0.76 0.23 40 / 0.5) 30%, oklch(0.92 0.1 62 / 0.9) 49%, oklch(0.8 0.2 45 / 0.6) 53%, transparent);
 }
 
 @layer base {
@@ -165,7 +166,12 @@
 
 .bts-track { display: flex; width: max-content; }
 .bts-group { display: flex; flex-shrink: 0; gap: 12px; padding-right: 12px; }
-.scroll-light-leak { position: fixed; inset: 0; z-index: 40; pointer-events: none; background: var(--scroll-leak); mix-blend-mode: screen; opacity: 0; transition: opacity 280ms ease-out; }
+.scroll-light-leak { --flare-left: -10%; --flare-top: 36%; position: fixed; inset: -15%; z-index: 40; pointer-events: none; background: var(--scroll-leak); mix-blend-mode: screen; opacity: 0; transform: translate3d(var(--leak-x, 0px), var(--leak-y, 0px), 0) rotate(var(--leak-angle, 0deg)); transition: opacity 650ms ease-out, transform 180ms linear; }
+.scroll-light-leak::after { content: ""; position: absolute; left: var(--flare-left); top: var(--flare-top); width: 65%; height: 2px; background: var(--flare-streak); box-shadow: 0 0 18px 5px oklch(0.72 0.23 40 / 0.24); opacity: 0; transform: rotate(-12deg); transition: opacity 500ms; }
+.scroll-light-leak[data-flare="true"].is-scrolling::after { opacity: 0.85; }
+.scroll-light-leak[data-variant="1"], .scroll-light-leak[data-variant="3"], .scroll-light-leak[data-variant="5"] { --flare-left: 45%; }
+.scroll-light-leak[data-variant="2"], .scroll-light-leak[data-variant="3"] { --flare-top: 24%; }
+.scroll-light-leak[data-variant="4"], .scroll-light-leak[data-variant="5"] { --flare-top: 70%; }
 .scroll-light-leak[data-variant="1"] { background: var(--scroll-leak-right); }
 .scroll-light-leak[data-variant="2"] { background: var(--scroll-leak-sweep); }
 .scroll-light-leak[data-variant="3"] { background: var(--scroll-leak-top); }
