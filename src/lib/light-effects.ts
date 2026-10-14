@@ -1,4 +1,4 @@
-export const FLARE_CHANCE = 0.585;
+export const FLARE_CHANCE = 0.497;
 export function shouldShowFlare(random = Math.random) {
   return random() < FLARE_CHANCE;
 }
