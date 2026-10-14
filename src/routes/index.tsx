@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight, Clapperboard } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { PortfolioGallery } from "@/components/portfolio-gallery";
 import { ContactForm } from "@/components/contact-form";
@@ -69,7 +70,7 @@ function Index() {
       {/* Nav */}
       <header className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-background/90 to-transparent">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-2xl tracking-tight">
+          <a href="#top" className="vintage-glow font-display text-2xl tracking-tight">
             filmabent
           </a>
           <nav className="hidden items-center gap-5 whitespace-nowrap text-xs uppercase tracking-[0.2em] lg:gap-8 md:flex">
@@ -98,7 +99,7 @@ function Index() {
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
           <p className="hero-eyebrow mb-6 text-[11px] font-normal uppercase tracking-[0.28em] text-logo sm:text-[12px] sm:tracking-[0.34em]">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Mit Gefühl gedreht")}</p>
-          <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
+          <h1 className="vintage-glow font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
           <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
               {t("Films with a vintage soul. Grainy, warm, honest — made to be remembered, not scrolled past.", "Filme mit Vintage-Seele. Körnig, warm, ehrlich — gemacht, um zu bleiben, nicht um weggescrollt zu werden.")}
@@ -278,12 +279,12 @@ function BehindTheScenes() {
       </div>
     </div>
     </div>
-    {open !== null && currentPhoto && <div role="dialog" aria-modal="true" aria-label={t("Photo viewer", "Fotoansicht")} className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
+    {open !== null && currentPhoto && createPortal(<div role="dialog" aria-modal="true" aria-label={t("Photo viewer", "Fotoansicht")} className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
       <img src={currentPhoto.src} alt={t(currentPhoto.alt, "Hinter den Kulissen am filmabent-Set")} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
       <Button variant="outline" size="icon" aria-label={t("Close", "Schließen")} className="absolute right-4 top-4" onClick={() => setOpen(null)}><X /></Button>
       <Button variant="outline" size="icon" aria-label={t("Previous photo", "Vorheriges Foto")} className="absolute left-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(-1); }}><ChevronLeft /></Button>
       <Button variant="outline" size="icon" aria-label={t("Next photo", "Nächstes Foto")} className="absolute right-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(1); }}><ChevronRight /></Button>
       <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] text-reel-foreground/70">{open + 1} / {n}</p>
-    </div>}
+    </div>, document.body)}
   </section>;
 }
