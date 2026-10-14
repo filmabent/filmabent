@@ -381,7 +381,7 @@
 .slate-cell.wide { grid-column: 1 / -1; border-left: none; border-top: 2px solid var(--color-foreground); }
 @media (max-width: 560px) { .slate-grid { grid-template-columns: 1fr; } .slate-cell + .slate-cell { border-left: none; border-top: 2px solid var(--color-foreground); } }
 .slate-tape.alt { transform: rotate(1.2deg); }
-.slate-send { cursor: pointer; border: 0; padding: 0.9em 2em; transform: rotate(-1deg); transition: transform .2s ease, filter .2s ease; }
+.slate-send { display: inline-flex; align-items: center; gap: .75em; white-space: nowrap; cursor: pointer; border: 0; padding: 0.9em 2em; transform: rotate(-1deg); transition: transform .2s ease, filter .2s ease; }
 .slate-send:hover:not(:disabled) { transform: rotate(0deg) scale(1.04); filter: brightness(1.1); }
 @media (max-width: 480px) { .slate-tape { font-size: 12px; letter-spacing: 0.12em; padding: 0.55em 1em; } }
 
