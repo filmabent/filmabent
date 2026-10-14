@@ -306,8 +306,8 @@
   .ticket-admit { font-size: 6px; letter-spacing: 0.26em; }
 }
 @media (max-width: 479px) {
-  .cinema-ticket { --stub: 26px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
-  .ticket-stub { left: 9px; width: 11px; height: 11px; }
+  .cinema-ticket { --stub: 30px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
+  .ticket-stub { left: 13px; width: 11px; height: 11px; }
   .ticket-admit { display: none; }
 }
 
