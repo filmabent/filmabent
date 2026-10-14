@@ -3,8 +3,8 @@
 - [x] Retro/vintage design system (styles.css)
 - [x] Homepage: hero, category-based spec work galleries, services, BTS photo banner
 - [x] Replace services with the four latest categories
-- [x] Combine project videos into Shot on feeling: one featured video and smaller empty gallery frames per category
-- [ ] Owner-only editing verification — requires owner account creation/confirmation
+- [x] Spec work videos embedded per category (owner-supplied links); gallery frames removed in favour of a "Full gallery on YouTube" channel link
+- [x] Owner-only editing removed at user request — video links are sent to the developer instead
 - [x] Compact right-to-left behind-the-scenes photo banner
 - [x] Replace Est. on film · Berlin with a film-focused highlight
 - [x] Socials: Instagram @filmabent, YouTube filmabent

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Clapperboard, Heart, Music, Camera, Film, Play } from "lucide-react";
+import { Clapperboard, Heart, Music, Camera, Film, Play, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { categories, videoSource } from "@/lib/portfolio";
 import { portfolioQuery } from "@/lib/portfolio.functions";
@@ -24,30 +24,32 @@ export function PortfolioGallery() {
         </a>;
       })}
     </div>
-    {categories.map((category, i) => <CategoryGallery key={category.slug} category={category} index={i} featured={data.find(row => row.slug === category.slug)?.featured_url ?? ""} urls={data.find(row => row.slug === category.slug)?.gallery_urls ?? []} />)}
+    {categories.map(category => <CategoryGallery key={category.slug} category={category} featured={data.find(row => row.slug === category.slug)?.featured_url ?? ""} />)}
   </section>;
 }
 
-function CategoryGallery({ category, featured, urls }: { category: typeof categories[number]; index: number; featured: string; urls: string[] }) {
-  const [selected, setSelected] = useState<string | null>(null);
+function CategoryGallery({ category, featured }: { category: typeof categories[number]; featured: string }) {
   const [playing, setPlaying] = useState(false);
-  const active = selected ?? featured;
-  const source = videoSource(active);
-  const frames = urls.length ? urls : ["", "", ""];
+  const source = videoSource(featured);
   return <article id={category.slug} className="scroll-mt-24 border-b border-border py-10 md:py-12">
     <div className="grid items-center gap-8 md:grid-cols-[1fr_1.65fr] md:gap-14">
       <div>
         <h3 className="font-display text-4xl md:text-5xl">{category.title}</h3>
         <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{category.text}</p>
       </div>
-      <div className="relative aspect-video max-h-[60vh] border border-border bg-reel">
-        {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={`Play ${category.title}`} className="h-full w-full rounded-none"><Play className="size-10 text-primary" /></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
+      <div>
+        <div className="relative aspect-video max-h-[60vh] border border-border bg-reel">
+          {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={`Play ${category.title}`} className="h-full w-full rounded-none"><Play className="size-10 text-primary" /></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
+        </div>
+        <a
+          href="https://www.youtube.com/@filmabent"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
+        >
+          <Youtube className="h-4 w-4 text-primary" /> Full gallery on YouTube
+        </a>
       </div>
-    </div>
-    <div className="mt-6 grid grid-cols-3 gap-3 md:ml-[calc(37.7358%+1.3rem)]">
-      {frames.map((url, i) => <Button key={`${i}-${url}`} disabled={!url} variant="ghost" aria-label={`Select ${category.title} gallery film ${i + 1}`} onClick={() => { setSelected(url); setPlaying(true); }} className="aspect-video h-auto w-full flex-col gap-2 rounded-none border border-border bg-reel p-2 disabled:opacity-100">
-        {url ? <Play className="text-primary" /> : <Film className="text-muted-foreground" strokeWidth={1} />}
-      </Button>)}
     </div>
   </article>;
 }
