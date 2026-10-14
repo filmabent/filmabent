@@ -39,6 +39,7 @@ export function ContactForm() {
 
   return <div className="clapper-slate mx-auto mt-10 max-w-xl text-left">
     <div className="slate-arm" aria-hidden="true" />
+    <div className="slate-arm-fixed" aria-hidden="true" />
     <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-7 sm:px-8" noValidate>
       <p className={slateLabel}>{t("Production — filmabent · Scene — your idea", "Produktion — filmabent · Szene — deine Idee")}</p>
       <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
