@@ -90,16 +90,30 @@ function FilmRollButton() {
 }
 
 function Projector() {
-  return <svg className="projector mb-1 h-16 w-auto shrink-0 text-foreground md:mb-3 md:h-24" viewBox="0 0 96 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-    <polygon className="projector-beam" points="78,50 96,44 96,68" stroke="none" />
-    {([[30, 18], [64, 18]] as const).map(([cx, cy]) => <g key={cx} className="projector-reel" style={{ transformOrigin: `${cx}px ${cy}px` }}>
-      <circle cx={cx} cy={cy} r="14" /><circle cx={cx} cy={cy} r="2.5" fill="currentColor" />
-      <line x1={cx} y1={cy - 12} x2={cx} y2={cy - 5} /><line x1={cx - 10.5} y1={cy + 6} x2={cx - 4} y2={cy + 2.5} /><line x1={cx + 10.5} y1={cy + 6} x2={cx + 4} y2={cy + 2.5} />
-    </g>)}
-    <path d="M 30 32 L 30 42 L 64 42 L 64 32" />
-    <rect x="26" y="42" width="44" height="50" rx="3" />
-    <rect x="70" y="50" width="10" height="12" />
-    <circle cx="48" cy="62" r="7" />
-    <line x1="34" y1="92" x2="24" y2="116" /><line x1="62" y1="92" x2="72" y2="116" />
+  const bg = "var(--color-background)";
+  return <svg className="projector mb-1 h-16 w-auto shrink-0 text-foreground md:mb-3 md:h-24" viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    <polygon className="projector-beam" points="98,50 120,38 120,86" stroke="none" />
+    {/* two spoked reels on top, like the reference */}
+    <g className="projector-reel" style={{ transformOrigin: "36px 20px" }}>
+      <circle cx="36" cy="20" r="14" strokeWidth="5" />
+      <line x1="36" y1="7" x2="36" y2="33" strokeWidth="3" /><line x1="23" y1="20" x2="49" y2="20" strokeWidth="3" />
+      <circle cx="36" cy="20" r="4" fill="currentColor" />
+    </g>
+    <g className="projector-reel" style={{ transformOrigin: "76px 30px" }}>
+      <circle cx="76" cy="30" r="12" strokeWidth="5" />
+      <line x1="76" y1="18" x2="76" y2="42" strokeWidth="3" /><line x1="64" y1="30" x2="88" y2="30" strokeWidth="3" />
+      <circle cx="76" cy="30" r="3.5" fill="currentColor" />
+    </g>
+    <line x1="36" y1="34" x2="36" y2="44" strokeWidth="3" />
+    {/* boxy body with cut-out knobs */}
+    <rect x="28" y="44" width="62" height="40" rx="2" fill="currentColor" />
+    <circle cx="48" cy="62" r="4.5" style={{ stroke: bg }} /><circle cx="62" cy="62" r="4.5" style={{ stroke: bg }} />
+    <rect x="72" y="55" width="11" height="14" rx="1.5" style={{ stroke: bg }} />
+    {/* conical lens hood, then the beam */}
+    <polygon points="88,52 100,45 100,79 88,72" fill="currentColor" />
+    {/* tripod: hub and three splayed legs */}
+    <circle cx="58" cy="87" r="4" fill="currentColor" />
+    <line x1="56" y1="88" x2="30" y2="118" strokeWidth="5" /><line x1="60" y1="88" x2="88" y2="118" strokeWidth="5" /><line x1="58" y1="89" x2="58" y2="118" strokeWidth="5" />
+    <line x1="33" y1="113" x2="56" y2="103" strokeWidth="3" />
   </svg>;
 }
