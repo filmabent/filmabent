@@ -293,8 +293,12 @@
   letter-spacing: 0.34em;
   color: var(--color-logo);
 }
-/* the hero line sits over the camera photo, so a soft dark halo keeps the red letters crisp */
+/* the hero line sits over a red-lit photo, so it rests on a soft shade to stay readable */
 .hero-eyebrow {
+  display: inline-block;
+  padding: 0.35em 0.85em;
+  background: oklch(0.12 0.045 265 / 0.45);
+  box-shadow: 0 0 26px 22px oklch(0.12 0.045 265 / 0.45);
   text-shadow: 0 0 10px oklch(0.11 0.04 265 / 0.9), 0 1px 1px oklch(0.1 0.04 265 / 0.85);
 }
 .cinema-ticket:hover,
