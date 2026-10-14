@@ -8,6 +8,12 @@ describe("portfolio links", () => {
   it("accepts Vimeo links", () => {
     expect(videoSource("https://vimeo.com/123456789")).toBe("https://player.vimeo.com/video/123456789");
   });
+  it("requests immediate YouTube playback after the site's play click", () => {
+    expect(videoSource("https://youtu.be/TeE6CvUIg0E", true)).toBe("https://www.youtube-nocookie.com/embed/TeE6CvUIg0E?rel=0&autoplay=1&playsinline=1");
+  });
+  it("requests immediate Vimeo playback after the site's play click", () => {
+    expect(videoSource("https://vimeo.com/123456789", true)).toBe("https://player.vimeo.com/video/123456789?autoplay=1&playsinline=1");
+  });
   it("rejects unsafe or unsupported URLs", () => {
     expect(videoSource("javascript:alert(1)")).toBeNull();
     expect(videoSource("https://youtube.com.evil.test/watch?v=TeE6CvUIg0E")).toBeNull();

@@ -1,5 +1,8 @@
 # filmabent site
 
+- [x] Coarser 16mm-style grain restricted to backgrounds and lettering
+- [x] One-click video playback
+
 - [x] Remove incompatible Jekyll publishing job
 - [ ] External publishing verification — requires next GitHub sync and redeploy on the chosen host
 - [x] Increase flare occurrence by 30%
