@@ -20,3 +20,4 @@
 - Do not add Jekyll/GitHub Pages deployment workflows to this SSR app; publish through Lovable or an explicitly configured SSR-compatible external host.
 - Grainy lettering uses CSS background-clipped ink texture rather than font changes or media filters, preserving typography and layout.
 - Surface grain lives beneath content in an isolated page stack or in surface backgrounds, never in an above-media overlay, so photos and players remain clean.
+- The projector, headline beam and progressively scaled letters share one SVG coordinate system so the lens connection and text containment stay aligned at every screen size.
