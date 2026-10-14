@@ -399,6 +399,19 @@
 /* Vintage wordmark glow + running projector */
 .vintage-glow { text-shadow: 0 0 6px oklch(0.9 0.025 90 / 0.45), 0 0 18px oklch(0.84 0.035 90 / 0.3), 0 0 36px oklch(0.84 0.035 90 / 0.15); }
 .projector-reel { animation: reel-spin 1.6s linear infinite; }
-.projector-beam { fill: oklch(0.82 0.1 70 / 0.5); animation: projector-flicker 0.24s steps(2) infinite; }
+.projector-beam { fill: url(#projector-beam-fade); animation: projector-flicker 0.24s steps(2) infinite; }
 @keyframes projector-flicker { 0% { opacity: 1; } 50% { opacity: 0.7; } }
-@media (prefers-reduced-motion: reduce) { .projector-reel, .projector-beam { animation: none; } }
+/* the headline flickers like film thrown onto a screen */
+.projected-title { animation: film-projection 2.8s steps(1) infinite; transform-origin: left center; }
+@keyframes film-projection {
+  0% { opacity: 1; transform: translateX(0); }
+  11% { opacity: 0.94; transform: translateX(0.6px); }
+  13% { opacity: 1; transform: translateX(0); }
+  38% { opacity: 0.96; }
+  40% { opacity: 1; }
+  63% { opacity: 0.93; transform: translateX(-0.6px); }
+  65% { opacity: 1; transform: translateX(0); }
+  88% { opacity: 0.95; }
+  90% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .projector-reel, .projector-beam, .projected-title { animation: none; } }
