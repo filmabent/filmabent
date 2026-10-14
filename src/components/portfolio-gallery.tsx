@@ -89,6 +89,8 @@ function FilmRollButton() {
   </a>;
 }
 
+const headlineWidthCache = new Map<string, number[]>();
+
 function ProjectionHeadline({ title }: { title: string }) {
   const letters = Array.from(title);
   const [metrics, setMetrics] = useState<{ title: string; widths: number[] }>();
@@ -98,11 +100,16 @@ function ProjectionHeadline({ title }: { title: string }) {
       const context = document.createElement("canvas").getContext("2d");
       if (!active || !context) return;
       context.font = '84px "DM Serif Display"';
-      setMetrics({ title, widths: Array.from(title).map(letter => context.measureText(letter).width) });
+      // Pre-measure both language variants so switching never falls back to estimates.
+      for (const variant of ["Shot on feeling", "Mit Gefühl gedreht"]) {
+        if (!headlineWidthCache.has(variant)) headlineWidthCache.set(variant, Array.from(variant).map(letter => context.measureText(letter).width));
+      }
+      setMetrics({ title, widths: headlineWidthCache.get(title)! });
     });
     return () => { active = false; };
   }, [title]);
-  const widths = metrics?.title === title ? metrics.widths : letters.map(letter => letter === " " ? 21 : /[ilIt]/.test(letter) ? 25 : /[mwM]/.test(letter) ? 72 : 43);
+  const cached = metrics?.title === title ? metrics.widths : headlineWidthCache.get(title);
+  const widths = cached ?? letters.map(letter => letter === " " ? 21 : /[ilIt]/.test(letter) ? 25 : /[mwM]/.test(letter) ? 72 : 43);
   const growth = letters.map((_, index) => 0.55 + 1.05 * index / Math.max(1, letters.length - 1));
   const fit = 625 / widths.reduce((sum, width, index) => sum + width * (growth[index] ?? 1), 0);
   let offset = 0;
