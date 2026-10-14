@@ -44,3 +44,6 @@
 - [x] Ticket inner frame removed, tear line running the full height with evenly fitting dashes
 - [x] Ticket clapperboard moved further right, clear of the left edge
 - [x] BTS banner 10% faster auto-scroll
+- [x] Clapperboard tape labels: "Prod. filmabent" and "Director: you" (DE "Regie: du") — nothing that wouldn't be on a real sticker
+- [x] No hairline between Imagefilms & Events and Behind the scenes
+- [x] "Roll camera" caption removed above the clapperboard contact form

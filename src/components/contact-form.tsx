@@ -44,7 +44,7 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
     <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-8 sm:px-10" noValidate>
       <div className="flex flex-wrap items-center gap-3">
         <span className="slate-tape">{t("Prod.", "Prod.")} filmabent</span>
-        <span className="slate-tape alt">{t("Roll", "Rolle")} 01 · {t("Scene", "Szene")} {t("your idea", "deine Idee")} · Take 1</span>
+        <span className="slate-tape alt">{t("Director", "Regie")}: {t("you", "du")}</span>
       </div>
       {children && <div className="text-center">{children}</div>}
       <div className="slate-grid">
