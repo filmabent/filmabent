@@ -395,3 +395,10 @@
   html { scroll-behavior: auto; }
 }
 @media (max-width: 639px), (hover: none) { .film-unroll { display: none; } }
+
+/* Vintage wordmark glow + running projector */
+.vintage-glow { text-shadow: 0 0 6px oklch(0.85 0.09 70 / 0.35), 0 0 18px oklch(0.74 0.1 65 / 0.22); }
+.projector-reel { animation: reel-spin 1.6s linear infinite; }
+.projector-beam { fill: oklch(0.9 0.06 80 / 0.28); animation: projector-flicker 0.24s steps(2) infinite; }
+@keyframes projector-flicker { 0% { opacity: 1; } 50% { opacity: 0.6; } }
+@media (prefers-reduced-motion: reduce) { .projector-reel, .projector-beam { animation: none; } }

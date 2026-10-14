@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
     <div id="work" className="scroll-mt-24">
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
-      <h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2>
+      <div className="flex items-end gap-4 md:gap-6"><h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2><Projector /></div>
     </div>
     <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
@@ -87,4 +87,17 @@ function FilmRollButton() {
       <span className="film-unroll" aria-hidden="true" />
     </span>
   </a>;
+}
+
+function Projector() {
+  return <svg className="projector mb-1 h-12 w-auto shrink-0 text-foreground md:mb-3 md:h-16" viewBox="0 0 120 64" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    <polygon className="projector-beam" points="98,40 120,28 120,58" stroke="none" />
+    {([[30, 16], [62, 16]] as const).map(([cx, cy]) => <g key={cx} className="projector-reel" style={{ transformOrigin: `${cx}px ${cy}px` }}>
+      <circle cx={cx} cy={cy} r="13" /><circle cx={cx} cy={cy} r="2.5" fill="currentColor" />
+      <line x1={cx} y1={cy - 11} x2={cx} y2={cy - 4} /><line x1={cx - 9.5} y1={cy + 5.5} x2={cx - 3.5} y2={cy + 2} /><line x1={cx + 9.5} y1={cy + 5.5} x2={cx + 3.5} y2={cy + 2} />
+    </g>)}
+    <rect x="18" y="32" width="72" height="20" rx="3" />
+    <rect x="90" y="36" width="8" height="10" />
+    <line x1="30" y1="52" x2="26" y2="62" /><line x1="78" y1="52" x2="82" y2="62" />
+  </svg>;
 }
