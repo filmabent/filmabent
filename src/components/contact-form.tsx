@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { Send } from "lucide-react";
 import { useLanguage } from "@/components/language";
@@ -16,6 +16,17 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
   const { t } = useLanguage();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
+  const armRef = useRef<HTMLDivElement>(null);
+
+  // restart the clap animation on every mouse entry — a CSS :hover switch alone
+  // doesn't always retrigger it (quick exits/entries can keep the same animation)
+  function retriggerClap() {
+    const el = armRef.current;
+    if (!el) return;
+    el.style.animation = "none";
+    void el.offsetWidth;
+    el.style.animation = "";
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,8 +47,8 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
 
   if (status === "sent") return <p className="mx-auto mt-10 max-w-md text-sm text-primary">{t("Thank you — your message is on its way. We’ll get back to you soon.", "Vielen Dank — deine Nachricht ist unterwegs. Wir melden uns bald.")}</p>;
 
-  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left">
-    <div className="slate-arm" aria-hidden="true" />
+  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left" onMouseEnter={retriggerClap}>
+    <div ref={armRef} className="slate-arm" aria-hidden="true" />
     <div className="slate-hinge" aria-hidden="true" />
     <div className="slate-arm-fixed" aria-hidden="true" />
     <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-8 sm:px-10" noValidate>
