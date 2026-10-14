@@ -400,13 +400,13 @@
 .vintage-glow { text-shadow: 0 0 6px oklch(0.9 0.025 90 / 0.45), 0 0 18px oklch(0.84 0.035 90 / 0.3), 0 0 36px oklch(0.84 0.035 90 / 0.15); }
 .projector-reel { animation: reel-spin 1.6s linear infinite; }
 /* beam: a light cone starting at the lens, opening to the full headline height; the words stay readable and flicker */
-.projection-beam { position: absolute; left: -0.75rem; right: -1.5rem; top: -0.3em; bottom: -0.3em; pointer-events: none;
-  background: linear-gradient(90deg, oklch(0.88 0.09 70 / 0.7), oklch(0.85 0.08 70 / 0.25) 70%, oklch(0.85 0.08 70 / 0.1));
-  clip-path: polygon(0 44%, 100% 0, 100% 100%, 0 56%); filter: blur(0.5px); mix-blend-mode: screen;
-  animation: projector-beam 2.6s steps(1) infinite; }
-@media (min-width: 768px) { .projection-beam { left: -1rem; } }
-.projection-screen { perspective: 700px; }
-.projected-title { transform: rotateY(-32deg); transform-origin: right center; animation: film-projection 2.6s steps(1) infinite; }
+.projection-screen { margin-left: -2.6rem; transform: perspective(700px) rotateY(-32deg); transform-origin: right center; }
+@media (min-width: 768px) { .projection-screen { margin-left: -4.4rem; } }
+/* beam lives on the same tilted plane as the words, so its edges follow the letters exactly; it extends left to reach the lens */
+.projection-beam { position: absolute; left: -70%; right: -0.4em; top: -0.12em; bottom: -0.12em; pointer-events: none;
+  background: linear-gradient(90deg, oklch(0.88 0.09 70 / 0.75), oklch(0.86 0.08 70 / 0.35) 45%, oklch(0.85 0.08 70 / 0.15));
+  clip-path: polygon(0 30%, 40% 0, 100% 0, 100% 100%, 40% 100%, 0 70%); mix-blend-mode: screen; animation: projector-beam 2.6s steps(1) infinite; }
+.projected-title { animation: film-projection 2.6s steps(1) infinite; }
 @keyframes projector-beam { 0% { opacity: 1; } 12% { opacity: .65; } 16% { opacity: 1; } 41% { opacity: .75; } 44% { opacity: 1; } 70% { opacity: .55; } 73% { opacity: .9; } 76% { opacity: 1; } }
 @keyframes film-projection { 0% { opacity: 1; } 12% { opacity: .7; } 16% { opacity: 1; } 41% { opacity: .8; } 44% { opacity: 1; } 70% { opacity: .6; } 73% { opacity: .9; } 76% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .projector-reel, .projection-beam, .projected-title { animation: none; opacity: 1; filter: none; } }
