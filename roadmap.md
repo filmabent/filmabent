@@ -1,5 +1,9 @@
 # filmabent site
 
+- [ ] Smaller equal right-side videos and category icons
+- [ ] Hover-paused banner with manual left/right scrolling
+- [ ] Subtle scroll-triggered light leaks
+
 - [x] Retro/vintage design system (styles.css)
 - [x] Homepage: hero, category-based spec work galleries, services, BTS photo banner
 - [x] Replace services with the four latest categories
