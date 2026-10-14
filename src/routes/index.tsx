@@ -119,8 +119,8 @@ function Index() {
       {/* Contact */}
       <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
 <ContactForm>
-        <h2 className="font-display text-5xl md:text-7xl">{t("Let’s make something", "Lass uns was drehen")}</h2>
-        <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+        <h2 className="font-display text-[clamp(1.6rem,7vw,3.25rem)] leading-tight sm:whitespace-nowrap">{t("Let’s make something", "Lass uns was drehen")}</h2>
+        <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
           {t("A wedding, a record, a short film, an event — tell us what you’re dreaming of and we’ll bring the film.", "Eine Hochzeit, ein Musikvideo, ein Kurzfilm, ein Event — erzähl uns von deiner Idee, den Rest machen wir.")}
         </p>
         </ContactForm>
