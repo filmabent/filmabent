@@ -50,7 +50,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
   const source = videoSource(featured, true);
   const thumbnail = thumb(featured);
   const Icon = icons[categories.findIndex(item => item.slug === category.slug)] ?? Film;
-  return <article id={category.slug} className="scroll-mt-24 border-b border-border py-10 md:py-12">
+  return <article id={category.slug} className={`scroll-mt-24 py-10 md:py-12 ${category.slug === "imagefilms" ? "" : "border-b border-border"}`}>
     <div className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
       <div>
         <div className="flex items-start gap-4"><Icon className="mt-2 size-7 shrink-0 text-primary" strokeWidth={1.5} aria-hidden="true" /><h3 className="font-display text-3xl lg:text-4xl">{category.title}</h3></div>
