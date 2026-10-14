@@ -73,3 +73,15 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
     </div>
   </article>;
 }
+
+function FilmRollButton() {
+  const { t } = useLanguage();
+  return <a
+    href="#contact"
+    className="group relative mt-8 inline-flex items-center gap-3 border border-foreground/40 px-5 py-3 text-xs uppercase tracking-[0.25em] transition-colors hover:border-primary hover:text-primary"
+  >
+    <Film className="film-reel h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+    {t("Start your film", "Starte deinen Film")}
+    <span className="film-unroll" aria-hidden="true" />
+  </a>;
+}
