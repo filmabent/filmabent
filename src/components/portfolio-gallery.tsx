@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
     <div id="work" className="scroll-mt-24">
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
-      <div className="flex items-end gap-4 md:gap-6"><Projector /><h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2></div>
+      <div className="flex items-end gap-4 md:gap-6"><Projector /><h2 className="projected-title font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2></div>
     </div>
     <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
@@ -91,9 +91,16 @@ function FilmRollButton() {
 
 function Projector() {
   const bg = "var(--color-background)";
-  return <svg className="projector mb-1 h-16 w-auto shrink-0 text-foreground md:mb-3 md:h-24" viewBox="0 0 150 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-    {/* long beam, widening toward the headline */}
-    <polygon className="projector-beam" points="0,30 0,94 46,74 46,50" stroke="none" />
+  return <svg className="projector relative z-10 mb-1 h-16 w-auto shrink-0 overflow-visible text-foreground md:mb-3 md:h-24" viewBox="0 0 150 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    {/* long beam widening rightward onto the headline, fading out over the letters */}
+    <defs>
+      <linearGradient id="projector-beam-fade" x1="128" y1="0" x2="460" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="oklch(0.82 0.1 70)" stopOpacity="0.55" />
+        <stop offset="0.6" stopColor="oklch(0.82 0.1 70)" stopOpacity="0.3" />
+        <stop offset="1" stopColor="oklch(0.82 0.1 70)" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    <polygon className="projector-beam" points="128,50 460,26 460,106 128,82" stroke="none" />
     {/* two big spoked reels on top, close together */}
     <g className="projector-reel" style={{ transformOrigin: "70px 22px" }}>
       <circle cx="70" cy="22" r="17" strokeWidth="5" />
@@ -110,8 +117,8 @@ function Projector() {
     <rect x="56" y="48" width="62" height="40" rx="2" fill="currentColor" />
     <circle cx="76" cy="66" r="4.5" style={{ stroke: bg }} /><circle cx="90" cy="66" r="4.5" style={{ stroke: bg }} />
     <rect x="100" y="59" width="11" height="14" rx="1.5" style={{ stroke: bg }} />
-    {/* conical lens hood pointing left, then the beam */}
-    <polygon points="58,56 46,49 46,83 58,76" fill="currentColor" />
+    {/* conical lens hood pointing right, feeding the beam */}
+    <polygon points="116,56 128,49 128,83 116,76" fill="currentColor" />
     {/* tripod: hub and three splayed legs */}
     <circle cx="86" cy="91" r="4" fill="currentColor" />
     <line x1="84" y1="92" x2="58" y2="118" strokeWidth="5" /><line x1="88" y1="92" x2="116" y2="118" strokeWidth="5" /><line x1="86" y1="93" x2="86" y2="118" strokeWidth="5" />
