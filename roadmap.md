@@ -41,3 +41,5 @@
 - [x] Remove the animation from the ticket button
 - [x] Hero line a little smaller and thinner again
 - [x] Get in touch button shaped like a cinema ticket (notches, tear line, admit-one print)
+- [x] Ticket inner frame removed, tear line running the full height with evenly fitting dashes
+- [x] Ticket clapperboard moved further right, clear of the left edge
