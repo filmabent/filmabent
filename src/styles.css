@@ -146,7 +146,7 @@
   63% { opacity: .95; }
   85% { opacity: .94; }
 }
-@utility animate-flicker { animation: flicker 3.2s infinite; }
+@utility animate-flicker { animation: flicker 4s infinite; }
 
 /* deep-blue light leak, glows behind the dark screens */
 @utility navy-leak {
