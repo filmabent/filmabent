@@ -47,7 +47,7 @@ export function PortfolioGallery() {
 function CategoryGallery({ category, featured }: { category: { slug: typeof categories[number]["slug"]; title: string; text: string }; featured: string }) {
   const { t } = useLanguage();
   const [playing, setPlaying] = useState(false);
-  const source = videoSource(featured);
+  const source = videoSource(featured, true);
   const thumbnail = thumb(featured);
   const Icon = icons[categories.findIndex(item => item.slug === category.slug)] ?? Film;
   return <article id={category.slug} className="scroll-mt-24 border-b border-border py-10 md:py-12">

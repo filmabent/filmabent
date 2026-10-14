@@ -7,18 +7,18 @@ export const categories = [
   { slug: "imagefilms", title: "Imagefilms & Events", text: "People, places and moments — captured with character." },
 ] as const;
 
-export function videoSource(value: string): string | null {
+export function videoSource(value: string, autoplay = false): string | null {
   try {
     const url = new URL(value);
     if (url.protocol !== "https:") return null;
     const host = url.hostname.replace(/^www\./, "");
     if (host === "youtube.com" || host === "youtube-nocookie.com" || host === "youtu.be") {
       const id = host === "youtu.be" ? url.pathname.slice(1) : url.searchParams.get("v") ?? url.pathname.split("/")[2];
-      return id && /^[\w-]{11}$/.test(id) ? `https://www.youtube-nocookie.com/embed/${id}?rel=0` : null;
+      return id && /^[\w-]{11}$/.test(id) ? `https://www.youtube-nocookie.com/embed/${id}?rel=0${autoplay ? "&autoplay=1&playsinline=1" : ""}` : null;
     }
     if (host === "vimeo.com" || host === "player.vimeo.com") {
       const id = url.pathname.split("/").filter(Boolean).pop();
-      return id && /^\d+$/.test(id) ? `https://player.vimeo.com/video/${id}` : null;
+      return id && /^\d+$/.test(id) ? `https://player.vimeo.com/video/${id}${autoplay ? "?autoplay=1&playsinline=1" : ""}` : null;
     }
     return /\.mp4$/i.test(url.pathname) ? url.href : null;
   } catch { return null; }
