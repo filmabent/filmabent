@@ -32,3 +32,4 @@
 - [x] Contact button in each category section with film-roll / camera animation
 - [x] Top photo film flicker a little more often
 - [x] Bigger film strip with sprocket holes and frame lines travelling at one speed
+- [ ] Film strip rolls out from under the reel with holes visible the whole way out
