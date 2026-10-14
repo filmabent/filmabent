@@ -311,6 +311,36 @@
   .ticket-admit { display: none; }
 }
 
+/* clapperboard — striped arm claps shut every few seconds */
+@keyframes clap {
+  0%, 72%, 100% { transform: rotate(-16deg); }
+  78%, 88% { transform: rotate(0deg); }
+}
+.clapperboard { position: relative; width: 64px; height: 46px; flex-shrink: 0; }
+.clapperboard .cb-arm {
+  position: absolute; left: 0; right: 0; top: 0; height: 13px;
+  transform-origin: 3px 100%;
+  transform: rotate(-16deg);
+  animation: clap 5.5s ease-in-out infinite;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  background: repeating-linear-gradient(-58deg, var(--color-foreground) 0 8px, var(--color-reel) 8px 16px);
+}
+.clapperboard .cb-body {
+  position: absolute; left: 0; right: 0; top: 12px; bottom: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(-58deg, var(--color-foreground) 0 8px, var(--color-reel) 8px 16px) top / 100% 6px no-repeat,
+    linear-gradient(var(--color-card), var(--color-card));
+}
+.clapperboard .cb-body::after {
+  content: "";
+  position: absolute; left: 6px; right: 6px; top: 12px; bottom: 6px;
+  background: repeating-linear-gradient(to bottom, var(--color-border) 0 1px, transparent 1px 6px);
+  opacity: 0.7;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
   .bts-track { animation: none; }
