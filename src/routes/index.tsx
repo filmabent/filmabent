@@ -1,6 +1,9 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Camera, Clapperboard, Heart, Instagram, Mail, MapPin, Music, Play, Sparkles, Youtube } from "lucide-react";
+import { Instagram, Mail, MapPin, Play, Youtube, Pause } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { PortfolioGallery } from "@/components/portfolio-gallery";
+import { portfolioQuery } from "@/lib/portfolio.functions";
 
 import bts1 from "@/assets/bts/000049460017.jpg.asset.json";
 import bts2 from "@/assets/bts/000049460020.jpg.asset.json";
@@ -14,20 +17,23 @@ import bts9 from "@/assets/bts/IMG_4677.JPG.asset.json";
 import bts10 from "@/assets/bts/IMG_4719.JPG.asset.json";
 
 export const Route = createFileRoute("/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(portfolioQuery),
   component: Index,
+  errorComponent: () => <div className="min-h-screen bg-background p-12 text-foreground">The galleries could not load. Please refresh and try again.</div>,
+  notFoundComponent: () => <div>Page not found.</div>,
   head: () => ({
     meta: [
       { title: "filmabent — Film Production with a Vintage Soul" },
       {
         name: "description",
         content:
-          "filmabent crafts films with a retro heart: narrative films, Super 8 weddings, music videos, image films and documentaries. Based in Berlin.",
+          "filmabent crafts films with a retro heart: narrative films, Super 8 weddings, music videos and advertisements, imagefilms and events. Based in Berlin.",
       },
       { property: "og:title", content: "filmabent — Film Production with a Vintage Soul" },
       {
         property: "og:description",
         content:
-          "Narrative films, Super 8 weddings, music videos, image films, documentaries and events — film with real character.",
+          "Narrative films, Super 8 weddings, music videos and advertisements, imagefilms and events — film with real character.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
@@ -36,41 +42,6 @@ export const Route = createFileRoute("/")({
     links: [{ rel: "canonical", href: "/" }],
   }),
 });
-
-const videos = [
-  { id: "TeE6CvUIg0E", title: "Reel I" },
-  { id: "pNX1XCQijRQ", title: "Reel II" },
-  { id: "qBle2vkQjCg", title: "Reel III" },
-  { id: "ifzdD7G0ugA", title: "Reel IV" },
-];
-
-const services = [
-  {
-    icon: Clapperboard,
-    title: "Narrative Films",
-    text: "Short films and story work with a vintage pulse — written, shot and cut with real texture.",
-  },
-  {
-    icon: Heart,
-    title: "Weddings on Super 8",
-    text: "Your day on real film. Grain, warmth and light leaks included — a memory that feels like it was always there.",
-  },
-  {
-    icon: Music,
-    title: "Music Videos",
-    text: "Ideas built around the song, with a look nobody mistakes for stock footage.",
-  },
-  {
-    icon: Camera,
-    title: "Image Films & Documentaries",
-    text: "Brands and true stories told with a retro eye — honest, textured, worth a second watch.",
-  },
-  {
-    icon: Sparkles,
-    title: "Events",
-    text: "Concerts, launches and gatherings — covered properly, edited into something worth keeping.",
-  },
-];
 
 const gallery = [
   { src: bts2.url, alt: "ARRI camera rig by the lake", wide: true },
@@ -115,7 +86,7 @@ function Index() {
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">Est. on film · Berlin</p>
+          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">Stories with character · Shot on feeling</p>
           <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
           <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -132,53 +103,8 @@ function Index() {
         </div>
       </section>
 
-      {/* Work */}
-      <WorkSection />
-
-      
-
-      {/* Services */}
-      <section id="services" className="mx-auto max-w-6xl px-6 py-28">
-        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">What we do</p>
-        <h2 className="mb-6 font-display text-5xl md:text-7xl">Shot on feeling</h2>
-        <p className="mb-14 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Everything we make carries that analog warmth — the kind of look that
-          makes people feel something before they know why. Here's what that
-          can look like for you:
-        </p>
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-5">
-          {services.map((s, i) => (
-            <div
-              key={s.title}
-              className={`group bg-background p-6 transition-colors hover:bg-card xl:p-8 ${i === services.length - 1 ? "sm:col-span-2 lg:col-span-1" : ""}`}
-            >
-              <s.icon className="mb-6 h-8 w-8 text-primary" strokeWidth={1.5} />
-              <h3 className="mb-3 font-display text-xl xl:text-2xl">{s.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Behind the scenes */}
-      <section id="bts" className="relative border-y border-border bg-reel py-28 text-reel-foreground">
-        <div className="navy-leak pointer-events-none absolute inset-0 opacity-70" />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">On set</p>
-          <h2 className="mb-14 font-display text-5xl md:text-7xl">Behind the scenes</h2>
-          <div className="columns-2 gap-4 space-y-4 md:columns-3">
-            {gallery.map((img) => (
-              <img
-                key={img.src}
-                src={img.src}
-                alt={img.alt}
-                loading="lazy"
-                className="w-full border border-reel-foreground/20 transition-transform duration-300 hover:-rotate-1 hover:scale-[1.02]"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      <PortfolioGallery />
+      <BehindTheScenes />
 
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-6xl px-6 py-28 text-center">
@@ -233,6 +159,7 @@ function Index() {
           </div>
           <span className="text-xs uppercase tracking-[0.2em] text-reel-foreground/60">
             © {new Date().getFullYear()} filmabent — shot with love
+            <a href="/owner" className="mt-3 block text-reel-foreground/60 hover:text-primary">Owner studio</a>
           </span>
         </div>
       </footer>
@@ -241,66 +168,19 @@ function Index() {
 }
 
 
-function WorkSection() {
-  const [active, setActive] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const v = videos[active] ?? videos[0]!;
-  return (
-    <section id="work" className="mx-auto max-w-6xl px-6 py-32">
-      <div className="grid gap-10 md:grid-cols-[1fr_220px]">
-        <div className="relative aspect-video overflow-hidden bg-reel">
-          {playing ? (
-            <iframe
-              key={v.id}
-              src={`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1`}
-              title={v.title}
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              className="h-full w-full"
-            />
-          ) : (
-            <button onClick={() => setPlaying(true)} className="group absolute inset-0 h-full w-full" aria-label={`Play ${v.title}`}>
-              <img
-                src={`https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`}
-                alt=""
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-              />
-              <div className="vignette absolute inset-0 opacity-50" />
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-reel via-reel/50 to-transparent" />
-              <span className="absolute inset-0 flex items-center justify-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full border border-foreground/50 backdrop-blur-sm transition-colors group-hover:border-primary group-hover:text-primary">
-                  <Play className="h-6 w-6" />
-                </span>
-              </span>
-              <span className="absolute bottom-5 left-6 text-[10px] uppercase tracking-[0.4em] text-foreground/80">
-                {String(active + 1).padStart(2, "0")} — {v.title}
-              </span>
-            </button>
-          )}
-        </div>
-        <div className="flex flex-col justify-between">
-          <div>
-            <p className="mb-3 text-[10px] uppercase tracking-[0.4em] text-primary">Selected work</p>
-            <h2 className="mb-10 font-display text-4xl">The Reel</h2>
-            <ol className="space-y-1">
-              {videos.map((item, i) => (
-                <li key={item.id}>
-                  <button
-                    onClick={() => { setActive(i); setPlaying(false); }}
-                    className={`flex w-full items-baseline gap-4 border-b border-border py-3 text-left text-xs uppercase tracking-[0.25em] transition-colors ${i === active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                  >
-                    <span className={i === active ? "text-primary" : ""}>{String(i + 1).padStart(2, "0")}</span>
-                    {item.title}
-                  </button>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <a href="https://www.youtube.com/@filmabent" target="_blank" rel="noreferrer" className="mt-8 text-[10px] uppercase tracking-[0.3em] text-muted-foreground hover:text-primary">
-            More on YouTube →
-          </a>
-        </div>
+function BehindTheScenes() {
+  const [paused, setPaused] = useState(false);
+  return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-12 text-reel-foreground">
+    <div className="mx-auto mb-8 flex max-w-6xl items-center justify-between gap-4 px-6">
+      <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
+      <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
+    </div>
+    <div className={`bts-strip ${paused ? "is-paused" : ""}`}>
+      <div className="bts-track">
+        {[0, 1].map(copy => <div className="bts-group" key={copy} aria-hidden={copy === 1}>
+          {gallery.map(img => <img key={img.src} src={img.src} alt={copy === 0 ? img.alt : ""} loading="lazy" className="h-44 w-auto shrink-0 object-contain md:h-56" />)}
+        </div>)}
       </div>
-    </section>
-  );
+    </div>
+  </section>;
 }
