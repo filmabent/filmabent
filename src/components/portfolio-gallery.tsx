@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Clapperboard, Heart, Music, Camera, Film, Play } from "lucide-react";
+import { Clapperboard, Heart, Music, Camera, Film, Play, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { categories, videoSource } from "@/lib/portfolio";
 import { portfolioQuery } from "@/lib/portfolio.functions";
