@@ -47,8 +47,8 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
 
   if (status === "sent") return <p className="mx-auto mt-10 max-w-md text-sm text-primary">{t("Thank you — your message is on its way. We’ll get back to you soon.", "Vielen Dank — deine Nachricht ist unterwegs. Wir melden uns bald.")}</p>;
 
-  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left">
-    <div className="slate-arm" aria-hidden="true" />
+  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left" onMouseEnter={retriggerClap}>
+    <div ref={armRef} className="slate-arm" aria-hidden="true" />
     <div className="slate-hinge" aria-hidden="true" />
     <div className="slate-arm-fixed" aria-hidden="true" />
     <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-8 sm:px-10" noValidate>
