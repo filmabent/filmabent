@@ -29,3 +29,4 @@
 - [x] Contact: mailto filmabent@gmail.com
 - [x] Register uploaded BTS images via lovable-assets
 - [x] Head metadata per route
+- [x] Contact button in each category section with film-roll / camera animation

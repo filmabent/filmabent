@@ -55,6 +55,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
       <div>
         <div className="flex items-start gap-4"><Icon className="mt-2 size-7 shrink-0 text-primary" strokeWidth={1.5} aria-hidden="true" /><h3 className="font-display text-3xl lg:text-4xl">{category.title}</h3></div>
         <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{category.text}</p>
+        <FilmRollButton />
       </div>
       <div className="w-full max-w-md md:justify-self-end">
         <div className="relative aspect-video w-full border border-border bg-reel">
@@ -71,4 +72,16 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
       </div>
     </div>
   </article>;
+}
+
+function FilmRollButton() {
+  const { t } = useLanguage();
+  return <a
+    href="#contact"
+    className="group relative mt-8 inline-flex items-center gap-3 border border-foreground/40 px-5 py-3 text-xs uppercase tracking-[0.25em] transition-colors hover:border-primary hover:text-primary"
+  >
+    <Film className="film-reel h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+    {t("Start your film", "Starte deinen Film")}
+    <span className="film-unroll" aria-hidden="true" />
+  </a>;
 }
