@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -80,9 +80,10 @@ function Index() {
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
             <LanguageSwitch />
-            <Button asChild variant="outline" className="h-auto rounded-none border-foreground/40 bg-transparent px-3 py-2 text-[10px] uppercase tracking-widest sm:px-4 sm:text-xs hover:bg-foreground hover:text-background">
-              <a href="#contact">{t("Get in touch", "Kontakt")}</a>
-            </Button>
+            <a href="#contact" className="cinema-ticket">
+              <Star className="ticket-stub h-3 w-3 text-ember" aria-hidden="true" />
+              {t("Get in touch", "Kontakt")}
+            </a>
           </div>
         </div>
       </header>

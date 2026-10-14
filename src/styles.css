@@ -226,11 +226,70 @@
 @keyframes film-feed { to { background-position: 40px 2px, 40px 15px, 40px 6px; } }
 .group:hover .film-unroll, a.group:focus-visible .film-unroll { clip-path: inset(0 0 0 0); animation: film-feed 1.5s linear infinite; }
 
+/* cinema-ticket contact button — punched end notches, dashed tear line, brass stub */
+.cinema-ticket {
+  --notch: 6px;
+  --stub: 26px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.9rem 0.5rem calc(var(--stub) + 0.7rem);
+  border: 1px solid color-mix(in oklab, var(--color-foreground) 40%, transparent);
+  background-color: transparent;
+  color: var(--color-foreground);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  -webkit-mask-image:
+    radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+  mask-image:
+    radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+/* the tear line between the stub and the ticket */
+.cinema-ticket::before {
+  content: "";
+  position: absolute;
+  left: var(--stub);
+  top: 5px;
+  bottom: 5px;
+  width: 1px;
+  background: repeating-linear-gradient(180deg, currentColor 0 3px, transparent 3px 6px);
+  opacity: 0.5;
+}
+.ticket-stub {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.cinema-ticket:hover,
+.cinema-ticket:focus-visible {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+  border-color: var(--color-foreground);
+  transform: translateY(-1px);
+}
+@keyframes ticket-tear { to { background-position: 0 6px; } }
+.cinema-ticket:hover::before { animation: ticket-tear 900ms linear infinite; }
+@media (max-width: 639px) {
+  .cinema-ticket { --stub: 22px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.55rem); font-size: 9px; letter-spacing: 0.13em; }
+  .ticket-stub { left: 7px; width: 10px; height: 10px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
   .bts-track { animation: none; }
    .scroll-light-leak { display: none; }
   .grain::after, .animate-flicker { animation: none; }
   .film-reel, .film-unroll { animation: none; }
+  .cinema-ticket::before { animation: none; }
   html { scroll-behavior: auto; }
 }
