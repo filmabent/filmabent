@@ -262,24 +262,16 @@
   mask-composite: intersect;
   transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
-/* the second hairline frame, like vintage letterpress ticket printing */
-.cinema-ticket::after {
-  content: "";
-  position: absolute;
-  inset: 3px 11px;
-  border: 1px solid currentColor;
-  opacity: 0.3;
-  pointer-events: none;
-}
-/* the tear line between the stub and the ticket */
+/* the tear line between the stub and the ticket — runs the full inner height,
+   dashes sized as a share of the height so none of them is ever cut short */
 .cinema-ticket::before {
   content: "";
   position: absolute;
   left: var(--stub);
-  top: 7px;
-  bottom: 7px;
+  top: 0;
+  bottom: 0;
   width: 2px;
-  background: repeating-linear-gradient(180deg, currentColor 0 4px, transparent 4px 8px);
+  background: repeating-linear-gradient(180deg, currentColor 0 10%, transparent 10% 20%);
   opacity: 0.65;
 }
 .ticket-stub {
@@ -312,7 +304,6 @@
   .cinema-ticket { --notch: 7px; --stub: 30px; padding: 0.45rem 0.75rem 0.45rem calc(var(--stub) + 0.65rem); font-size: 10px; letter-spacing: 0.14em; }
   .ticket-stub { left: 9px; width: 13px; height: 13px; }
   .ticket-admit { font-size: 6px; letter-spacing: 0.26em; }
-  .cinema-ticket::after { inset: 3px 9px; }
 }
 @media (max-width: 479px) {
   .cinema-ticket { --stub: 24px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
