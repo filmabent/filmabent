@@ -2,10 +2,10 @@ import { describe, expect, it } from "vitest";
 import { chooseLeak, FLARE_CHANCE, shouldShowFlare } from "@/lib/light-effects";
 
 describe("Light leak placement", () => {
-  it("increases flare frequency by 30 percent from 45 percent", () => {
-    expect(FLARE_CHANCE).toBeCloseTo(0.585, 10);
-    expect(shouldShowFlare(() => 0.584)).toBe(true);
-    expect(shouldShowFlare(() => 0.585)).toBe(false);
+  it("keeps flare frequency 15 percent below 0.585", () => {
+    expect(FLARE_CHANCE).toBeCloseTo(0.497, 10);
+    expect(shouldShowFlare(() => 0.496)).toBe(true);
+    expect(shouldShowFlare(() => 0.497)).toBe(false);
   });
   it("uses left-side variants in the first half", () => {
     for (const value of [0, 0.4, 0.99]) expect([0, 2, 4]).toContain(chooseLeak(0.49, -1, () => value));
