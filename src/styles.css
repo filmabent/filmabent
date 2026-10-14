@@ -266,7 +266,7 @@
 .cinema-ticket::after {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 3px 11px;
   border: 1px solid currentColor;
   opacity: 0.3;
   pointer-events: none;
@@ -293,19 +293,22 @@
   letter-spacing: 0.34em;
   color: var(--color-logo);
 }
+/* the hero line sits over the camera photo, so a soft dark halo keeps the red letters crisp */
+.hero-eyebrow {
+  text-shadow: 0 0 10px oklch(0.11 0.04 265 / 0.9), 0 1px 1px oklch(0.1 0.04 265 / 0.85);
+}
 .cinema-ticket:hover,
 .cinema-ticket:focus-visible {
   background-color: var(--color-foreground);
   color: var(--color-background);
   border-color: var(--color-foreground);
-  transform: translateY(-1px);
+  background-image: none;
 }
-@keyframes ticket-tear { to { background-position: 0 8px; } }
-.cinema-ticket:hover::before { animation: ticket-tear 900ms linear infinite; }
 @media (max-width: 639px) {
   .cinema-ticket { --notch: 7px; --stub: 30px; padding: 0.45rem 0.75rem 0.45rem calc(var(--stub) + 0.65rem); font-size: 10px; letter-spacing: 0.14em; }
   .ticket-stub { left: 9px; width: 13px; height: 13px; }
   .ticket-admit { font-size: 6px; letter-spacing: 0.26em; }
+  .cinema-ticket::after { inset: 3px 9px; }
 }
 @media (max-width: 479px) {
   .cinema-ticket { --stub: 24px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
@@ -319,6 +322,5 @@
    .scroll-light-leak { display: none; }
   .grain::after, .animate-flicker { animation: none; }
   .film-reel, .film-unroll { animation: none; }
-  .cinema-ticket::before { animation: none; }
   html { scroll-behavior: auto; }
 }
