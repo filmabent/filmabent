@@ -233,7 +233,7 @@
 /* cinema-ticket contact button — punched end notches, dashed tear line, admit-one print */
 .cinema-ticket {
   --notch: 9px;
-  --stub: 38px;
+  --stub: 42px;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -262,21 +262,21 @@
   mask-composite: intersect;
   transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
-/* the tear line between the stub and the ticket — runs the full inner height,
-   dashes sized as a share of the height so none of them is ever cut short */
+/* the tear line between the stub and the ticket — a dashed border, so the dashes
+   always divide the height exactly and none of them is ever cut short */
 .cinema-ticket::before {
   content: "";
   position: absolute;
   left: var(--stub);
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: repeating-linear-gradient(180deg, currentColor 0 10%, transparent 10% 20%);
+  width: 0;
+  border-left: 2px dashed currentColor;
   opacity: 0.65;
 }
 .ticket-stub {
   position: absolute;
-  left: 12px;
+  left: 19px;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -301,13 +301,13 @@
   background-image: none;
 }
 @media (max-width: 639px) {
-  .cinema-ticket { --notch: 7px; --stub: 30px; padding: 0.45rem 0.75rem 0.45rem calc(var(--stub) + 0.65rem); font-size: 10px; letter-spacing: 0.14em; }
-  .ticket-stub { left: 9px; width: 13px; height: 13px; }
+  .cinema-ticket { --notch: 7px; --stub: 33px; padding: 0.45rem 0.75rem 0.45rem calc(var(--stub) + 0.65rem); font-size: 10px; letter-spacing: 0.14em; }
+  .ticket-stub { left: 12px; width: 13px; height: 13px; }
   .ticket-admit { font-size: 6px; letter-spacing: 0.26em; }
 }
 @media (max-width: 479px) {
-  .cinema-ticket { --stub: 24px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
-  .ticket-stub { left: 7px; width: 11px; height: 11px; }
+  .cinema-ticket { --stub: 26px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
+  .ticket-stub { left: 9px; width: 11px; height: 11px; }
   .ticket-admit { display: none; }
 }
 
