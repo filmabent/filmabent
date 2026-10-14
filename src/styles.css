@@ -73,8 +73,9 @@
   /* warm brass — used sparingly, like a tungsten bulb */
   --ember: oklch(0.74 0.1 65);
   --cream: oklch(0.9 0.02 235);
-  /* FILM ABENT logo red, sampled from the imagefilms/events thumbnail (#a20612) */
-  --logo-red: oklch(0.45 0.18 27);
+  /* FILM ABENT logo red, sampled from the imagefilms/events thumbnail (#a20612),
+     lifted the same hue so 10px labels stay readable on the navy ground */
+  --logo-red: oklch(0.58 0.19 27);
   --grain-opacity: 0.121;
   --ink-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='ink'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncG type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncB type='linear' slope='.65' intercept='.35'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ink)'/%3E%3C/svg%3E");
   --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
@@ -239,6 +240,11 @@
   padding: 0.5rem 0.9rem 0.5rem calc(var(--stub) + 0.7rem);
   border: 1px solid color-mix(in oklab, var(--color-foreground) 40%, transparent);
   background-color: transparent;
+  /* notch outlines drawn just outside the punched holes, so the cut reads as a curve */
+  background-image:
+    radial-gradient(circle at 0 50%, transparent 0 6px, currentColor 6px 6.8px, transparent 6.8px),
+    radial-gradient(circle at 100% 50%, transparent 0 6px, currentColor 6px 6.8px, transparent 6.8px);
+  background-repeat: no-repeat;
   color: var(--color-foreground);
   font-size: 10px;
   letter-spacing: 0.18em;
