@@ -6,16 +6,16 @@ import { PortfolioGallery } from "@/components/portfolio-gallery";
 import { ContactForm } from "@/components/contact-form";
 import { portfolioQuery } from "@/lib/portfolio.functions";
 
-import bts1 from "@/assets/bts/000049460017.jpg.asset.json";
-import bts2 from "@/assets/bts/000049460020.jpg.asset.json";
-import bts3 from "@/assets/bts/000049460021.jpg.asset.json";
-import bts4 from "@/assets/bts/000163320022.jpg.asset.json";
-import bts5 from "@/assets/bts/000163320024.jpg.asset.json";
-import bts6 from "@/assets/bts/000163320027.jpg.asset.json";
-import bts7 from "@/assets/bts/000163320033.jpg.asset.json";
-import bts8 from "@/assets/bts/IMG_4676.JPG.asset.json";
-import bts9 from "@/assets/bts/IMG_4677.JPG.asset.json";
-import bts10 from "@/assets/bts/IMG_4719.JPG.asset.json";
+const bts1 = { url: "/bts/000049460017.jpg" };
+const bts2 = { url: "/bts/000049460020.jpg" };
+const bts3 = { url: "/bts/000049460021.jpg" };
+const bts4 = { url: "/bts/000163320022.jpg" };
+const bts5 = { url: "/bts/000163320024.jpg" };
+const bts6 = { url: "/bts/000163320027.jpg" };
+const bts7 = { url: "/bts/000163320033.jpg" };
+const bts8 = { url: "/bts/img_4676.jpg" };
+const bts9 = { url: "/bts/img_4677.jpg" };
+const bts10 = { url: "/bts/img_4719.jpg" };
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(portfolioQuery),
