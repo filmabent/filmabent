@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Clapperboard, Heart, Music, Sparkles, Film, Play, Youtube } from "lucide-react";
+import { Clapperboard, Heart, Music, Stars, Film, Play, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { categories, videoSource } from "@/lib/portfolio";
 import { portfolioQuery } from "@/lib/portfolio.functions";
 
-const icons = [Clapperboard, Heart, Music, Sparkles];
+const icons = [Clapperboard, Heart, Music, Stars];
 
 function thumb(url: string) {
   const m = url.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
@@ -36,15 +36,17 @@ export function PortfolioGallery() {
 function CategoryGallery({ category, featured }: { category: typeof categories[number]; featured: string }) {
   const [playing, setPlaying] = useState(false);
   const source = videoSource(featured);
+  const thumbnail = thumb(featured);
+  const Icon = icons[categories.findIndex(item => item.slug === category.slug)] ?? Film;
   return <article id={category.slug} className="scroll-mt-24 border-b border-border py-10 md:py-12">
-    <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.65fr)] md:gap-14">
+    <div className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">
       <div>
-        <h3 className="font-display text-4xl md:text-5xl">{category.title}</h3>
+        <div className="flex items-start gap-4"><Icon className="mt-2 size-7 shrink-0 text-primary" strokeWidth={1.5} aria-hidden="true" /><h3 className="font-display text-3xl lg:text-4xl">{category.title}</h3></div>
         <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">{category.text}</p>
       </div>
-      <div>
+      <div className="w-full max-w-md md:justify-self-end">
         <div className="relative aspect-video w-full border border-border bg-reel">
-          {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={`Play ${category.title}`} className="group relative h-full w-full overflow-hidden rounded-none p-0">{thumb(featured) && <img src={thumb(featured)!} alt="" className="absolute inset-0 h-full w-full object-cover" />}<span className="relative flex size-16 items-center justify-center rounded-full bg-reel/70 transition-transform group-hover:scale-110"><Play className="size-8 text-primary" /></span></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
+          {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={`Play ${category.title}`} className="group relative h-full w-full overflow-hidden rounded-none p-0">{thumbnail && <img src={thumbnail} alt="" className="absolute inset-0 h-full w-full object-cover" />}<span className="relative flex size-14 items-center justify-center rounded-full bg-reel/70 transition-transform group-hover:scale-110"><Play className="size-7 text-primary" /></span></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
         </div>
         <a
           href="https://www.youtube.com/@filmabent"

@@ -62,6 +62,7 @@ const gallery = [
 function Index() {
   return (
     <div className="grain min-h-screen bg-background text-foreground">
+      <ScrollLightLeak />
       {/* Nav */}
       <header className="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-background/90 to-transparent">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -200,8 +201,51 @@ function BehindTheScenes() {
   const [open, setOpen] = useState<number | null>(null);
   const n = gallery.length;
   const strip = useRef<HTMLDivElement>(null);
-  const slide = (d: number) => strip.current?.scrollBy({ left: d * strip.current.clientWidth * 0.6, behavior: "smooth" });
+  const group = useRef<HTMLDivElement>(null);
+  const hovering = useRef(false);
+  const focused = useRef(false);
+  const stopped = useRef(false);
+  const travel = useRef(0);
+  const slide = (d: number) => { travel.current += d * (strip.current?.clientWidth ?? 0) * 0.65; };
   const go = (d: number) => setOpen(i => i === null ? i : (i + d + n) % n);
+  const currentPhoto = open === null ? undefined : gallery[open];
+  useEffect(() => { stopped.current = paused || open !== null; }, [paused, open]);
+  useEffect(() => {
+    const el = strip.current;
+    const photos = group.current;
+    if (!el || !photos) return;
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let width = 0;
+    const resize = new ResizeObserver(() => {
+      const next = photos.offsetWidth;
+      if (next <= 0) return;
+      el.scrollLeft = width ? el.scrollLeft / width * next : next;
+      width = next;
+    });
+    resize.observe(photos);
+    let frame = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 50);
+      last = now;
+      let distance = 0;
+      if (Math.abs(travel.current) > 0.5) {
+        distance = motion.matches ? travel.current : travel.current * (1 - Math.exp(-dt / 100));
+        travel.current -= distance;
+      } else {
+        travel.current = 0;
+        if (!motion.matches && !stopped.current && !hovering.current && !focused.current) distance = dt * 0.03;
+      }
+      if (width > 0) {
+        if (distance) el.scrollLeft += distance;
+        if (el.scrollLeft < width * 0.5) el.scrollLeft += width;
+        if (el.scrollLeft > width * 1.5) el.scrollLeft -= width;
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => { cancelAnimationFrame(frame); resize.disconnect(); };
+  }, []);
   useEffect(() => {
     if (open === null) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(null); if (e.key === "ArrowRight") go(1); if (e.key === "ArrowLeft") go(-1); };
@@ -213,25 +257,40 @@ function BehindTheScenes() {
       <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
       <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
     </div>
-    <div className="relative">
-    <Button variant="outline" size="icon" aria-label="Scroll photos left" className="absolute left-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(-1)}><ChevronLeft /></Button>
-    <Button variant="outline" size="icon" aria-label="Scroll photos right" className="absolute right-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(1)}><ChevronRight /></Button>
+    <div className="relative" onPointerEnter={() => { hovering.current = true; }} onPointerLeave={() => { hovering.current = false; }} onFocusCapture={() => { focused.current = true; }} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) focused.current = false; }}>
+    <Button variant="outline" size="icon" aria-label="Scroll photos left" title="Scroll banner left" className="absolute left-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(-1)}><ChevronLeft /></Button>
+    <Button variant="outline" size="icon" aria-label="Scroll photos right" title="Scroll banner right" className="absolute right-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(1)}><ChevronRight /></Button>
     <div ref={strip} className={`bts-strip overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${paused || open !== null ? "is-paused" : ""}`}>
       <div className="bts-track">
-        {[0, 1].map(copy => <div className="bts-group" key={copy} aria-hidden={copy === 1}>
-          {gallery.map((img, i) => <button key={img.src} type="button" tabIndex={copy === 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={`Open photo ${i + 1}`} className="shrink-0 cursor-zoom-in">
-            <img src={img.src} alt={copy === 0 ? img.alt : ""} loading="lazy" className="h-44 w-auto object-contain transition-opacity hover:opacity-80 md:h-56" />
-          </button>)}
+        {[0, 1, 2].map(copy => <div ref={copy === 1 ? group : undefined} className="bts-group" key={copy} aria-hidden={copy !== 1}>
+          {gallery.map((img, i) => <Button variant="ghost" key={img.src} type="button" tabIndex={copy !== 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={`Open photo ${i + 1}`} className="h-auto shrink-0 cursor-zoom-in rounded-none p-0">
+            <img src={img.src} alt={copy === 1 ? img.alt : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
+          </Button>)}
         </div>)}
       </div>
     </div>
     </div>
-    {open !== null && <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
-      <img src={gallery[open]!.src} alt={gallery[open]!.alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
+    {open !== null && currentPhoto && <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
+      <img src={currentPhoto.src} alt={currentPhoto.alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
       <Button variant="outline" size="icon" aria-label="Close" className="absolute right-4 top-4" onClick={() => setOpen(null)}><X /></Button>
       <Button variant="outline" size="icon" aria-label="Previous photo" className="absolute left-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(-1); }}><ChevronLeft /></Button>
       <Button variant="outline" size="icon" aria-label="Next photo" className="absolute right-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(1); }}><ChevronRight /></Button>
       <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] text-reel-foreground/70">{open + 1} / {n}</p>
     </div>}
   </section>;
+}
+
+function ScrollLightLeak() {
+  const leak = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const onScroll = () => {
+      leak.current?.classList.add("is-scrolling");
+      clearTimeout(timer);
+      timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 220);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(timer); };
+  }, []);
+  return <div ref={leak} className="scroll-light-leak" aria-hidden="true" />;
 }
