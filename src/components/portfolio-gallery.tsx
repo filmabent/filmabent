@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Clapperboard, Heart, Music, Stars, Film, Play, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -91,8 +91,20 @@ function FilmRollButton() {
 
 function ProjectionHeadline({ title }: { title: string }) {
   const letters = Array.from(title);
-  const weights = letters.map(letter => letter === " " ? 0.35 : /[ilIt]/.test(letter) ? 0.45 : /[mwM]/.test(letter) ? 1.15 : 0.85);
-  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  const [metrics, setMetrics] = useState<{ title: string; widths: number[] }>();
+  useEffect(() => {
+    let active = true;
+    document.fonts.ready.then(() => {
+      const context = document.createElement("canvas").getContext("2d");
+      if (!active || !context) return;
+      context.font = '84px "DM Serif Display"';
+      setMetrics({ title, widths: Array.from(title).map(letter => context.measureText(letter).width) });
+    });
+    return () => { active = false; };
+  }, [title]);
+  const widths = metrics?.title === title ? metrics.widths : letters.map(letter => letter === " " ? 21 : /[ilIt]/.test(letter) ? 25 : /[mwM]/.test(letter) ? 72 : 43);
+  const growth = letters.map((_, index) => 0.55 + 1.05 * index / Math.max(1, letters.length - 1));
+  const fit = 625 / widths.reduce((sum, width, index) => sum + width * (growth[index] ?? 1), 0);
   let offset = 0;
   return <h2 className="projection-screen">
     <span className="sr-only">{title}</span>
@@ -106,11 +118,11 @@ function ProjectionHeadline({ title }: { title: string }) {
       <path className="projection-beam" d="M127 86 L846 8 L846 175 L127 106 Z" fill="url(#headline-light)" />
       <g className="projected-title">
         {letters.map((letter, index) => {
-          const width = 625 * (weights[index] ?? 0.85) / total;
+          const scale = (growth[index] ?? 1) * fit;
+          const width = (widths[index] ?? 43) * scale;
           const x = 202 + offset;
-          const scale = 0.42 + 0.9 * (offset + width / 2) / 625;
           offset += width;
-          return <text key={index} x="0" y="0" dominantBaseline="central" transform={`translate(${x} 96) scale(1 ${scale})`} textLength={width * 0.96} lengthAdjust="spacingAndGlyphs">{letter === " " ? "\u00a0" : letter}</text>;
+          return <text key={index} x="0" y="0" transform={`translate(${x} ${96 + 27 * scale}) scale(${scale})`}>{letter === " " ? "\u00a0" : letter}</text>;
         })}
       </g>
       <Projector />
