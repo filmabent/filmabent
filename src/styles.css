@@ -156,3 +156,14 @@
 @utility animate-marquee {
   animation: marquee-x 30s linear infinite;
 }
+
+.bts-track { display: flex; width: max-content; animation: marquee-x 75s linear infinite; }
+.bts-group { display: flex; flex-shrink: 0; gap: 12px; padding-right: 12px; }
+.bts-strip:hover .bts-track, .bts-strip:focus-within .bts-track, .bts-strip.is-paused .bts-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .bts-strip { overflow-x: auto; }
+  .bts-track { animation: none; }
+  .bts-group[aria-hidden="true"] { display: none; }
+  .grain::after, .animate-flicker { animation: none; }
+  html { scroll-behavior: auto; }
+}
