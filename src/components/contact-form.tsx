@@ -61,7 +61,7 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
         </label>
       </div>
       {(error || status === "error") && <p className="text-xs text-destructive">{error ? error === "name" ? t("Please add your name", "Bitte gib deinen Namen an") : error === "email" ? t("Please enter a valid email", "Bitte gib eine gültige E-Mail-Adresse ein") : t("Please write a message", "Bitte schreibe eine Nachricht") : t("Something went wrong — please try again or email filmabent@gmail.com.", "Etwas ist schiefgelaufen — bitte versuche es erneut oder schreibe an filmabent@gmail.com.")}</p>}
-      <div className="flex justify-center pt-1"><button type="submit" disabled={status === "sending"} className="slate-tape slate-send inline-flex items-center gap-3 disabled:opacity-50">
+      <div className="flex justify-end pt-1"><button type="submit" disabled={status === "sending"} className="slate-tape slate-send inline-flex items-center gap-3 disabled:opacity-50">
         <Send className="h-4 w-4" /> {status === "sending" ? t("Sending…", "Wird gesendet…") : t("Send message", "Nachricht senden")}
       </button></div>
     </form>
