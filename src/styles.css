@@ -186,7 +186,8 @@
 .scroll-light-leak[data-variant="4"] { background: var(--scroll-leak-bottom); }
 .scroll-light-leak[data-variant="5"] { background: var(--scroll-leak-bottom-right); }
 .scroll-light-leak.is-scrolling { opacity: 0.8; transition-duration: 90ms; }
-.grain > section, .grain > footer { position: relative; z-index: 1; }
+.grain > section:not(#bts), .grain > footer { position: relative; z-index: 1; }
+#bts { position: relative; }
 .grain > footer, #bts, #services a.bg-background {
   background-image: var(--ink-grain);
   background-blend-mode: soft-light;

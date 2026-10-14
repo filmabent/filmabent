@@ -1,7 +1,7 @@
 # filmabent site
 
-- [ ] Coarser 16mm-style grain restricted to backgrounds and lettering
-- [ ] One-click video playback
+- [x] Coarser 16mm-style grain restricted to backgrounds and lettering
+- [x] One-click video playback
 
 - [x] Remove incompatible Jekyll publishing job
 - [ ] External publishing verification — requires next GitHub sync and redeploy on the chosen host
