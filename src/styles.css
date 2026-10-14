@@ -136,8 +136,17 @@
 @utility vignette {
   background: var(--vignette);
 }
-@keyframes flicker { 0%,100% {opacity:1} 50% {opacity:.92} 52% {opacity:.8} 54% {opacity:.95} }
-@utility animate-flicker { animation: flicker 4s infinite; }
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  19% { opacity: .93; }
+  21% { opacity: .82; }
+  23% { opacity: .96; }
+  58% { opacity: .9; }
+  60% { opacity: .79; }
+  63% { opacity: .95; }
+  85% { opacity: .94; }
+}
+@utility animate-flicker { animation: flicker 3.2s infinite; }
 
 /* deep-blue light leak, glows behind the dark screens */
 @utility navy-leak {
