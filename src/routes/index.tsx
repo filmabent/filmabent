@@ -285,7 +285,7 @@ function ScrollLightLeak() {
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
     let lastY = window.scrollY;
-    let lastTrigger = 0;
+    let lastTrigger = -Infinity;
     let variation = 0;
     const selectors = ["#work", "#weddings", "#imagefilms", "#contact"];
     const onScroll = () => {
