@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
     <div id="work" className="scroll-mt-24">
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
-      <div className="flex items-end gap-4 md:gap-6"><Projector /><h2 className="projected-title font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2></div>
+      <div className="flex items-center gap-3 md:gap-4"><Projector /><div className="projection-screen relative"><span className="projection-beam" aria-hidden="true" /><h2 className="projected-title relative font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2></div></div>
     </div>
     <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
@@ -92,15 +92,6 @@ function FilmRollButton() {
 function Projector() {
   const bg = "var(--color-background)";
   return <svg className="projector relative z-10 mb-1 h-16 w-auto shrink-0 overflow-visible text-foreground md:mb-3 md:h-24" viewBox="0 0 150 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-    {/* long beam widening rightward onto the headline, fading out over the letters */}
-    <defs>
-      <linearGradient id="projector-beam-fade" x1="128" y1="0" x2="460" y2="0" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stopColor="oklch(0.82 0.1 70)" stopOpacity="0.55" />
-        <stop offset="0.6" stopColor="oklch(0.82 0.1 70)" stopOpacity="0.3" />
-        <stop offset="1" stopColor="oklch(0.82 0.1 70)" stopOpacity="0" />
-      </linearGradient>
-    </defs>
-    <polygon className="projector-beam" points="128,50 460,26 460,106 128,82" stroke="none" />
     {/* two big spoked reels on top, close together */}
     <g className="projector-reel" style={{ transformOrigin: "70px 22px" }}>
       <circle cx="70" cy="22" r="17" strokeWidth="5" />
