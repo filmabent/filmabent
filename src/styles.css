@@ -399,19 +399,14 @@
 /* Vintage wordmark glow + running projector */
 .vintage-glow { text-shadow: 0 0 6px oklch(0.9 0.025 90 / 0.45), 0 0 18px oklch(0.84 0.035 90 / 0.3), 0 0 36px oklch(0.84 0.035 90 / 0.15); }
 .projector-reel { animation: reel-spin 1.6s linear infinite; }
-/* beam: a light cone from the lens, exactly as tall as the headline, the words appear inside it */
-.projection-beam { position: absolute; left: -1.25rem; right: -1.5rem; top: -0.35em; bottom: -0.35em; pointer-events: none;
-  background: linear-gradient(90deg, oklch(0.85 0.09 70 / 0.55), oklch(0.85 0.08 70 / 0.22) 70%, oklch(0.85 0.08 70 / 0.08));
-  clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 62%); filter: blur(1px); mix-blend-mode: screen;
-  animation: projector-beam 6s linear infinite; }
-.projected-title { animation: film-projection 6s linear infinite; }
-@keyframes projector-beam {
-  0%, 4% { opacity: 0; } 6% { opacity: .9; } 8% { opacity: .3; } 10% { opacity: 1; } 13% { opacity: .5; } 16% { opacity: 1; }
-  40% { opacity: .85; } 42% { opacity: 1; } 70% { opacity: .9; } 72%, 86% { opacity: 1; } 92%, 100% { opacity: 0; } }
-@keyframes film-projection {
-  0%, 9% { opacity: 0; filter: blur(3px); transform: translateX(-2px); }
-  11% { opacity: .55; } 13% { opacity: .15; } 16% { opacity: .8; filter: blur(1px); } 18% { opacity: .4; }
-  22% { opacity: 1; filter: blur(0); transform: translateX(0); }
-  45% { opacity: .9; } 47% { opacity: 1; } 68% { opacity: .92; transform: translateX(.6px); } 70%, 86% { opacity: 1; transform: translateX(0); }
-  92%, 100% { opacity: 0; filter: blur(2px); } }
+/* beam: a light cone starting at the lens, opening to the full headline height; the words stay readable and flicker */
+.projection-beam { position: absolute; left: -0.75rem; right: -1.5rem; top: -0.3em; bottom: -0.3em; pointer-events: none;
+  background: linear-gradient(90deg, oklch(0.88 0.09 70 / 0.7), oklch(0.85 0.08 70 / 0.25) 70%, oklch(0.85 0.08 70 / 0.1));
+  clip-path: polygon(0 44%, 100% 0, 100% 100%, 0 56%); filter: blur(0.5px); mix-blend-mode: screen;
+  animation: projector-beam 2.6s steps(1) infinite; }
+@media (min-width: 768px) { .projection-beam { left: -1rem; } }
+.projection-screen { perspective: 700px; }
+.projected-title { transform: rotateY(-24deg); transform-origin: right center; animation: film-projection 2.6s steps(1) infinite; }
+@keyframes projector-beam { 0% { opacity: 1; } 12% { opacity: .65; } 16% { opacity: 1; } 41% { opacity: .75; } 44% { opacity: 1; } 70% { opacity: .55; } 73% { opacity: .9; } 76% { opacity: 1; } }
+@keyframes film-projection { 0% { opacity: 1; } 12% { opacity: .7; } 16% { opacity: 1; } 41% { opacity: .8; } 44% { opacity: 1; } 70% { opacity: .6; } 73% { opacity: .9; } 76% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .projector-reel, .projection-beam, .projected-title { animation: none; opacity: 1; filter: none; } }
