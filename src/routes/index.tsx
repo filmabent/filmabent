@@ -118,6 +118,7 @@ function Index() {
 
       {/* Contact */}
       <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
+        <div className="clapperboard mx-auto mb-4" aria-hidden="true"><span className="cb-arm" /><span className="cb-body" /></div>
         <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("Roll camera", "Kamera läuft")}</p>
         <h2 className="font-display text-5xl md:text-7xl">{t("Let’s make something", "Lass uns was drehen")}</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -261,7 +262,6 @@ function BehindTheScenes() {
   return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-8 text-reel-foreground">
     <div className="mx-auto mb-8 flex max-w-6xl items-center justify-between gap-4 px-6">
       <div className="flex items-center gap-5">
-        <div className="clapperboard" aria-hidden="true"><span className="cb-arm" /><span className="cb-body" /></div>
         <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">{t("On set", "Am Set")}</p><h2 className="font-display text-3xl md:text-4xl">{t("Behind the scenes", "Hinter den Kulissen")}</h2></div>
       </div>
       <Button variant="outline" size="icon" aria-label={paused ? t("Resume photo banner", "Fotobanner fortsetzen") : t("Pause photo banner", "Fotobanner anhalten")} title={paused ? t("Resume", "Fortsetzen") : t("Pause", "Anhalten")} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
