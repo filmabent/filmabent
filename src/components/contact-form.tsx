@@ -10,8 +10,8 @@ const schema = z.object({
   message: z.string().trim().min(1, "Please write a message").max(3000),
 });
 
-const field = "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-3 text-sm placeholder:text-muted-foreground focus:border-b-2 focus:border-primary focus:outline-none";
-const slateLabel = "font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground";
+const field = "w-full rounded-none border-0 bg-transparent px-0 py-2 text-base placeholder:text-muted-foreground focus:outline-none";
+const slateLabel = "font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-logo";
 
 export function ContactForm({ children }: { children?: React.ReactNode }) {
   const { t } = useLanguage();
@@ -47,20 +47,20 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
         <span className="slate-tape alt">{t("Roll", "Rolle")} 01 · {t("Scene", "Szene")} {t("your idea", "deine Idee")} · Take 1</span>
       </div>
       {children && <div className="text-center">{children}</div>}
-      <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
-        <label className="grid gap-1.5">
+      <div className="slate-grid">
+        <label className="slate-cell">
           <span className={slateLabel}>{t("Name", "Name")}</span>
           <input name="name" placeholder={t("Your name", "Dein Name")} aria-label={t("Your name", "Dein Name")} className={field} maxLength={100} />
         </label>
-        <label className="grid gap-1.5">
+        <label className="slate-cell">
           <span className={slateLabel}>{t("Email", "E-Mail")}</span>
           <input name="email" type="email" placeholder={t("Your email", "Deine E-Mail")} aria-label={t("Your email", "Deine E-Mail")} className={field} maxLength={255} />
         </label>
+        <label className="slate-cell wide">
+          <span className={slateLabel}>{t("Scene — your project idea", "Szene — deine Projektidee")}</span>
+          <textarea name="message" rows={5} placeholder={t("Tell us about your project", "Erzähl uns von deinem Projekt")} aria-label={t("Message", "Nachricht")} className={field} maxLength={3000} />
+        </label>
       </div>
-      <label className="grid gap-1.5">
-        <span className={slateLabel}>{t("Scene", "Szene")}</span>
-        <textarea name="message" rows={5} placeholder={t("Tell us about your project", "Erzähl uns von deinem Projekt")} aria-label={t("Message", "Nachricht")} className={field} maxLength={3000} />
-      </label>
       {(error || status === "error") && <p className="text-xs text-destructive">{error ? error === "name" ? t("Please add your name", "Bitte gib deinen Namen an") : error === "email" ? t("Please enter a valid email", "Bitte gib eine gültige E-Mail-Adresse ein") : t("Please write a message", "Bitte schreibe eine Nachricht") : t("Something went wrong — please try again or email filmabent@gmail.com.", "Etwas ist schiefgelaufen — bitte versuche es erneut oder schreibe an filmabent@gmail.com.")}</p>}
       <Button type="submit" disabled={status === "sending"} className="h-auto rounded-none inline-flex items-center justify-center gap-3 bg-primary px-10 py-4 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-opacity hover:opacity-85 disabled:opacity-50">
         <Send className="h-4 w-4" /> {status === "sending" ? t("Sending…", "Wird gesendet…") : t("Send message", "Nachricht senden")}
