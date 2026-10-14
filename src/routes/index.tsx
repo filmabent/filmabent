@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight, Clapperboard } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -80,9 +80,13 @@ function Index() {
           </nav>
           <div className="flex items-center gap-2 sm:gap-4">
             <LanguageSwitch />
-            <Button asChild variant="outline" className="h-auto rounded-none border-foreground/40 bg-transparent px-3 py-2 text-[10px] uppercase tracking-widest sm:px-4 sm:text-xs hover:bg-foreground hover:text-background">
-              <a href="#contact">{t("Get in touch", "Kontakt")}</a>
-            </Button>
+            <a href="#contact" className="cinema-ticket">
+              <Clapperboard className="ticket-stub h-4 w-4 text-logo" aria-hidden="true" />
+              <span className="flex flex-col items-start gap-[3px] leading-none">
+                <span className="ticket-admit">{t("Admit one", "Eintritt")}</span>
+                <span>{t("Get in touch", "Kontakt")}</span>
+              </span>
+            </a>
           </div>
         </div>
       </header>
@@ -93,7 +97,7 @@ function Index() {
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Mit Gefühl gedreht")}</p>
+          <p className="hero-eyebrow mb-6 text-[11px] font-normal uppercase tracking-[0.28em] text-logo sm:text-[12px] sm:tracking-[0.34em]">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Mit Gefühl gedreht")}</p>
           <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
           <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -122,13 +126,13 @@ function Index() {
         <ContactForm />
         <div className="mx-auto mt-12 grid max-w-xl gap-5 border-t border-border pt-10 text-left sm:grid-cols-2">
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">{t("Email", "E-Mail")}</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Email", "E-Mail")}</p>
             <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
               <Mail className="h-4 w-4 text-primary" /> filmabent@gmail.com
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">{t("Based in", "Zuhause in")}</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Based in", "Zuhause in")}</p>
             <a
               href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
               target="_blank"
@@ -139,7 +143,7 @@ function Index() {
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Instagram</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">Instagram</p>
             <a
               href="https://www.instagram.com/filmabent"
               target="_blank"
@@ -150,7 +154,7 @@ function Index() {
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">YouTube</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">YouTube</p>
             <a
               href="https://www.youtube.com/@filmabent"
               target="_blank"

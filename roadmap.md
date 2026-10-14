@@ -33,3 +33,11 @@
 - [x] Top photo film flicker a little more often
 - [x] Bigger film strip with sprocket holes and frame lines travelling at one speed
 - [x] Film strip at the reel's height, its bottom edge level with the reel's bottom, holes visible the whole way out
+- [x] Hero line 'Stories with character · Shot on feeling' in the filmabent logo red from the imagefilms/events thumbnail
+- [x] Contact detail labels (Email, Based in, Instagram, YouTube) in the same logo red
+- [x] Ticket button more prominent/thicker with an old-school cinema ticket feel
+- [x] Hero line bigger and thicker
+- [x] Ticket stub icon: cinema-related, in the logo red
+- [x] Remove the animation from the ticket button
+- [x] Hero line a little smaller and thinner again
+- [x] Get in touch button shaped like a cinema ticket (notches, tear line, admit-one print)

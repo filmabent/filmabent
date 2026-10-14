@@ -42,6 +42,7 @@
   --color-reel-foreground: var(--reel-foreground);
   --color-ember: var(--ember);
   --color-cream: var(--cream);
+  --color-logo: var(--logo-red);
 }
 
 :root {
@@ -72,6 +73,9 @@
   /* warm brass — used sparingly, like a tungsten bulb */
   --ember: oklch(0.74 0.1 65);
   --cream: oklch(0.9 0.02 235);
+  /* FILM ABENT logo red, sampled from the imagefilms/events thumbnail (#a20612),
+     lifted the same hue so 10px labels stay readable on the navy ground */
+  --logo-red: oklch(0.58 0.19 27);
   --grain-opacity: 0.121;
   --ink-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='ink'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncG type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncB type='linear' slope='.65' intercept='.35'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ink)'/%3E%3C/svg%3E");
   --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
@@ -225,6 +229,96 @@
    four sprocket holes per frame, all layers travelling the same 40px per cycle — one speed, seamless loop */
 @keyframes film-feed { to { background-position: 40px 2px, 40px 15px, 40px 6px; } }
 .group:hover .film-unroll, a.group:focus-visible .film-unroll { clip-path: inset(0 0 0 0); animation: film-feed 1.5s linear infinite; }
+
+/* cinema-ticket contact button — punched end notches, dashed tear line, admit-one print */
+.cinema-ticket {
+  --notch: 9px;
+  --stub: 38px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.15rem 0.55rem calc(var(--stub) + 0.9rem);
+  border: 2px solid color-mix(in oklab, var(--color-foreground) 70%, transparent);
+  background-color: color-mix(in oklab, var(--color-card) 70%, transparent);
+  color: var(--color-foreground);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  /* notch outlines drawn just outside the punched holes, so the cut reads as a curve */
+  background-image:
+    radial-gradient(circle at 0 50%, transparent 0 var(--notch), currentColor var(--notch) calc(var(--notch) + 1.3px), transparent calc(var(--notch) + 1.3px)),
+    radial-gradient(circle at 100% 50%, transparent 0 var(--notch), currentColor var(--notch) calc(var(--notch) + 1.3px), transparent calc(var(--notch) + 1.3px));
+  background-repeat: no-repeat;
+  -webkit-mask-image:
+    radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+  mask-image:
+    radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+    radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+/* the second hairline frame, like vintage letterpress ticket printing */
+.cinema-ticket::after {
+  content: "";
+  position: absolute;
+  inset: 3px 11px;
+  border: 1px solid currentColor;
+  opacity: 0.3;
+  pointer-events: none;
+}
+/* the tear line between the stub and the ticket */
+.cinema-ticket::before {
+  content: "";
+  position: absolute;
+  left: var(--stub);
+  top: 7px;
+  bottom: 7px;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, currentColor 0 4px, transparent 4px 8px);
+  opacity: 0.65;
+}
+.ticket-stub {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket-admit {
+  font-size: 7px;
+  letter-spacing: 0.34em;
+  color: var(--color-logo);
+}
+/* the hero line sits over a red-lit photo, so it rests on a deeper soft shade to stay readable */
+.hero-eyebrow {
+  display: inline-block;
+  padding: 0.4em 0.9em;
+  background: oklch(0.11 0.045 265 / 0.62);
+  box-shadow: 0 0 30px 26px oklch(0.11 0.045 265 / 0.55);
+  text-shadow: 0 0 10px oklch(0.1 0.04 265 / 0.95), 0 1px 1px oklch(0.09 0.04 265 / 0.9);
+}
+.cinema-ticket:hover,
+.cinema-ticket:focus-visible {
+  background-color: var(--color-foreground);
+  color: var(--color-background);
+  border-color: var(--color-foreground);
+  background-image: none;
+}
+@media (max-width: 639px) {
+  .cinema-ticket { --notch: 7px; --stub: 30px; padding: 0.45rem 0.75rem 0.45rem calc(var(--stub) + 0.65rem); font-size: 10px; letter-spacing: 0.14em; }
+  .ticket-stub { left: 9px; width: 13px; height: 13px; }
+  .ticket-admit { font-size: 6px; letter-spacing: 0.26em; }
+  .cinema-ticket::after { inset: 3px 9px; }
+}
+@media (max-width: 479px) {
+  .cinema-ticket { --stub: 24px; padding: 0.4rem 0.6rem 0.4rem calc(var(--stub) + 0.5rem); font-size: 9px; letter-spacing: 0.12em; }
+  .ticket-stub { left: 7px; width: 11px; height: 11px; }
+  .ticket-admit { display: none; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
