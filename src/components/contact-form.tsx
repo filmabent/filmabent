@@ -13,7 +13,7 @@ const schema = z.object({
 const field = "w-full rounded-none border-0 border-b border-border bg-transparent px-1 py-3 text-sm placeholder:text-muted-foreground focus:border-b-2 focus:border-primary focus:outline-none";
 const slateLabel = "font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground";
 
-export function ContactForm() {
+export function ContactForm({ children }: { children?: React.ReactNode }) {
   const { t } = useLanguage();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
@@ -37,11 +37,16 @@ export function ContactForm() {
 
   if (status === "sent") return <p className="mx-auto mt-10 max-w-md text-sm text-primary">{t("Thank you — your message is on its way. We’ll get back to you soon.", "Vielen Dank — deine Nachricht ist unterwegs. Wir melden uns bald.")}</p>;
 
-  return <div className="clapper-slate mx-auto mt-10 max-w-xl text-left">
+  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left">
     <div className="slate-arm" aria-hidden="true" />
+    <div className="slate-hinge" aria-hidden="true" />
     <div className="slate-arm-fixed" aria-hidden="true" />
-    <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-7 sm:px-8" noValidate>
-      <p className={slateLabel}>{t("Production — filmabent · Scene — your idea", "Produktion — filmabent · Szene — deine Idee")}</p>
+    <form onSubmit={onSubmit} className="slate-body grid gap-5 px-6 py-8 sm:px-10" noValidate>
+      <div className="flex flex-wrap items-center gap-3">
+        <span className="slate-tape">{t("Prod.", "Prod.")} filmabent</span>
+        <span className="slate-tape alt">{t("Roll", "Rolle")} 01 · {t("Scene", "Szene")} {t("your idea", "deine Idee")} · Take 1</span>
+      </div>
+      {children && <div className="text-center">{children}</div>}
       <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
         <label className="grid gap-1.5">
           <span className={slateLabel}>{t("Name", "Name")}</span>
