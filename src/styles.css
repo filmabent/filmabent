@@ -347,5 +347,6 @@
    .scroll-light-leak { display: none; }
   .grain::after, .animate-flicker { animation: none; }
   .film-reel, .film-unroll { animation: none; }
+  .clapperboard .cb-arm { animation: none; }
   html { scroll-behavior: auto; }
 }
