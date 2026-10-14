@@ -30,3 +30,5 @@
 - [x] Register uploaded BTS images via lovable-assets
 - [x] Head metadata per route
 - [x] Contact button in each category section with film-roll / camera animation
+- [x] Top photo film flicker a little more often
+- [x] Bigger film strip with sprocket holes and frame lines travelling at one speed
