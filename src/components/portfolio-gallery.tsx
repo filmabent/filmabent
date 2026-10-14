@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
     <div id="work" className="scroll-mt-24">
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
-      <div className="flex items-end gap-4 md:gap-6"><h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2><Projector /></div>
+      <div className="flex items-end gap-4 md:gap-6"><Projector /><h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2></div>
     </div>
     <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
@@ -91,29 +91,29 @@ function FilmRollButton() {
 
 function Projector() {
   const bg = "var(--color-background)";
-  return <svg className="projector mb-1 h-16 w-auto shrink-0 text-foreground md:mb-3 md:h-24" viewBox="0 0 120 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-    <polygon className="projector-beam" points="98,50 120,38 120,86" stroke="none" />
-    {/* two spoked reels on top, like the reference */}
-    <g className="projector-reel" style={{ transformOrigin: "36px 20px" }}>
-      <circle cx="36" cy="20" r="14" strokeWidth="5" />
-      <line x1="36" y1="7" x2="36" y2="33" strokeWidth="3" /><line x1="23" y1="20" x2="49" y2="20" strokeWidth="3" />
-      <circle cx="36" cy="20" r="4" fill="currentColor" />
+  return <svg className="projector mb-1 h-16 w-auto shrink-0 text-foreground md:mb-3 md:h-24" viewBox="0 0 150 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    {/* long beam, widening toward the headline */}
+    <polygon className="projector-beam" points="0,30 0,94 46,74 46,50" stroke="none" />
+    {/* two big spoked reels on top, close together */}
+    <g className="projector-reel" style={{ transformOrigin: "70px 22px" }}>
+      <circle cx="70" cy="22" r="17" strokeWidth="5" />
+      <line x1="70" y1="7" x2="70" y2="37" strokeWidth="3" /><line x1="55" y1="22" x2="85" y2="22" strokeWidth="3" />
+      <circle cx="70" cy="22" r="4.5" fill="currentColor" />
     </g>
-    <g className="projector-reel" style={{ transformOrigin: "76px 30px" }}>
-      <circle cx="76" cy="30" r="12" strokeWidth="5" />
-      <line x1="76" y1="18" x2="76" y2="42" strokeWidth="3" /><line x1="64" y1="30" x2="88" y2="30" strokeWidth="3" />
-      <circle cx="76" cy="30" r="3.5" fill="currentColor" />
+    <g className="projector-reel" style={{ transformOrigin: "106px 28px" }}>
+      <circle cx="106" cy="28" r="15" strokeWidth="5" />
+      <line x1="106" y1="14" x2="106" y2="42" strokeWidth="3" /><line x1="92" y1="28" x2="120" y2="28" strokeWidth="3" />
+      <circle cx="106" cy="28" r="4" fill="currentColor" />
     </g>
-    <line x1="36" y1="34" x2="36" y2="44" strokeWidth="3" />
+    <line x1="70" y1="39" x2="70" y2="48" strokeWidth="3" />
     {/* boxy body with cut-out knobs */}
-    <rect x="28" y="44" width="62" height="40" rx="2" fill="currentColor" />
-    <circle cx="48" cy="62" r="4.5" style={{ stroke: bg }} /><circle cx="62" cy="62" r="4.5" style={{ stroke: bg }} />
-    <rect x="72" y="55" width="11" height="14" rx="1.5" style={{ stroke: bg }} />
-    {/* conical lens hood, then the beam */}
-    <polygon points="88,52 100,45 100,79 88,72" fill="currentColor" />
+    <rect x="56" y="48" width="62" height="40" rx="2" fill="currentColor" />
+    <circle cx="76" cy="66" r="4.5" style={{ stroke: bg }} /><circle cx="90" cy="66" r="4.5" style={{ stroke: bg }} />
+    <rect x="100" y="59" width="11" height="14" rx="1.5" style={{ stroke: bg }} />
+    {/* conical lens hood pointing left, then the beam */}
+    <polygon points="58,56 46,49 46,83 58,76" fill="currentColor" />
     {/* tripod: hub and three splayed legs */}
-    <circle cx="58" cy="87" r="4" fill="currentColor" />
-    <line x1="56" y1="88" x2="30" y2="118" strokeWidth="5" /><line x1="60" y1="88" x2="88" y2="118" strokeWidth="5" /><line x1="58" y1="89" x2="58" y2="118" strokeWidth="5" />
-    <line x1="33" y1="113" x2="56" y2="103" strokeWidth="3" />
+    <circle cx="86" cy="91" r="4" fill="currentColor" />
+    <line x1="84" y1="92" x2="58" y2="118" strokeWidth="5" /><line x1="88" y1="92" x2="116" y2="118" strokeWidth="5" /><line x1="86" y1="93" x2="86" y2="118" strokeWidth="5" />
   </svg>;
 }
