@@ -51,3 +51,4 @@
 - [x] Running projector animation next to Shot on feeling
 - [x] Classical projector: taller redraw, warm amber beam (no grey)
 - [x] Wordmark glow: stronger and less yellow
+- [ ] Contact form submissions emailed to filmabent@gmail.com
