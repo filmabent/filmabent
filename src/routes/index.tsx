@@ -130,7 +130,7 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-reel py-12 text-reel-foreground">
+      <footer className="border-t border-border bg-reel py-8 text-reel-foreground">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-6 md:flex-row">
           <span className="font-display text-3xl">filmabent</span>
           <div className="flex items-center gap-6">
@@ -165,7 +165,7 @@ function Index() {
 
 function BehindTheScenes() {
   const [paused, setPaused] = useState(false);
-  return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-12 text-reel-foreground">
+  return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-8 text-reel-foreground">
     <div className="mx-auto mb-8 flex max-w-6xl items-center justify-between gap-4 px-6">
       <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
       <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>

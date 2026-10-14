@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   </section>;
 }
 
-function CategoryGallery({ category, index, featured, urls }: { category: typeof categories[number]; index: number; featured: string; urls: string[] }) {
+function CategoryGallery({ category, featured, urls }: { category: typeof categories[number]; index: number; featured: string; urls: string[] }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);
   const active = selected ?? featured;
