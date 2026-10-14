@@ -17,3 +17,5 @@
 - Scroll light leaks use global effect tokens and a pointer-transparent screen-blended overlay above page imagery but below navigation and viewers, so effects continue over the hero without applying media filters; respect reduced motion.
 - English/German display text uses a shared root language context with English SSR defaults and a hydration-safe saved preference; canonical portfolio slugs and data stay language-independent.
 - Scroll-effect shape selection lives in a browser-safe helper with placement tests; effect motion uses transient CSS custom properties, while all effect colors remain global tokens.
+- Do not add Jekyll/GitHub Pages deployment workflows to this SSR app; publish through Lovable or an explicitly configured SSR-compatible external host.
+- Grainy lettering uses CSS background-clipped ink texture rather than font changes or media filters, preserving typography and layout.

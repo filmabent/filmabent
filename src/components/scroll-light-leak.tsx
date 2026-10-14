@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { chooseLeak } from "@/lib/light-effects";
+import { chooseLeak, shouldShowFlare } from "@/lib/light-effects";
 
 export function ScrollLightLeak() {
   const leak = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ export function ScrollLightLeak() {
       baseY = (Math.random() - 0.5) * 140;
       lastVariant = chooseLeak(crossed, lastVariant);
       element.dataset["variant"] = String(lastVariant);
-      element.dataset["flare"] = Math.random() < 0.45 ? "true" : "false";
+      element.dataset["flare"] = shouldShowFlare() ? "true" : "false";
       element.style.setProperty("--leak-x", `${baseX}px`);
       element.style.setProperty("--leak-y", `${baseY}px`);
       element.style.setProperty("--leak-angle", "0deg");
