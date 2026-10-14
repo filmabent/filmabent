@@ -131,7 +131,7 @@ function Index() {
               rel="noreferrer"
               className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
             >
-              <MapPin className="h-4 w-4 text-primary" /> Berlin — find us on the map
+              <MapPin className="h-4 w-4 text-primary" /> Berlin — on the map
             </a>
           </div>
           <div>
