@@ -39,3 +39,4 @@
 - [ ] Hero line bigger and thicker
 - [ ] Ticket stub icon: cinema-related, in the logo red
 - [ ] Remove the animation from the ticket button
+- [ ] Hero line a little smaller and thinner again
