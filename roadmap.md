@@ -1,5 +1,9 @@
 # filmabent site
 
+- [ ] Disable incompatible Jekyll publishing job; external redeploy still needed
+- [ ] Increase flare occurrence by 30%
+- [ ] Make blue surfaces and lettering visibly grainy without changing typography
+
 - [x] Longer scroll-moving randomized light leaks and occasional flares
 - [x] Get in touch scrolls to the contact form
 - [x] English/German language switch across the site
