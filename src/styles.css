@@ -73,6 +73,7 @@
   --ember: oklch(0.74 0.1 65);
   --cream: oklch(0.9 0.02 235);
   --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
+  --scroll-leak: linear-gradient(110deg, transparent 5%, oklch(0.74 0.1 65 / 0.24) 12%, oklch(0.68 0.1 240 / 0.16) 18%, transparent 34%, transparent 76%, oklch(0.74 0.1 65 / 0.18) 91%, transparent);
 }
 
 @layer base {
@@ -157,13 +158,15 @@
   animation: marquee-x 30s linear infinite;
 }
 
-.bts-track { display: flex; width: max-content; animation: marquee-x 75s linear infinite; }
+.bts-track { display: flex; width: max-content; }
 .bts-group { display: flex; flex-shrink: 0; gap: 12px; padding-right: 12px; }
-.bts-strip:hover .bts-track, .bts-strip:focus-within .bts-track, .bts-strip.is-paused .bts-track { animation-play-state: paused; }
+.scroll-light-leak { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: var(--scroll-leak); opacity: 0; transition: opacity 1s ease-out; }
+.scroll-light-leak.is-scrolling { opacity: 1; transition-duration: 180ms; }
+.grain > section:not(#bts), .grain > footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
   .bts-track { animation: none; }
-  .bts-group[aria-hidden="true"] { display: none; }
+   .scroll-light-leak { display: none; }
   .grain::after, .animate-flicker { animation: none; }
   html { scroll-behavior: auto; }
 }
