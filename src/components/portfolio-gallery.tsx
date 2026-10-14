@@ -108,14 +108,14 @@ function ProjectionHeadline({ title }: { title: string }) {
   let offset = 0;
   return <h2 className="projection-screen">
     <span className="sr-only">{title}</span>
-    <svg viewBox="0 0 850 180" className="projection-scene" aria-hidden="true">
+    <svg viewBox="0 0 850 210" className="projection-scene" aria-hidden="true">
       <defs>
         <linearGradient id="headline-light" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0" stopColor="var(--projection-source)" />
           <stop offset="1" stopColor="var(--projection-spread)" />
         </linearGradient>
       </defs>
-      <path className="projection-beam" d="M127 86 L846 8 L846 175 L127 106 Z" fill="url(#headline-light)" />
+      <path className="projection-beam" d="M127 86 L846 0 L846 200 L127 106 Z" fill="url(#headline-light)" />
       <g className="projected-title">
         {letters.map((letter, index) => {
           const scale = (growth[index] ?? 1) * fit;
