@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight, Clapperboard } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -81,8 +81,11 @@ function Index() {
           <div className="flex items-center gap-2 sm:gap-4">
             <LanguageSwitch />
             <a href="#contact" className="cinema-ticket">
-              <Star className="ticket-stub h-3 w-3 text-ember" aria-hidden="true" />
-              {t("Get in touch", "Kontakt")}
+              <Clapperboard className="ticket-stub h-4 w-4 text-logo" aria-hidden="true" />
+              <span className="flex flex-col items-start gap-[3px] leading-none">
+                <span className="ticket-admit">{t("Admit one", "Eintritt")}</span>
+                <span>{t("Get in touch", "Kontakt")}</span>
+              </span>
             </a>
           </div>
         </div>
@@ -94,7 +97,7 @@ function Index() {
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-logo">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Mit Gefühl gedreht")}</p>
+          <p className="mb-6 text-[13px] font-bold uppercase tracking-[0.3em] text-logo sm:text-[15px] sm:tracking-[0.4em]">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Mit Gefühl gedreht")}</p>
           <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
           <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
