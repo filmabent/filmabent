@@ -257,7 +257,7 @@ function BehindTheScenes() {
       <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
       <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
     </div>
-    <div className="relative" onPointerEnter={() => { hovering.current = true; }} onPointerLeave={() => { hovering.current = false; }} onFocusCapture={() => { focused.current = true; }} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) focused.current = false; }}>
+    <div className="relative" onPointerEnter={() => { hovering.current = true; }} onPointerLeave={() => { hovering.current = false; focused.current = false; travel.current = 0; }} onFocusCapture={e => { focused.current = e.target.matches(":focus-visible"); }} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) focused.current = false; }}>
     <Button variant="outline" size="icon" aria-label="Scroll photos left" title="Scroll banner left" className="absolute left-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(-1)}><ChevronLeft /></Button>
     <Button variant="outline" size="icon" aria-label="Scroll photos right" title="Scroll banner right" className="absolute right-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(1)}><ChevronRight /></Button>
     <div ref={strip} className={`bts-strip overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${paused || open !== null ? "is-paused" : ""}`}>
@@ -284,10 +284,28 @@ function ScrollLightLeak() {
   const leak = useRef<HTMLDivElement>(null);
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
+    let lastY = window.scrollY;
+    let lastTrigger = -Infinity;
+    let variation = 0;
+    const selectors = ["#work", "#weddings", "#imagefilms", "#contact"];
     const onScroll = () => {
-      leak.current?.classList.add("is-scrolling");
+      const y = window.scrollY;
+      const previous = lastY;
+      lastY = y;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || performance.now() - lastTrigger < 2200) return;
+      const crossed = selectors.some(selector => {
+        const section = document.querySelector(selector);
+        if (!section) return false;
+        const point = section.getBoundingClientRect().top + y - window.innerHeight * 0.55;
+        return (previous < point && y >= point) || (previous > point && y <= point);
+      });
+      if (!crossed || !leak.current) return;
+      lastTrigger = performance.now();
+      variation = (variation + 1) % 3;
+      leak.current.dataset["variant"] = String(variation);
+      leak.current.classList.add("is-scrolling");
       clearTimeout(timer);
-      timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 220);
+      timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 650);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => { window.removeEventListener("scroll", onScroll); clearTimeout(timer); };
