@@ -208,20 +208,20 @@
 .group:hover .film-reel, a.group:focus-visible .film-reel { animation: reel-spin 1.6s linear infinite; }
 .film-unroll {
   pointer-events: none; position: absolute; left: 50%; bottom: 0;
-  height: 18px; width: 132px; transform: translateY(-50%) scaleX(0); transform-origin: left center;
+  height: 20px; width: 140px; transform: translateY(-50%) scaleX(0); transform-origin: left center;
   transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-  border-block: 1px solid currentColor;
+  border-block: 1px solid currentColor; border-right: 1px solid currentColor;
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 2px, currentColor 2px 6px, transparent 6px 9px),
-    repeating-linear-gradient(90deg, transparent 0 2px, currentColor 2px 6px, transparent 6px 9px),
-    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 27px);
-  background-size: 100% 2px, 100% 2px, 100% 9px;
+    repeating-linear-gradient(90deg, transparent 0 3px, currentColor 3px 7px, transparent 7px 10px),
+    repeating-linear-gradient(90deg, transparent 0 3px, currentColor 3px 7px, transparent 7px 10px),
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 40px);
+  background-size: 100% 3px, 100% 3px, 100% 8px;
   background-repeat: no-repeat;
-  background-position: 0 2px, 0 14px, 0 4px;
+  background-position: 0 2px, 0 15px, 0 6px;
 }
-/* sprocket holes and frame lines travel the same 27px per cycle — one speed, seamless loop */
-@keyframes film-feed { to { background-position: 27px 2px, 27px 14px, 27px 4px; } }
-.group:hover .film-unroll, a.group:focus-visible .film-unroll { transform: translateY(-50%) scaleX(1); animation: film-feed 1.1s linear infinite; }
+/* four sprocket holes per frame, all layers travelling the same 40px per cycle — one speed, seamless loop */
+@keyframes film-feed { to { background-position: 40px 2px, 40px 15px, 40px 6px; } }
+.group:hover .film-unroll, a.group:focus-visible .film-unroll { transform: translateY(-50%) scaleX(1); animation: film-feed 1.5s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
