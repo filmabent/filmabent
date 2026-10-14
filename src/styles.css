@@ -162,7 +162,7 @@
 .bts-group { display: flex; flex-shrink: 0; gap: 12px; padding-right: 12px; }
 .scroll-light-leak { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: var(--scroll-leak); opacity: 0; transition: opacity 1s ease-out; }
 .scroll-light-leak.is-scrolling { opacity: 1; transition-duration: 180ms; }
-.grain > section, .grain > footer { position: relative; z-index: 1; }
+.grain > section:not(#bts), .grain > footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .bts-strip { overflow-x: auto; }
   .bts-track { animation: none; }
