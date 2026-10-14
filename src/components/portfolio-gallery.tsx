@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
     <div id="work" className="scroll-mt-24">
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
-      <div className="flex items-center gap-3 md:gap-4"><Projector /><div className="projection-screen relative"><span className="projection-beam" aria-hidden="true" /><h2 className="projected-title relative font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2></div></div>
+      <ProjectionHeadline title={t("Shot on feeling", "Mit Gefühl gedreht")} />
     </div>
     <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
@@ -89,9 +89,38 @@ function FilmRollButton() {
   </a>;
 }
 
+function ProjectionHeadline({ title }: { title: string }) {
+  const letters = Array.from(title);
+  const weights = letters.map(letter => letter === " " ? 0.35 : /[ilIt]/.test(letter) ? 0.45 : /[mwM]/.test(letter) ? 1.15 : 0.85);
+  const total = weights.reduce((sum, weight) => sum + weight, 0);
+  let offset = 0;
+  return <h2 className="projection-screen">
+    <span className="sr-only">{title}</span>
+    <svg viewBox="0 0 850 180" className="projection-scene" aria-hidden="true">
+      <defs>
+        <linearGradient id="headline-light" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="var(--projection-source)" />
+          <stop offset="1" stopColor="var(--projection-spread)" />
+        </linearGradient>
+      </defs>
+      <path className="projection-beam" d="M127 86 L846 8 L846 175 L127 106 Z" fill="url(#headline-light)" />
+      <g className="projected-title">
+        {letters.map((letter, index) => {
+          const width = 625 * (weights[index] ?? 0.85) / total;
+          const x = 202 + offset;
+          const scale = 0.42 + 0.9 * (offset + width / 2) / 625;
+          offset += width;
+          return <text key={index} x="0" y="0" dominantBaseline="central" transform={`translate(${x} 96) scale(1 ${scale})`} textLength={width * 0.96} lengthAdjust="spacingAndGlyphs">{letter === " " ? "\u00a0" : letter}</text>;
+        })}
+      </g>
+      <Projector />
+    </svg>
+  </h2>;
+}
+
 function Projector() {
   const bg = "var(--color-background)";
-  return <svg className="projector relative z-10 mb-1 h-16 w-auto shrink-0 overflow-visible text-foreground md:mb-3 md:h-24" viewBox="0 0 150 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+  return <svg x="0" y="30" width="150" height="120" className="projector text-foreground" viewBox="0 0 150 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
     {/* two big spoked reels on top, close together */}
     <g className="projector-reel" style={{ transformOrigin: "70px 22px" }}>
       <circle cx="70" cy="22" r="17" strokeWidth="5" />
