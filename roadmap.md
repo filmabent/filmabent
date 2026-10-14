@@ -47,3 +47,4 @@
 - [x] Clapperboard tape labels: "Prod. filmabent" and "Director: you" (DE "Regie: du") — nothing that wouldn't be on a real sticker
 - [x] No hairline between Imagefilms & Events and Behind the scenes
 - [x] "Roll camera" caption removed above the clapperboard contact form
+- [ ] Subtle vintage glow on the filmabent wordmark
