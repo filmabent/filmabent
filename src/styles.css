@@ -73,7 +73,9 @@
   --ember: oklch(0.74 0.1 65);
   --cream: oklch(0.9 0.02 235);
   --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
-  --scroll-leak: linear-gradient(110deg, transparent 5%, oklch(0.74 0.1 65 / 0.24) 12%, oklch(0.68 0.1 240 / 0.16) 18%, transparent 34%, transparent 76%, oklch(0.74 0.1 65 / 0.18) 91%, transparent);
+  --scroll-leak: linear-gradient(106deg, transparent 1%, oklch(0.7 0.2 42 / 0.6) 7%, oklch(0.78 0.18 58 / 0.35) 12%, transparent 27%);
+  --scroll-leak-right: linear-gradient(76deg, transparent 65%, oklch(0.72 0.2 44 / 0.38) 86%, oklch(0.79 0.17 62 / 0.65) 95%, transparent);
+  --scroll-leak-sweep: linear-gradient(165deg, transparent 38%, oklch(0.69 0.2 38 / 0.28) 48%, oklch(0.77 0.18 55 / 0.44) 53%, transparent 66%);
 }
 
 @layer base {
@@ -161,6 +163,8 @@
 .bts-track { display: flex; width: max-content; }
 .bts-group { display: flex; flex-shrink: 0; gap: 12px; padding-right: 12px; }
 .scroll-light-leak { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: var(--scroll-leak); opacity: 0; transition: opacity 1s ease-out; }
+.scroll-light-leak[data-variant="1"] { background: var(--scroll-leak-right); }
+.scroll-light-leak[data-variant="2"] { background: var(--scroll-leak-sweep); }
 .scroll-light-leak.is-scrolling { opacity: 1; transition-duration: 180ms; }
 .grain > section:not(#bts), .grain > footer { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
