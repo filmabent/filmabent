@@ -116,16 +116,46 @@ function Index() {
           you're dreaming of and we'll bring the film.
         </p>
         <ContactForm />
-        <div className="mt-8 flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-          <MapPin className="h-4 w-4 text-primary" />
-          <a
-            href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
-            target="_blank"
-            rel="noreferrer"
-            className="underline underline-offset-4 hover:text-primary"
-          >
-            Find us on the map
-          </a>
+        <div className="mx-auto mt-12 grid max-w-xl gap-5 border-t border-border pt-10 text-left sm:grid-cols-2">
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Email</p>
+            <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
+              <Mail className="h-4 w-4 text-primary" /> filmabent@gmail.com
+            </a>
+          </div>
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Studio</p>
+            <a
+              href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
+            >
+              <MapPin className="h-4 w-4 text-primary" /> Berlin — find us on the map
+            </a>
+          </div>
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Instagram</p>
+            <a
+              href="https://www.instagram.com/filmabent"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+            >
+              <Instagram className="h-4 w-4 text-primary" /> @filmabent
+            </a>
+          </div>
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">YouTube</p>
+            <a
+              href="https://www.youtube.com/@filmabent"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+            >
+              <Youtube className="h-4 w-4 text-primary" /> filmabent
+            </a>
+          </div>
         </div>
       </section>
 
