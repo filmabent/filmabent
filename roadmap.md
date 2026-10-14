@@ -1,6 +1,6 @@
 # filmabent site
 
-- [ ] Connect the projection directly to the lens and fit growing headline letters inside the cone, matching the reference; check English/German at desktop and phone widths.
+- [x] Connect the projection directly to the lens and fit growing headline letters inside the cone, matching the reference; check English/German at desktop and phone widths.
 
 - [x] Coarser 16mm-style grain restricted to backgrounds and lettering
 - [x] One-click video playback
