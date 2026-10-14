@@ -302,7 +302,7 @@ function ScrollLightLeak() {
       if (!crossed || !leak.current) return;
       lastTrigger = performance.now();
       variation = (variation + 1) % 3;
-      leak.current.dataset.variant = String(variation);
+      leak.current.dataset["variant"] = String(variation);
       leak.current.classList.add("is-scrolling");
       clearTimeout(timer);
       timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 650);
