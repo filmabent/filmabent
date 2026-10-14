@@ -8,8 +8,8 @@ import { portfolioQuery } from "@/lib/portfolio.functions";
 import { useLanguage } from "@/components/language";
 
 const germanCategories = {
-  narrative: { title: "Narrative Filme", text: "Geschichten mit Vintage-Puls — geschrieben, gedreht und geschnitten mit echter Textur." },
-  weddings: { title: "Hochzeiten auf Super 8", text: "Dein Tag auf echtem Film. Eine Erinnerung mit Körnung, Wärme und Eigenleben." },
+  narrative: { title: "Narrative Filme", text: "Geschichten mit Vintage-Charme — geschrieben, gedreht und geschnitten mit echter Textur." },
+  weddings: { title: "Hochzeiten auf Super 8", text: "Euer Tag auf echtem Film. Eine Erinnerung mit Korn, Wärme und ganz eigenem Charakter." },
   music: { title: "Musikvideos & Werbung", text: "Eine visuelle Welt rund um deinen Sound, deine Idee, deine Identität." },
   imagefilms: { title: "Imagefilme & Events", text: "Menschen, Orte und Momente — mit Charakter festgehalten." },
 };
@@ -28,7 +28,7 @@ export function PortfolioGallery() {
   return <section id="services" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
     <div id="work" className="scroll-mt-24">
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
-      <h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Gefühlsecht gefilmt")}</h2>
+      <h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Mit Gefühl gedreht")}</h2>
     </div>
     <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
@@ -67,7 +67,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
           rel="noreferrer"
           className="mt-4 inline-flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
         >
-          <Youtube className="h-4 w-4 text-primary" /> {t("Full gallery on YouTube", "Komplette Galerie auf YouTube")}
+          <Youtube className="h-4 w-4 text-primary" /> {t("Full gallery on YouTube", "Mehr auf YouTube")}
         </a>
       </div>
     </div>
@@ -77,7 +77,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
 function FilmRollButton() {
   const { t } = useLanguage();
   return <a href="#contact" className="group relative mt-8 inline-flex items-center gap-3 py-2 text-xs uppercase tracking-[0.25em] text-foreground">
-    {t("Start your film", "Starte deinen Film")}
+    {t("Start your film", "Dein Film beginnt hier")}
     <span className="relative inline-flex">
       <svg viewBox="0 0 32 32" className="film-reel relative z-10 size-8" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
         <circle cx="16" cy="16" r="15" fill="var(--background)" /><circle cx="16" cy="16" r="12.5" strokeWidth="0.6" />
