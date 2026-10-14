@@ -6,9 +6,9 @@ import type { Database } from "@/integrations/supabase/types";
 import { portfolioSchema } from "./portfolio";
 
 export const getPortfolio = createServerFn({ method: "GET" }).handler(async () => {
-  const key = process.env['SUPABASE_PUBLISHABLE_KEY'];
-  const url = process.env['SUPABASE_URL'];
-  if (!key || !url) throw new Error("Gallery unavailable. Please try again.");
+  const key = process.env['SUPABASE_PUBLISHABLE_KEY'] ?? import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'];
+  const url = process.env['SUPABASE_URL'] ?? import.meta.env['VITE_SUPABASE_URL'];
+  if (!key || !url) return [];
   const client = createClient<Database>(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
     global: { fetch: (input, init) => {
@@ -19,7 +19,7 @@ export const getPortfolio = createServerFn({ method: "GET" }).handler(async () =
     } },
   });
   const { data, error } = await client.from("portfolio_categories").select("slug,featured_url,gallery_urls");
-  if (error) throw new Error("Gallery unavailable. Please try again.");
+  if (error) return [];
   return (data ?? []).map(row => portfolioSchema.parse(row));
 });
 
