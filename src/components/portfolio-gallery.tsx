@@ -30,10 +30,10 @@ export function PortfolioGallery() {
       <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("What we do", "Was wir tun")}</p>
       <h2 className="font-display text-5xl md:text-7xl">{t("Shot on feeling", "Gefühlsecht gefilmt")}</h2>
     </div>
-    <div className="mt-10 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mt-10 grid border-l border-t border-border sm:grid-cols-2 lg:grid-cols-4">
       {localizedCategories.map((category, i) => {
         const Icon = icons[i] ?? Film;
-        return <a key={category.slug} href={`#${category.slug}`} className="flex flex-col bg-background p-6 transition-colors hover:bg-card">
+        return <a key={category.slug} href={`#${category.slug}`} className="flex flex-col border-b border-r border-border p-6 transition-colors hover:bg-foreground/5">
           <Icon className="h-7 w-7 text-primary" strokeWidth={1.5} />
           <h3 className="mt-5 font-display text-2xl">{category.title}</h3>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{category.text}</p>
@@ -76,12 +76,14 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
 
 function FilmRollButton() {
   const { t } = useLanguage();
-  return <a
-    href="#contact"
-    className="group relative mt-8 inline-flex items-center gap-3 border border-foreground/40 px-5 py-3 text-xs uppercase tracking-[0.25em] transition-colors hover:border-primary hover:text-primary"
-  >
-    <Film className="film-reel h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+  return <a href="#contact" className="group relative mt-8 inline-flex items-center gap-3 py-2 text-xs uppercase tracking-[0.25em] text-foreground">
     {t("Start your film", "Starte deinen Film")}
-    <span className="film-unroll" aria-hidden="true" />
+    <span className="relative inline-flex">
+      <svg viewBox="0 0 32 32" className="film-reel size-8" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
+        <circle cx="16" cy="16" r="14.5" /><circle cx="16" cy="16" r="2.5" />
+        {[0, 72, 144, 216, 288].map(a => <circle key={a} cx={16 + 8 * Math.cos(a * Math.PI / 180)} cy={16 + 8 * Math.sin(a * Math.PI / 180)} r="3" />)}
+      </svg>
+      <span className="film-unroll" aria-hidden="true" />
+    </span>
   </a>;
 }
