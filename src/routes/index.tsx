@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { PortfolioGallery } from "@/components/portfolio-gallery";
 import { ContactForm } from "@/components/contact-form";
 import { portfolioQuery } from "@/lib/portfolio.functions";
+import { LanguageSwitch, useLanguage } from "@/components/language";
+import { ScrollLightLeak } from "@/components/scroll-light-leak";
 
 const bts7 = { url: "/bts/000163320033.jpg" };
 
@@ -60,6 +62,7 @@ const gallery = [
 ];
 
 function Index() {
+  const { t } = useLanguage();
   return (
     <div className="grain min-h-screen bg-background text-foreground">
       <ScrollLightLeak />
@@ -70,38 +73,37 @@ function Index() {
             filmabent
           </a>
           <nav className="hidden items-center gap-8 text-xs uppercase tracking-[0.2em] md:flex">
-            <a href="#work" className="transition-colors hover:text-primary">Work</a>
-            <a href="#services" className="transition-colors hover:text-primary">Services</a>
-            <a href="#bts" className="transition-colors hover:text-primary">Behind the Scenes</a>
-            <a href="#contact" className="transition-colors hover:text-primary">Contact</a>
+            <a href="#work" className="transition-colors hover:text-primary">{t("Work", "Arbeiten")}</a>
+            <a href="#services" className="transition-colors hover:text-primary">{t("Services", "Leistungen")}</a>
+            <a href="#bts" className="transition-colors hover:text-primary">{t("Behind the Scenes", "Hinter den Kulissen")}</a>
+            <a href="#contact" className="transition-colors hover:text-primary">{t("Contact", "Kontakt")}</a>
           </nav>
-          <a
-            href="mailto:filmabent@gmail.com"
-            className="border border-foreground/40 px-4 py-2 text-xs uppercase tracking-[0.2em] transition-colors hover:bg-foreground hover:text-background"
-          >
-            Get in touch
-          </a>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <LanguageSwitch />
+            <Button asChild variant="outline" className="h-auto rounded-none border-foreground/40 bg-transparent px-3 py-2 text-[10px] uppercase tracking-widest sm:px-4 sm:text-xs hover:bg-foreground hover:text-background">
+              <a href="#contact">{t("Get in touch", "Kontakt aufnehmen")}</a>
+            </Button>
+          </div>
         </div>
       </header>
 
       {/* Hero */}
       <section id="top" className="relative flex min-h-screen items-end overflow-hidden">
-        <img src={bts7.url} alt="Two cinema cameras in red light" className="animate-flicker absolute inset-0 h-full w-full object-cover" />
+        <img src={bts7.url} alt={t("Two cinema cameras in red light", "Zwei Filmkameras in rotem Licht")} className="animate-flicker absolute inset-0 h-full w-full object-cover" />
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">Stories with character · Shot on feeling</p>
+          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Gefühlsecht gefilmt")}</p>
           <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
           <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              Films with a vintage soul. Grainy, warm, honest —
-              made to be remembered, not scrolled past.
+              {t("Films with a vintage soul. Grainy, warm, honest — made to be remembered, not scrolled past.", "Filme mit Vintage-Seele. Körnig, warm, ehrlich — gemacht, um in Erinnerung zu bleiben, nicht um vorbeizuscrollen.")}
             </p>
             <a href="#work" className="group flex items-center gap-4 text-xs uppercase tracking-[0.3em]">
               <span className="flex h-14 w-14 items-center justify-center rounded-full border border-foreground/40 transition-colors group-hover:border-primary group-hover:text-primary">
                 <Play className="h-4 w-4" />
               </span>
-              Watch
+              {t("Watch", "Ansehen")}
             </a>
           </div>
         </div>
@@ -111,30 +113,29 @@ function Index() {
       <BehindTheScenes />
 
       {/* Contact */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
-        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">Roll camera</p>
-        <h2 className="font-display text-5xl md:text-7xl">Let's make something</h2>
+      <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
+        <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("Roll camera", "Kamera läuft")}</p>
+        <h2 className="font-display text-5xl md:text-7xl">{t("Let’s make something", "Lass uns etwas erschaffen")}</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-          A wedding, a record, a short film, an event — tell us what
-          you're dreaming of and we'll bring the film.
+          {t("A wedding, a record, a short film, an event — tell us what you’re dreaming of and we’ll bring the film.", "Eine Hochzeit, eine Platte, ein Kurzfilm, ein Event — erzähl uns, wovon du träumst, und wir bringen den Film mit.")}
         </p>
         <ContactForm />
         <div className="mx-auto mt-12 grid max-w-xl gap-5 border-t border-border pt-10 text-left sm:grid-cols-2">
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Email</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">{t("Email", "E-Mail")}</p>
             <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
               <Mail className="h-4 w-4 text-primary" /> filmabent@gmail.com
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">Based in</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">{t("Based in", "Unser Standort")}</p>
             <a
               href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
             >
-              <MapPin className="h-4 w-4 text-primary" /> Hamburg — filming across all of Europe
+              <MapPin className="h-4 w-4 text-primary" /> {t("Hamburg — filming across all of Europe", "Hamburg — wir drehen europaweit")}
             </a>
           </div>
           <div>
@@ -187,7 +188,7 @@ function Index() {
             </a>
           </div>
           <span className="text-xs uppercase tracking-[0.2em] text-reel-foreground/60">
-            © 2022 filmabent — shot with love
+            © 2022 filmabent — {t("shot with love", "mit Liebe gefilmt")}
           </span>
         </div>
       </footer>
@@ -197,6 +198,7 @@ function Index() {
 
 
 function BehindTheScenes() {
+  const { t } = useLanguage();
   const [paused, setPaused] = useState(false);
   const [open, setOpen] = useState<number | null>(null);
   const n = gallery.length;
@@ -254,66 +256,28 @@ function BehindTheScenes() {
   }, [open]);
   return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-8 text-reel-foreground">
     <div className="mx-auto mb-8 flex max-w-6xl items-center justify-between gap-4 px-6">
-      <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
-      <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
+      <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">{t("On set", "Am Set")}</p><h2 className="font-display text-3xl md:text-4xl">{t("Behind the scenes", "Hinter den Kulissen")}</h2></div>
+      <Button variant="outline" size="icon" aria-label={paused ? t("Resume photo banner", "Fotobanner fortsetzen") : t("Pause photo banner", "Fotobanner anhalten")} title={paused ? t("Resume", "Fortsetzen") : t("Pause", "Anhalten")} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
     </div>
     <div className="relative" onPointerEnter={() => { hovering.current = true; }} onPointerLeave={() => { hovering.current = false; focused.current = false; travel.current = 0; }} onFocusCapture={e => { focused.current = e.target.matches(":focus-visible"); }} onBlurCapture={e => { if (!e.currentTarget.contains(e.relatedTarget)) focused.current = false; }}>
-    <Button variant="outline" size="icon" aria-label="Scroll photos left" title="Scroll banner left" className="absolute left-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(-1)}><ChevronLeft /></Button>
-    <Button variant="outline" size="icon" aria-label="Scroll photos right" title="Scroll banner right" className="absolute right-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(1)}><ChevronRight /></Button>
+    <Button variant="outline" size="icon" aria-label={t("Scroll photos left", "Fotos nach links scrollen")} title={t("Scroll banner left", "Banner nach links scrollen")} className="absolute left-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(-1)}><ChevronLeft /></Button>
+    <Button variant="outline" size="icon" aria-label={t("Scroll photos right", "Fotos nach rechts scrollen")} title={t("Scroll banner right", "Banner nach rechts scrollen")} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 bg-reel/80" onClick={() => slide(1)}><ChevronRight /></Button>
     <div ref={strip} className={`bts-strip overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${paused || open !== null ? "is-paused" : ""}`}>
       <div className="bts-track">
         {[0, 1, 2].map(copy => <div ref={copy === 1 ? group : undefined} className="bts-group" key={copy} aria-hidden={copy !== 1}>
-          {gallery.map((img, i) => <Button variant="ghost" key={img.src} type="button" tabIndex={copy !== 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={`Open photo ${i + 1}`} className="h-auto shrink-0 cursor-zoom-in rounded-none p-0">
-            <img src={img.src} alt={copy === 1 ? img.alt : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
+          {gallery.map((img, i) => <Button variant="ghost" key={img.src} type="button" tabIndex={copy !== 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={t(`Open photo ${i + 1}`, `Foto ${i + 1} öffnen`)} className="h-auto shrink-0 cursor-zoom-in rounded-none p-0">
+            <img src={img.src} alt={copy === 1 ? t(img.alt, "Hinter den Kulissen am filmabent-Set") : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
           </Button>)}
         </div>)}
       </div>
     </div>
     </div>
-    {open !== null && currentPhoto && <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
-      <img src={currentPhoto.src} alt={currentPhoto.alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
-      <Button variant="outline" size="icon" aria-label="Close" className="absolute right-4 top-4" onClick={() => setOpen(null)}><X /></Button>
-      <Button variant="outline" size="icon" aria-label="Previous photo" className="absolute left-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(-1); }}><ChevronLeft /></Button>
-      <Button variant="outline" size="icon" aria-label="Next photo" className="absolute right-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(1); }}><ChevronRight /></Button>
+    {open !== null && currentPhoto && <div role="dialog" aria-modal="true" aria-label={t("Photo viewer", "Fotoansicht")} className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
+      <img src={currentPhoto.src} alt={t(currentPhoto.alt, "Hinter den Kulissen am filmabent-Set")} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
+      <Button variant="outline" size="icon" aria-label={t("Close", "Schließen")} className="absolute right-4 top-4" onClick={() => setOpen(null)}><X /></Button>
+      <Button variant="outline" size="icon" aria-label={t("Previous photo", "Vorheriges Foto")} className="absolute left-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(-1); }}><ChevronLeft /></Button>
+      <Button variant="outline" size="icon" aria-label={t("Next photo", "Nächstes Foto")} className="absolute right-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(1); }}><ChevronRight /></Button>
       <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] text-reel-foreground/70">{open + 1} / {n}</p>
     </div>}
   </section>;
-}
-
-function ScrollLightLeak() {
-  const leak = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    let lastY = window.scrollY;
-    let lastTrigger = -Infinity;
-    const spots = [
-      { progress: 0.04, variant: 0 },
-      { progress: 0.2, variant: 2 },
-      { progress: 0.39, variant: 4 },
-      { progress: 0.57, variant: 1 },
-      { progress: 0.74, variant: 3 },
-      { progress: 0.91, variant: 5 },
-    ];
-    const onScroll = () => {
-      const y = window.scrollY;
-      const previous = lastY;
-      lastY = y;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || performance.now() - lastTrigger < 1400) return;
-      const distance = document.documentElement.scrollHeight - window.innerHeight;
-      if (distance <= 0) return;
-      const crossed = spots.find(spot => {
-        const point = distance * spot.progress;
-        return (previous < point && y >= point) || (previous > point && y <= point);
-      });
-      if (!crossed || !leak.current) return;
-      lastTrigger = performance.now();
-      leak.current.dataset["variant"] = String(crossed.variant);
-      leak.current.classList.add("is-scrolling");
-      clearTimeout(timer);
-      timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 260);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => { window.removeEventListener("scroll", onScroll); clearTimeout(timer); };
-  }, []);
-  return <div ref={leak} className="scroll-light-leak" aria-hidden="true" />;
 }
