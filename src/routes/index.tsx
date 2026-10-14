@@ -3,6 +3,7 @@ import { Instagram, Mail, MapPin, Play, Youtube, Pause } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PortfolioGallery } from "@/components/portfolio-gallery";
+import { ContactForm } from "@/components/contact-form";
 import { portfolioQuery } from "@/lib/portfolio.functions";
 
 import bts1 from "@/assets/bts/000049460017.jpg.asset.json";
@@ -107,19 +108,14 @@ function Index() {
       <BehindTheScenes />
 
       {/* Contact */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 py-28 text-center">
+      <section id="contact" className="mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
         <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">Roll camera</p>
         <h2 className="font-display text-5xl md:text-7xl">Let's make something</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
           A wedding, a record, a short film, an event — tell us what
           you're dreaming of and we'll bring the film.
         </p>
-        <a
-          href="mailto:filmabent@gmail.com"
-          className="mt-10 inline-flex items-center gap-3 bg-primary px-10 py-5 text-xs uppercase tracking-[0.25em] text-primary-foreground transition-opacity hover:opacity-85"
-        >
-          <Mail className="h-4 w-4" /> filmabent@gmail.com
-        </a>
+        <ContactForm />
         <div className="mt-8 flex items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">
           <MapPin className="h-4 w-4 text-primary" />
           <a
@@ -134,7 +130,7 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-reel py-12 text-reel-foreground">
+      <footer className="border-t border-border bg-reel py-8 text-reel-foreground">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-6 md:flex-row">
           <span className="font-display text-3xl">filmabent</span>
           <div className="flex items-center gap-6">
@@ -159,7 +155,6 @@ function Index() {
           </div>
           <span className="text-xs uppercase tracking-[0.2em] text-reel-foreground/60">
             © {new Date().getFullYear()} filmabent — shot with love
-            <a href="/owner" className="mt-3 block text-reel-foreground/60 hover:text-primary">Owner studio</a>
           </span>
         </div>
       </footer>
@@ -170,7 +165,7 @@ function Index() {
 
 function BehindTheScenes() {
   const [paused, setPaused] = useState(false);
-  return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-12 text-reel-foreground">
+  return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-8 text-reel-foreground">
     <div className="mx-auto mb-8 flex max-w-6xl items-center justify-between gap-4 px-6">
       <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
       <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
