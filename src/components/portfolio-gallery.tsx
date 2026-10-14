@@ -79,8 +79,8 @@ function FilmRollButton() {
   return <a href="#contact" className="group relative mt-8 inline-flex items-center gap-3 py-2 text-xs uppercase tracking-[0.25em] text-foreground">
     {t("Start your film", "Starte deinen Film")}
     <span className="relative inline-flex">
-      <svg viewBox="0 0 32 32" className="film-reel size-8" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
-        <circle cx="16" cy="16" r="15" /><circle cx="16" cy="16" r="12.5" strokeWidth="0.6" />
+      <svg viewBox="0 0 32 32" className="film-reel relative z-10 size-8" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="var(--background)" /><circle cx="16" cy="16" r="12.5" strokeWidth="0.6" />
         <circle cx="16" cy="16" r="3.2" /><circle cx="16" cy="16" r="1" fill="currentColor" />
         {[270, 30, 150].map(a => { const r = a * Math.PI / 180; return <path key={a} d={`M ${16 + 5 * Math.cos(r - 0.5)} ${16 + 5 * Math.sin(r - 0.5)} L ${16 + 10.5 * Math.cos(r - 0.42)} ${16 + 10.5 * Math.sin(r - 0.42)} A 10.5 10.5 0 0 1 ${16 + 10.5 * Math.cos(r + 0.42)} ${16 + 10.5 * Math.sin(r + 0.42)} L ${16 + 5 * Math.cos(r + 0.5)} ${16 + 5 * Math.sin(r + 0.5)} A 5 5 0 0 0 ${16 + 5 * Math.cos(r - 0.5)} ${16 + 5 * Math.sin(r - 0.5)} Z`} strokeLinejoin="round" />; })}
       </svg>
