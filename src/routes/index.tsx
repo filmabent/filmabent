@@ -72,8 +72,8 @@ function Index() {
           <a href="#top" className="font-display text-2xl tracking-tight">
             filmabent
           </a>
-          <nav className="hidden items-center gap-8 text-xs uppercase tracking-[0.2em] md:flex">
-            <a href="#work" className="transition-colors hover:text-primary">{t("Work", "Arbeiten")}</a>
+          <nav className="hidden items-center gap-5 whitespace-nowrap text-xs uppercase tracking-[0.2em] lg:gap-8 md:flex">
+            <a href="#work" className="transition-colors hover:text-primary">{t("Work", "Filme")}</a>
             <a href="#services" className="transition-colors hover:text-primary">{t("Services", "Leistungen")}</a>
             <a href="#bts" className="transition-colors hover:text-primary">{t("Behind the Scenes", "Hinter den Kulissen")}</a>
             <a href="#contact" className="transition-colors hover:text-primary">{t("Contact", "Kontakt")}</a>
@@ -81,7 +81,7 @@ function Index() {
           <div className="flex items-center gap-2 sm:gap-4">
             <LanguageSwitch />
             <Button asChild variant="outline" className="h-auto rounded-none border-foreground/40 bg-transparent px-3 py-2 text-[10px] uppercase tracking-widest sm:px-4 sm:text-xs hover:bg-foreground hover:text-background">
-              <a href="#contact">{t("Get in touch", "Kontakt aufnehmen")}</a>
+              <a href="#contact">{t("Get in touch", "Kontakt")}</a>
             </Button>
           </div>
         </div>
@@ -93,11 +93,11 @@ function Index() {
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Gefühlsecht gefilmt")}</p>
+          <p className="mb-6 text-[10px] uppercase tracking-[0.5em] text-ember">{t("Stories with character · Shot on feeling", "Geschichten mit Charakter · Mit Gefühl gedreht")}</p>
           <h1 className="font-display text-[15vw] leading-[0.85] tracking-tight md:text-[10rem]">filmabent</h1>
           <div className="mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              {t("Films with a vintage soul. Grainy, warm, honest — made to be remembered, not scrolled past.", "Filme mit Vintage-Seele. Körnig, warm, ehrlich — gemacht, um in Erinnerung zu bleiben, nicht um vorbeizuscrollen.")}
+              {t("Films with a vintage soul. Grainy, warm, honest — made to be remembered, not scrolled past.", "Filme mit Vintage-Seele. Körnig, warm, ehrlich — gemacht, um zu bleiben, nicht um weggescrollt zu werden.")}
             </p>
             <a href="#work" className="group flex items-center gap-4 text-xs uppercase tracking-[0.3em]">
               <span className="flex h-14 w-14 items-center justify-center rounded-full border border-foreground/40 transition-colors group-hover:border-primary group-hover:text-primary">
@@ -115,9 +115,9 @@ function Index() {
       {/* Contact */}
       <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
         <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("Roll camera", "Kamera läuft")}</p>
-        <h2 className="font-display text-5xl md:text-7xl">{t("Let’s make something", "Lass uns etwas erschaffen")}</h2>
+        <h2 className="font-display text-5xl md:text-7xl">{t("Let’s make something", "Lass uns was drehen")}</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-          {t("A wedding, a record, a short film, an event — tell us what you’re dreaming of and we’ll bring the film.", "Eine Hochzeit, eine Platte, ein Kurzfilm, ein Event — erzähl uns, wovon du träumst, und wir bringen den Film mit.")}
+          {t("A wedding, a record, a short film, an event — tell us what you’re dreaming of and we’ll bring the film.", "Eine Hochzeit, ein Musikvideo, ein Kurzfilm, ein Event — erzähl uns von deiner Idee, den Rest machen wir.")}
         </p>
         <ContactForm />
         <div className="mx-auto mt-12 grid max-w-xl gap-5 border-t border-border pt-10 text-left sm:grid-cols-2">
@@ -128,14 +128,14 @@ function Index() {
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">{t("Based in", "Unser Standort")}</p>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-ember">{t("Based in", "Zuhause in")}</p>
             <a
               href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
             >
-              <MapPin className="h-4 w-4 text-primary" /> {t("Hamburg — filming across all of Europe", "Hamburg — wir drehen europaweit")}
+              <MapPin className="h-4 w-4 text-primary" /> {t("Hamburg — filming across all of Europe", "Hamburg — Drehs in ganz Europa")}
             </a>
           </div>
           <div>
