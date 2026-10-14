@@ -14,4 +14,4 @@
 - Owner roles live in a protected role table and are assigned only after the designated account email is verified, preventing self-assigned privileges.
 - Authentication identity events are subscribed to once in the root; owner views receive scoped events rather than competing auth subscriptions.
 - BTS autoplay and manual arrows share one scrollLeft-based animation loop with duplicated image groups, so manual movement and seamless looping never compete.
-- Scroll light leaks render behind page content using global effect tokens, preserving unfiltered media and respecting reduced motion.
+- Scroll light leaks use global effect tokens and a pointer-transparent screen-blended overlay above page imagery but below navigation and viewers, so effects continue over the hero without applying media filters; respect reduced motion.

@@ -2,7 +2,7 @@
 
 - [x] Smaller equal right-side videos and category icons
 - [x] Hover-paused banner with manual left/right scrolling
-- [x] Subtle scroll-triggered light leaks
+- [x] Subtle, quick saturated-orange light leaks in varied areas, continuing over the upper camera photo
 
 - [x] Retro/vintage design system (styles.css)
 - [x] Homepage: hero, category-based spec work galleries, services, BTS photo banner

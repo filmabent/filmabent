@@ -286,14 +286,17 @@ function ScrollLightLeak() {
     let timer: ReturnType<typeof setTimeout>;
     let lastY = window.scrollY;
     let lastTrigger = -Infinity;
-    let variation = 0;
+    let variation = -1;
     const selectors = ["#work", "#weddings", "#imagefilms", "#contact"];
     const onScroll = () => {
       const y = window.scrollY;
       const previous = lastY;
       lastY = y;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || performance.now() - lastTrigger < 2200) return;
-      const crossed = selectors.some(selector => {
+      const hero = document.querySelector("#top");
+      const heroPoint = hero ? hero.getBoundingClientRect().top + y + hero.clientHeight * 0.24 : -1;
+      const crossedHero = heroPoint > 0 && ((previous < heroPoint && y >= heroPoint) || (previous > heroPoint && y <= heroPoint));
+      const crossed = crossedHero || selectors.some(selector => {
         const section = document.querySelector(selector);
         if (!section) return false;
         const point = section.getBoundingClientRect().top + y - window.innerHeight * 0.55;
@@ -301,11 +304,11 @@ function ScrollLightLeak() {
       });
       if (!crossed || !leak.current) return;
       lastTrigger = performance.now();
-      variation = (variation + 1) % 3;
+      variation = (variation + 1) % 5;
       leak.current.dataset["variant"] = String(variation);
       leak.current.classList.add("is-scrolling");
       clearTimeout(timer);
-      timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 650);
+      timer = setTimeout(() => leak.current?.classList.remove("is-scrolling"), 260);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => { window.removeEventListener("scroll", onScroll); clearTimeout(timer); };
