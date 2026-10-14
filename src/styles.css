@@ -405,7 +405,7 @@
 /* beam lives on the same tilted plane as the words, so its edges follow the letters exactly; it extends left to reach the lens */
 .projection-beam { position: absolute; left: -70%; right: -0.4em; top: -0.12em; bottom: -0.12em; pointer-events: none;
   background: linear-gradient(90deg, oklch(0.88 0.09 70 / 0.75), oklch(0.86 0.08 70 / 0.35) 45%, oklch(0.85 0.08 70 / 0.15));
-  mix-blend-mode: screen; animation: projector-beam 2.6s steps(1) infinite; }
+  clip-path: polygon(0 30%, 40% 0, 100% 0, 100% 100%, 40% 100%, 0 70%); mix-blend-mode: screen; animation: projector-beam 2.6s steps(1) infinite; }
 .projected-title { animation: film-projection 2.6s steps(1) infinite; }
 @keyframes projector-beam { 0% { opacity: 1; } 12% { opacity: .65; } 16% { opacity: 1; } 41% { opacity: .75; } 44% { opacity: 1; } 70% { opacity: .55; } 73% { opacity: .9; } 76% { opacity: 1; } }
 @keyframes film-projection { 0% { opacity: 1; } 12% { opacity: .7; } 16% { opacity: 1; } 41% { opacity: .8; } 44% { opacity: 1; } 70% { opacity: .6; } 73% { opacity: .9; } 76% { opacity: 1; } }
