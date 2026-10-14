@@ -49,3 +49,5 @@
 - [x] "Roll camera" caption removed above the clapperboard contact form
 - [x] Subtle vintage glow on the filmabent wordmark
 - [x] Running projector animation next to Shot on feeling
+- [ ] Classical projector: taller redraw, warm amber beam (no grey)
+- [ ] Wordmark glow: stronger and less yellow
