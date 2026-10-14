@@ -2,8 +2,11 @@
 
 - [x] Retro/vintage design system (styles.css)
 - [x] Homepage: hero, 4 YouTube project videos, services, BTS photo gallery
-- [ ] Split Image Films and Documentaries into six evenly arranged service squares
-- [ ] Interactive behind-the-scenes gallery with full-screen viewing
+- [ ] Replace services with the four latest categories
+- [ ] Combine project videos into Shot on feeling: one featured video and smaller empty gallery frames per category
+- [ ] Owner-only editing for featured video URLs and gallery URLs
+- [ ] Compact right-to-left behind-the-scenes photo banner
+- [ ] Replace Est. on film · Berlin with a film-focused highlight
 - [x] Socials: Instagram @filmabent, YouTube filmabent
 - [ ] TikTok link — user will send it; add to footer when received
 - [x] Google Maps link: https://maps.app.goo.gl/whusxa1zkMY6TPmX8
