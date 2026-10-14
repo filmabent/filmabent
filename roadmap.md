@@ -36,3 +36,5 @@
 - [ ] Hero line 'Stories with character · Shot on feeling' in the filmabent logo red from the imagefilms/events thumbnail
 - [ ] Contact detail labels (Email, Based in, Instagram, YouTube) in the same logo red
 - [ ] Ticket button more prominent/thicker with an old-school cinema ticket feel
+- [ ] Hero line bigger and thicker
+- [ ] Ticket stub icon: cinema-related, in the logo red
