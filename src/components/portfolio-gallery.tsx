@@ -90,14 +90,16 @@ function FilmRollButton() {
 }
 
 function Projector() {
-  return <svg className="projector mb-1 h-12 w-auto shrink-0 text-foreground md:mb-3 md:h-16" viewBox="0 0 120 64" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-    <polygon className="projector-beam" points="98,40 120,28 120,58" stroke="none" />
-    {([[30, 16], [62, 16]] as const).map(([cx, cy]) => <g key={cx} className="projector-reel" style={{ transformOrigin: `${cx}px ${cy}px` }}>
-      <circle cx={cx} cy={cy} r="13" /><circle cx={cx} cy={cy} r="2.5" fill="currentColor" />
-      <line x1={cx} y1={cy - 11} x2={cx} y2={cy - 4} /><line x1={cx - 9.5} y1={cy + 5.5} x2={cx - 3.5} y2={cy + 2} /><line x1={cx + 9.5} y1={cy + 5.5} x2={cx + 3.5} y2={cy + 2} />
+  return <svg className="projector mb-1 h-16 w-auto shrink-0 text-foreground md:mb-3 md:h-24" viewBox="0 0 96 120" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+    <polygon className="projector-beam" points="78,50 96,44 96,68" stroke="none" />
+    {([[30, 18], [64, 18]] as const).map(([cx, cy]) => <g key={cx} className="projector-reel" style={{ transformOrigin: `${cx}px ${cy}px` }}>
+      <circle cx={cx} cy={cy} r="14" /><circle cx={cx} cy={cy} r="2.5" fill="currentColor" />
+      <line x1={cx} y1={cy - 12} x2={cx} y2={cy - 5} /><line x1={cx - 10.5} y1={cy + 6} x2={cx - 4} y2={cy + 2.5} /><line x1={cx + 10.5} y1={cy + 6} x2={cx + 4} y2={cy + 2.5} />
     </g>)}
-    <rect x="18" y="32" width="72" height="20" rx="3" />
-    <rect x="90" y="36" width="8" height="10" />
-    <line x1="30" y1="52" x2="26" y2="62" /><line x1="78" y1="52" x2="82" y2="62" />
+    <path d="M 30 32 L 30 42 L 64 42 L 64 32" />
+    <rect x="26" y="42" width="44" height="50" rx="3" />
+    <rect x="70" y="50" width="10" height="12" />
+    <circle cx="48" cy="62" r="7" />
+    <line x1="34" y1="92" x2="24" y2="116" /><line x1="62" y1="92" x2="72" y2="116" />
   </svg>;
 }
