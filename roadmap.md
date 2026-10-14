@@ -1,5 +1,7 @@
 # filmabent site
 
+- [x] Match the supplied projection reference with naturally proportioned, growing letters instead of stretched individual glyphs; verify both languages.
+
 - [x] Connect the projection directly to the lens and fit growing headline letters inside the cone, matching the reference; check English/German at desktop and phone widths.
 
 - [x] Coarser 16mm-style grain restricted to backgrounds and lettering
