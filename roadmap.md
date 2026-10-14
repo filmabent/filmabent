@@ -1,7 +1,7 @@
 # filmabent site
 
 - [x] Retro/vintage design system (styles.css)
-- [x] Homepage: hero, 4 YouTube project videos, services, BTS photo gallery
+- [x] Homepage: hero, category-based spec work galleries, services, BTS photo banner
 - [x] Replace services with the four latest categories
 - [x] Combine project videos into Shot on feeling: one featured video and smaller empty gallery frames per category
 - [ ] Owner-only editing verification — requires owner account creation/confirmation
