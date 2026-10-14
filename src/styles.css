@@ -72,8 +72,8 @@
   /* warm brass — used sparingly, like a tungsten bulb */
   --ember: oklch(0.74 0.1 65);
   --cream: oklch(0.9 0.02 235);
-  --grain-opacity: 0.16;
-  --ink-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='ink'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncG type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncB type='linear' slope='.65' intercept='.35'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ink)'/%3E%3C/svg%3E");
+  --grain-opacity: 0.11;
+  --ink-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='ink'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncG type='linear' slope='.65' intercept='.35'/%3E%3CfeFuncB type='linear' slope='.65' intercept='.35'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ink)'/%3E%3C/svg%3E");
   --vignette: radial-gradient(ellipse at center, transparent 30%, oklch(0.06 0.04 265 / 0.9) 100%);
   --scroll-leak: linear-gradient(106deg, oklch(0.66 0.26 32 / 0.7), oklch(0.72 0.24 43 / 0.62) 6%, oklch(0.7 0.24 39 / 0.3) 14%, transparent 32%);
   --scroll-leak-right: linear-gradient(76deg, transparent 66%, oklch(0.69 0.25 36 / 0.3) 82%, oklch(0.72 0.24 44 / 0.65) 94%, oklch(0.65 0.26 31 / 0.75));
@@ -123,8 +123,8 @@
   isolation: isolate;
   &::after {
     content: "";
-    position: fixed;
-    inset: -10%;
+    position: absolute;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
     opacity: var(--grain-opacity);
@@ -197,18 +197,22 @@
 @keyframes reel-spin { to { transform: rotate(1turn); } }
 .film-reel { transform-origin: center; transform-box: fill-box; }
 .group:hover .film-reel, a.group:focus-visible .film-reel { animation: reel-spin 1.6s linear infinite; }
-@keyframes film-feed { to { background-position: -10px 0; } }
 .film-unroll {
-  pointer-events: none; position: absolute; left: calc(100% - 2px); top: 50%;
-  height: 14px; width: 110px; transform: translateY(-50%) scaleX(0); transform-origin: left center;
+  pointer-events: none; position: absolute; left: 50%; bottom: 0;
+  height: 16px; width: 120px; transform: scaleX(0); transform-origin: left center;
   transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
   border-block: 1px solid currentColor;
-  background-image: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 10px);
-  background-size: 100% 2px; background-repeat: no-repeat;
-  background-position: 0 50%;
-  -webkit-mask: linear-gradient(90deg, #000 70%, transparent);
-  mask: linear-gradient(90deg, #000 70%, transparent);
+  background-image:
+    repeating-linear-gradient(90deg, currentColor 0 3px, transparent 3px 7px),
+    repeating-linear-gradient(90deg, currentColor 0 3px, transparent 3px 7px),
+    repeating-linear-gradient(90deg, transparent 0 1px, currentColor 1px 2px, transparent 2px 20px);
+  background-size: 100% 2px, 100% 2px, 100% 6px;
+  background-repeat: no-repeat;
+  background-position: 0 2px, 0 10px, 0 4px;
+  -webkit-mask: linear-gradient(90deg, #000 75%, transparent);
+  mask: linear-gradient(90deg, #000 75%, transparent);
 }
+@keyframes film-feed { to { background-position: -7px 2px, -7px 10px, -20px 4px; } }
 .group:hover .film-unroll, a.group:focus-visible .film-unroll { transform: translateY(-50%) scaleX(1); animation: film-feed 0.5s linear infinite; }
 
 @media (prefers-reduced-motion: reduce) {
