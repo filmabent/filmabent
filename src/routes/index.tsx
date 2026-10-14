@@ -1,21 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Instagram, Mail, MapPin, Play, Youtube, Pause } from "lucide-react";
+import { Instagram, Mail, MapPin, Play, Youtube, Pause, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PortfolioGallery } from "@/components/portfolio-gallery";
 import { ContactForm } from "@/components/contact-form";
 import { portfolioQuery } from "@/lib/portfolio.functions";
 
-const bts1 = { url: "/bts/000049460017.jpg" };
-const bts2 = { url: "/bts/000049460020.jpg" };
-const bts3 = { url: "/bts/000049460021.jpg" };
-const bts4 = { url: "/bts/000163320022.jpg" };
-const bts5 = { url: "/bts/000163320024.jpg" };
-const bts6 = { url: "/bts/000163320027.jpg" };
 const bts7 = { url: "/bts/000163320033.jpg" };
-const bts8 = { url: "/bts/img_4676.jpg" };
-const bts9 = { url: "/bts/img_4677.jpg" };
-const bts10 = { url: "/bts/img_4719.jpg" };
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(portfolioQuery),
@@ -28,7 +20,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "filmabent crafts films with a retro heart: narrative films, Super 8 weddings, music videos and advertisements, imagefilms and events. Based in Berlin.",
+          "filmabent crafts films with a retro heart: narrative films, Super 8 weddings, music videos and advertisements, imagefilms and events. Based in Hamburg.",
       },
       { property: "og:title", content: "filmabent — Film Production with a Vintage Soul" },
       {
@@ -45,16 +37,16 @@ export const Route = createFileRoute("/")({
 });
 
 const gallery = [
-  { src: bts2.url, alt: "ARRI camera rig by the lake", wide: true },
-  { src: bts8.url, alt: "Crew filming on the beach", wide: false },
-  { src: bts10.url, alt: "Operator adjusting the camera", wide: false },
-  { src: bts3.url, alt: "Camera rig among roses", wide: false },
-  { src: bts7.url, alt: "Two cinema cameras with red light leak", wide: true },
-  { src: bts9.url, alt: "filmmaker with drone on set", wide: false },
-  { src: bts1.url, alt: "Steadicam operator on set", wide: false },
-  { src: bts5.url, alt: "Camera on GF Mini Jib in autumn", wide: false },
-  { src: bts4.url, alt: "Operator with ARRI rig indoors", wide: false },
-  { src: bts6.url, alt: "Focus puller at work", wide: true },
+  { src: "/bts/new-dsc8801.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-1.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8469.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-000049460017-2.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8894.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc7497.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8596.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8814.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8471.jpg", alt: "Behind the scenes on a filmabent set" },
+  { src: "/bts/new-dsc8808.jpg", alt: "Behind the scenes on a filmabent set" },
 ];
 
 function Index() {
@@ -131,7 +123,7 @@ function Index() {
               rel="noreferrer"
               className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
             >
-              <MapPin className="h-4 w-4 text-primary" /> Berlin — filming across all of Europe
+              <MapPin className="h-4 w-4 text-primary" /> Hamburg — filming across all of Europe
             </a>
           </div>
           <div>
@@ -195,17 +187,35 @@ function Index() {
 
 function BehindTheScenes() {
   const [paused, setPaused] = useState(false);
+  const [open, setOpen] = useState<number | null>(null);
+  const n = gallery.length;
+  const go = (d: number) => setOpen(i => i === null ? i : (i + d + n) % n);
+  useEffect(() => {
+    if (open === null) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(null); if (e.key === "ArrowRight") go(1); if (e.key === "ArrowLeft") go(-1); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
   return <section id="bts" className="overflow-hidden border-y border-border bg-reel py-8 text-reel-foreground">
     <div className="mx-auto mb-8 flex max-w-6xl items-center justify-between gap-4 px-6">
       <div><p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-primary">On set</p><h2 className="font-display text-3xl md:text-4xl">Behind the scenes</h2></div>
       <Button variant="outline" size="icon" aria-label={paused ? "Resume photo banner" : "Pause photo banner"} title={paused ? "Resume" : "Pause"} onClick={() => setPaused(!paused)}>{paused ? <Play /> : <Pause />}</Button>
     </div>
-    <div className={`bts-strip ${paused ? "is-paused" : ""}`}>
+    <div className={`bts-strip ${paused || open !== null ? "is-paused" : ""}`}>
       <div className="bts-track">
         {[0, 1].map(copy => <div className="bts-group" key={copy} aria-hidden={copy === 1}>
-          {gallery.map(img => <img key={img.src} src={img.src} alt={copy === 0 ? img.alt : ""} loading="lazy" className="h-44 w-auto shrink-0 object-contain md:h-56" />)}
+          {gallery.map((img, i) => <button key={img.src} type="button" tabIndex={copy === 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={`Open photo ${i + 1}`} className="shrink-0 cursor-zoom-in">
+            <img src={img.src} alt={copy === 0 ? img.alt : ""} loading="lazy" className="h-44 w-auto object-contain transition-opacity hover:opacity-80 md:h-56" />
+          </button>)}
         </div>)}
       </div>
     </div>
+    {open !== null && <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
+      <img src={gallery[open]!.src} alt={gallery[open]!.alt} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
+      <Button variant="outline" size="icon" aria-label="Close" className="absolute right-4 top-4" onClick={() => setOpen(null)}><X /></Button>
+      <Button variant="outline" size="icon" aria-label="Previous photo" className="absolute left-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(-1); }}><ChevronLeft /></Button>
+      <Button variant="outline" size="icon" aria-label="Next photo" className="absolute right-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(1); }}><ChevronRight /></Button>
+      <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs tracking-[0.3em] text-reel-foreground/70">{open + 1} / {n}</p>
+    </div>}
   </section>;
 }
