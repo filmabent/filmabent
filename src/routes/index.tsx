@@ -118,6 +118,7 @@ function Index() {
 
       {/* Contact */}
       <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-6 py-16 text-center md:py-20">
+        <div className="clapperboard mx-auto mb-4" aria-hidden="true"><span className="cb-arm" /><span className="cb-body" /></div>
         <p className="mb-3 text-xs uppercase tracking-[0.35em] text-primary">{t("Roll camera", "Kamera läuft")}</p>
         <h2 className="font-display text-5xl md:text-7xl">{t("Let’s make something", "Lass uns was drehen")}</h2>
         <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
