@@ -406,7 +406,7 @@
   animation: projector-beam 2.6s steps(1) infinite; }
 @media (min-width: 768px) { .projection-beam { left: -1rem; } }
 .projection-screen { perspective: 700px; }
-.projected-title { transform: rotateY(-24deg); transform-origin: right center; animation: film-projection 2.6s steps(1) infinite; }
+.projected-title { transform: rotateY(-32deg); transform-origin: right center; animation: film-projection 2.6s steps(1) infinite; }
 @keyframes projector-beam { 0% { opacity: 1; } 12% { opacity: .65; } 16% { opacity: 1; } 41% { opacity: .75; } 44% { opacity: 1; } 70% { opacity: .55; } 73% { opacity: .9; } 76% { opacity: 1; } }
 @keyframes film-projection { 0% { opacity: 1; } 12% { opacity: .7; } 16% { opacity: 1; } 41% { opacity: .8; } 44% { opacity: 1; } 70% { opacity: .6; } 73% { opacity: .9; } 76% { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .projector-reel, .projection-beam, .projected-title { animation: none; opacity: 1; filter: none; } }
