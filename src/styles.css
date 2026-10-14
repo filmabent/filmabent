@@ -401,7 +401,7 @@
    .scroll-light-leak { display: none; }
   .grain::after, .animate-flicker { animation: none; }
   .film-reel, .film-unroll { animation: none; }
-  .clapperboard .cb-arm, .clapper-slate .slate-arm { animation: none; }
+  .clapperboard .cb-arm, .clapper-slate .slate-arm, .clapper-slate:hover .slate-arm { animation: none; }
   html { scroll-behavior: auto; }
 }
 @media (max-width: 639px), (hover: none) { .film-unroll { display: none; } }
