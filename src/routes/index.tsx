@@ -131,47 +131,49 @@ function Index() {
           {t("A wedding, a record, a short film, an event — tell us what you’re dreaming of and we’ll bring the film.", "Eine Hochzeit, ein Musikvideo, ein Kurzfilm, ein Event — erzähl uns von deiner Idee, den Rest machen wir.")}
         </p>
         </ContactForm>
-        <div className="mx-auto mt-12 grid max-w-xl gap-5 border-t border-border pt-10 text-left sm:grid-cols-2">
-          <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Email", "E-Mail")}</p>
-            <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
-              <Mail className="h-4 w-4 text-primary" /> filmabent@gmail.com
-            </a>
+        <div className="mx-auto mt-12 max-w-xl border-t border-border pt-10">
+          <div className="mx-auto grid w-fit gap-x-12 gap-y-5 text-center sm:grid-cols-[auto_auto] sm:text-left">
+            <div>
+              <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Email", "E-Mail")}</p>
+              <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
+                <Mail className="h-4 w-4 text-primary" /> filmabent@gmail.com
+              </a>
+            </div>
+            <div>
+              <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">Instagram</p>
+              <a
+                href="https://www.instagram.com/filmabent"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+              >
+                <Instagram className="h-4 w-4 text-primary" /> @filmabent
+              </a>
+            </div>
+            <div>
+              <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">YouTube</p>
+              <a
+                href="https://www.youtube.com/@filmabent"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+              >
+                <Youtube className="h-4 w-4 text-primary" /> filmabent
+              </a>
+            </div>
+            <div>
+              <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">TikTok</p>
+              <a
+                href="https://www.tiktok.com/@filmabent"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+              >
+                <TikTokIcon className="h-4 w-4 text-primary" /> @filmabent
+              </a>
+            </div>
           </div>
-          <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">Instagram</p>
-            <a
-              href="https://www.instagram.com/filmabent"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
-            >
-              <Instagram className="h-4 w-4 text-primary" /> @filmabent
-            </a>
-          </div>
-          <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">YouTube</p>
-            <a
-              href="https://www.youtube.com/@filmabent"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
-            >
-              <Youtube className="h-4 w-4 text-primary" /> filmabent
-            </a>
-          </div>
-          <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">TikTok</p>
-            <a
-              href="https://www.tiktok.com/@filmabent"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
-            >
-              <TikTokIcon className="h-4 w-4 text-primary" /> @filmabent
-            </a>
-          </div>
-          <div className="sm:col-span-2">
+          <div className="mt-5 text-center">
             <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Based in", "Zuhause in")}</p>
             <a
               href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
