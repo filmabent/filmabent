@@ -27,13 +27,12 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     clapRef.current?.cancel();
     clapRef.current = el.animate([
-      { transform: "rotate(0deg)", offset: 0 },
-      { transform: "rotate(-9deg)", offset: 0.14 },
-      { transform: "rotate(0deg)", offset: 0.3 },
-      { transform: "rotate(-3.5deg)", offset: 0.38 },
-      { transform: "rotate(0deg)", offset: 0.48 },
+      { transform: "rotate(-9deg)", offset: 0, easing: "ease-out" },
+      { transform: "rotate(0deg)", offset: 0.16, easing: "ease-out" },
+      { transform: "rotate(-3.5deg)", offset: 0.24, easing: "ease-out" },
+      { transform: "rotate(0deg)", offset: 0.34 },
       { transform: "rotate(0deg)", offset: 1 },
-    ], { duration: 1600, easing: "ease-out" });
+    ], { duration: 1500 });
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
