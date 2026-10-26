@@ -139,17 +139,6 @@ function Index() {
             </a>
           </div>
           <div>
-            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Based in", "Zuhause in")}</p>
-            <a
-              href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
-            >
-              <MapPin className="h-4 w-4 text-primary" /> {t("Hamburg — filming across all of Europe", "Hamburg — Drehs in ganz Europa")}
-            </a>
-          </div>
-          <div>
             <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">Instagram</p>
             <a
               href="https://www.instagram.com/filmabent"
@@ -180,6 +169,17 @@ function Index() {
               className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
             >
               <TikTokIcon className="h-4 w-4 text-primary" /> @filmabent
+            </a>
+          </div>
+          <div className="sm:col-span-2">
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Based in", "Zuhause in")}</p>
+            <a
+              href="https://maps.app.goo.gl/whusxa1zkMY6TPmX8"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 text-sm tracking-wide underline-offset-4 transition-colors hover:text-primary"
+            >
+              <MapPin className="h-4 w-4 text-primary" /> {t("Hamburg — filming across all of Europe", "Hamburg — Drehs in ganz Europa")}
             </a>
           </div>
         </div>
