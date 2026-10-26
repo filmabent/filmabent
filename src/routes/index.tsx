@@ -131,7 +131,7 @@ function Index() {
           {t("A wedding, a record, a short film, an event — tell us what you’re dreaming of and we’ll bring the film.", "Eine Hochzeit, ein Musikvideo, ein Kurzfilm, ein Event — erzähl uns von deiner Idee, den Rest machen wir.")}
         </p>
         </ContactForm>
-        <div className="mx-auto mt-12 grid max-w-xl gap-5 border-t border-border pt-10 text-left sm:grid-cols-2">
+        <div className="mx-auto mt-12 grid max-w-xl justify-items-center gap-5 border-t border-border pt-10 text-center sm:grid-cols-2">
           <div>
             <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Email", "E-Mail")}</p>
             <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
