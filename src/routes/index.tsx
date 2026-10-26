@@ -223,13 +223,19 @@ function BehindTheScenes() {
     if (!el || !photos) return;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let width = 0;
+    // fractional position kept here: on 1x screens the browser rounds scrollLeft
+    // to whole pixels, so adding ~0.5px per frame directly never moved the banner
+    let pos = 0;
     const resize = new ResizeObserver(() => {
       const next = photos.offsetWidth;
       if (next <= 0) return;
-      el.scrollLeft = width ? el.scrollLeft / width * next : next;
+      pos = width ? pos / width * next : next;
+      el.scrollLeft = pos;
       width = next;
     });
     resize.observe(photos);
+    const onUserScroll = () => { if (Math.abs(el.scrollLeft - pos) > 2) pos = el.scrollLeft; };
+    el.addEventListener("scroll", onUserScroll, { passive: true });
     let frame = 0;
     let last = performance.now();
     const tick = (now: number) => {
@@ -244,14 +250,15 @@ function BehindTheScenes() {
         if (!motion.matches && !stopped.current && !hovering.current && !focused.current) distance = dt * 0.033;
       }
       if (width > 0) {
-        if (distance) el.scrollLeft += distance;
-        if (el.scrollLeft < width * 0.5) el.scrollLeft += width;
-        if (el.scrollLeft > width * 1.5) el.scrollLeft -= width;
+        pos += distance;
+        if (pos < width * 0.5) pos += width;
+        if (pos > width * 1.5) pos -= width;
+        el.scrollLeft = pos;
       }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(frame); resize.disconnect(); };
+    return () => { cancelAnimationFrame(frame); resize.disconnect(); el.removeEventListener("scroll", onUserScroll); };
   }, []);
   useEffect(() => {
     if (open === null) return;
