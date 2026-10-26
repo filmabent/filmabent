@@ -28,7 +28,8 @@
 - [x] Compact right-to-left behind-the-scenes photo banner
 - [x] Replace Est. on film · Berlin with a film-focused highlight
 - [x] Socials: Instagram @filmabent, YouTube filmabent
-- [ ] TikTok link — user will send it; add to footer when received
+- [x] TikTok link (https://www.tiktok.com/@filmabent) in contact details and footer
+- [x] Hover clap triggers on every entry; banner runs on all desktops; filmabent tab icon
 - [x] Google Maps link: https://maps.app.goo.gl/whusxa1zkMY6TPmX8
 - [x] Contact: mailto filmabent@gmail.com
 - [x] Register uploaded BTS images via lovable-assets

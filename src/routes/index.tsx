@@ -10,6 +10,12 @@ import { portfolioQuery } from "@/lib/portfolio.functions";
 import { LanguageSwitch, useLanguage } from "@/components/language";
 import { ScrollLightLeak } from "@/components/scroll-light-leak";
 
+function TikTokIcon({ className }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="M9 12a4 4 0 1 0 4 4V3c.5 2.6 2.4 4.5 5 5" />
+  </svg>;
+}
+
 const bts7 = { url: "/bts/000163320033.jpg" };
 
 export const Route = createFileRoute("/")({
@@ -165,6 +171,17 @@ function Index() {
               <Youtube className="h-4 w-4 text-primary" /> filmabent
             </a>
           </div>
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">TikTok</p>
+            <a
+              href="https://www.tiktok.com/@filmabent"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+            >
+              <TikTokIcon className="h-4 w-4 text-primary" /> @filmabent
+            </a>
+          </div>
         </div>
       </section>
 
@@ -190,6 +207,15 @@ function Index() {
               className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] transition-colors hover:text-primary"
             >
               <Youtube className="h-5 w-5" /> filmabent
+            </a>
+            <a
+              href="https://www.tiktok.com/@filmabent"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="TikTok"
+              className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] transition-colors hover:text-primary"
+            >
+              <TikTokIcon className="h-5 w-5" /> @filmabent
             </a>
           </div>
           <span className="text-xs uppercase tracking-[0.2em] text-reel-foreground/60">
@@ -223,13 +249,19 @@ function BehindTheScenes() {
     if (!el || !photos) return;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let width = 0;
+    // fractional position kept here: on 1x screens the browser rounds scrollLeft
+    // to whole pixels, so adding ~0.5px per frame directly never moved the banner
+    let pos = 0;
     const resize = new ResizeObserver(() => {
       const next = photos.offsetWidth;
       if (next <= 0) return;
-      el.scrollLeft = width ? el.scrollLeft / width * next : next;
+      pos = width ? pos / width * next : next;
+      el.scrollLeft = pos;
       width = next;
     });
     resize.observe(photos);
+    const onUserScroll = () => { if (Math.abs(el.scrollLeft - pos) > 2) pos = el.scrollLeft; };
+    el.addEventListener("scroll", onUserScroll, { passive: true });
     let frame = 0;
     let last = performance.now();
     const tick = (now: number) => {
@@ -244,14 +276,15 @@ function BehindTheScenes() {
         if (!motion.matches && !stopped.current && !hovering.current && !focused.current) distance = dt * 0.033;
       }
       if (width > 0) {
-        if (distance) el.scrollLeft += distance;
-        if (el.scrollLeft < width * 0.5) el.scrollLeft += width;
-        if (el.scrollLeft > width * 1.5) el.scrollLeft -= width;
+        pos += distance;
+        if (pos < width * 0.5) pos += width;
+        if (pos > width * 1.5) pos -= width;
+        el.scrollLeft = pos;
       }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
-    return () => { cancelAnimationFrame(frame); resize.disconnect(); };
+    return () => { cancelAnimationFrame(frame); resize.disconnect(); el.removeEventListener("scroll", onUserScroll); };
   }, []);
   useEffect(() => {
     if (open === null) return;
