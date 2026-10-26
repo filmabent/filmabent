@@ -10,6 +10,12 @@ import { portfolioQuery } from "@/lib/portfolio.functions";
 import { LanguageSwitch, useLanguage } from "@/components/language";
 import { ScrollLightLeak } from "@/components/scroll-light-leak";
 
+function TikTokIcon({ className }: { className?: string }) {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <path d="M9 12a4 4 0 1 0 4 4V3c.5 2.6 2.4 4.5 5 5" />
+  </svg>;
+}
+
 const bts7 = { url: "/bts/000163320033.jpg" };
 
 export const Route = createFileRoute("/")({
@@ -165,6 +171,17 @@ function Index() {
               <Youtube className="h-4 w-4 text-primary" /> filmabent
             </a>
           </div>
+          <div>
+            <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">TikTok</p>
+            <a
+              href="https://www.tiktok.com/@filmabent"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary"
+            >
+              <TikTokIcon className="h-4 w-4 text-primary" /> @filmabent
+            </a>
+          </div>
         </div>
       </section>
 
@@ -190,6 +207,15 @@ function Index() {
               className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] transition-colors hover:text-primary"
             >
               <Youtube className="h-5 w-5" /> filmabent
+            </a>
+            <a
+              href="https://www.tiktok.com/@filmabent"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="TikTok"
+              className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] transition-colors hover:text-primary"
+            >
+              <TikTokIcon className="h-5 w-5" /> @filmabent
             </a>
           </div>
           <span className="text-xs uppercase tracking-[0.2em] text-reel-foreground/60">
