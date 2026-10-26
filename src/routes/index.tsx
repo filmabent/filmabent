@@ -132,7 +132,7 @@ function Index() {
         </p>
         </ContactForm>
         <div className="mx-auto mt-12 max-w-xl border-t border-border pt-10">
-          <div className="mx-auto grid w-fit gap-x-12 gap-y-5 text-center sm:grid-cols-2 sm:text-left">
+          <div className="mx-auto grid w-fit gap-x-12 gap-y-5 text-center sm:grid-cols-[auto_auto] sm:text-left">
             <div>
               <p className="mb-2 text-[10px] uppercase tracking-[0.35em] text-logo">{t("Email", "E-Mail")}</p>
               <a href="mailto:filmabent@gmail.com" className="inline-flex items-center gap-3 text-sm tracking-wide transition-colors hover:text-primary">
