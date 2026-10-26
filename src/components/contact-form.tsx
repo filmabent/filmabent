@@ -18,14 +18,22 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
   const [error, setError] = useState("");
   const armRef = useRef<HTMLDivElement>(null);
 
-  // restart the clap animation on every mouse entry — a CSS :hover switch alone
-  // doesn't always retrigger it (quick exits/entries can keep the same animation)
-  function retriggerClap() {
+  // every pointer entry plays its own clap on top of the periodic CSS clap;
+  // a scripted animation always starts fresh, unlike toggling a CSS :hover rule
+  const clapRef = useRef<Animation | null>(null);
+  function clap(e: React.PointerEvent) {
     const el = armRef.current;
-    if (!el) return;
-    el.style.animation = "none";
-    void el.offsetWidth;
-    el.style.animation = "";
+    if (!el || e.pointerType === "touch" || typeof el.animate !== "function") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    clapRef.current?.cancel();
+    clapRef.current = el.animate([
+      { transform: "rotate(0deg)", offset: 0 },
+      { transform: "rotate(-9deg)", offset: 0.14 },
+      { transform: "rotate(0deg)", offset: 0.3 },
+      { transform: "rotate(-3.5deg)", offset: 0.38 },
+      { transform: "rotate(0deg)", offset: 0.48 },
+      { transform: "rotate(0deg)", offset: 1 },
+    ], { duration: 1600, easing: "ease-out" });
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -47,7 +55,7 @@ export function ContactForm({ children }: { children?: React.ReactNode }) {
 
   if (status === "sent") return <p className="mx-auto mt-10 max-w-md text-sm text-primary">{t("Thank you — your message is on its way. We’ll get back to you soon.", "Vielen Dank — deine Nachricht ist unterwegs. Wir melden uns bald.")}</p>;
 
-  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left" onMouseEnter={retriggerClap}>
+  return <div className="clapper-slate mx-auto mt-6 max-w-3xl text-left" onPointerEnter={clap}>
     <div ref={armRef} className="slate-arm" aria-hidden="true" />
     <div className="slate-hinge" aria-hidden="true" />
     <div className="slate-arm-fixed" aria-hidden="true" />
