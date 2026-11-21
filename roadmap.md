@@ -1,5 +1,7 @@
 # filmabent site
 
+- [ ] Recover hero, banner and viewer photos when asset delivery fails; test with blocked asset requests.
+
 - [x] Restore video thumbnails when portfolio storage is unavailable.
 - [x] Optimize image delivery and verify photos, playback and load behavior on desktop/mobile.
 

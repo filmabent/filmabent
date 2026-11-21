@@ -4,7 +4,7 @@ import { Clapperboard, Heart, Music, Stars, Film, Play, Youtube } from "lucide-r
 import { Button } from "@/components/ui/button";
 import { categories, videoSource } from "@/lib/portfolio";
 import { portfolioQuery } from "@/lib/portfolio.functions";
-import { filmThumbnails } from "@/lib/media";
+import { filmThumbnails, restoreImage } from "@/lib/media";
 import { publishedPortfolio } from "@/lib/portfolio";
 
 import { useLanguage } from "@/components/language";
@@ -51,7 +51,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
   const [playing, setPlaying] = useState(false);
   const source = videoSource(featured, true);
   const original = publishedPortfolio.find(row => row.slug === category.slug);
-  const thumbnail = featured === original?.featured_url ? filmThumbnails[category.slug].url : thumb(featured);
+  const thumbnail = original && videoSource(featured) === videoSource(original.featured_url) ? filmThumbnails[category.slug].url : thumb(featured);
   const Icon = icons[categories.findIndex(item => item.slug === category.slug)] ?? Film;
   return <article id={category.slug} className={`scroll-mt-24 py-10 md:py-12 ${category.slug === "imagefilms" ? "" : "border-b border-border"}`}>
     <div className="grid items-center gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-12">

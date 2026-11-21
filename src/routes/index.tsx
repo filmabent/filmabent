@@ -9,7 +9,7 @@ import { ContactForm } from "@/components/contact-form";
 import { portfolioQuery } from "@/lib/portfolio.functions";
 import { LanguageSwitch, useLanguage } from "@/components/language";
 import { ScrollLightLeak } from "@/components/scroll-light-leak";
-import { btsPhotos, heroPhoto } from "@/lib/media";
+import { btsPhotos, heroPhoto, restoreImage } from "@/lib/media";
 
 function TikTokIcon({ className }: { className?: string }) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
@@ -101,7 +101,7 @@ function Index() {
 
       {/* Hero */}
       <section id="top" className="relative flex min-h-screen items-end overflow-hidden">
-        <img src={bts7.url} fetchPriority="high" width={1565} height={1037} alt={t("Two cinema cameras in red light", "Zwei Filmkameras in rotem Licht")} className="animate-flicker absolute inset-0 h-full w-full object-cover" />
+        <img src={bts7.url} onError={e => restoreImage(e.currentTarget, bts7.fallback)} fetchPriority="high" width={1565} height={1037} alt={t("Two cinema cameras in red light", "Zwei Filmkameras in rotem Licht")} className="animate-flicker absolute inset-0 h-full w-full object-cover" />
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-10">
@@ -309,14 +309,14 @@ function BehindTheScenes() {
       <div className="bts-track">
         {[0, 1, 2].map(copy => <div ref={copy === 1 ? group : undefined} className="bts-group" key={copy} aria-hidden={copy !== 1}>
           {gallery.map((img, i) => <Button variant="ghost" key={img.src} type="button" tabIndex={copy !== 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={t(`Open photo ${i + 1}`, `Foto ${i + 1} öffnen`)} className="h-auto shrink-0 cursor-zoom-in rounded-none p-0">
-            <img src={img.preview} loading="lazy" decoding="async" width={img.width} height={img.height} alt={copy === 1 ? t(img.alt, "Hinter den Kulissen am filmabent-Set") : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
+            <img src={img.preview} onError={e => restoreImage(e.currentTarget, img.fallback)} loading="lazy" decoding="async" width={img.width} height={img.height} alt={copy === 1 ? t(img.alt, "Hinter den Kulissen am filmabent-Set") : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
           </Button>)}
         </div>)}
       </div>
     </div>
     </div>
     {open !== null && currentPhoto && createPortal(<div role="dialog" aria-modal="true" aria-label={t("Photo viewer", "Fotoansicht")} className="fixed inset-0 z-[100] flex items-center justify-center bg-reel/95 p-4" onClick={() => setOpen(null)}>
-      <img src={currentPhoto.src} alt={t(currentPhoto.alt, "Hinter den Kulissen am filmabent-Set")} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
+      <img key={currentPhoto.src} src={currentPhoto.src} onError={e => restoreImage(e.currentTarget, currentPhoto.fallback)} alt={t(currentPhoto.alt, "Hinter den Kulissen am filmabent-Set")} className="max-h-[85vh] max-w-[90vw] object-contain" onClick={e => e.stopPropagation()} />
       <Button variant="outline" size="icon" aria-label={t("Close", "Schließen")} className="absolute right-4 top-4" onClick={() => setOpen(null)}><X /></Button>
       <Button variant="outline" size="icon" aria-label={t("Previous photo", "Vorheriges Foto")} className="absolute left-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(-1); }}><ChevronLeft /></Button>
       <Button variant="outline" size="icon" aria-label={t("Next photo", "Nächstes Foto")} className="absolute right-4 top-1/2 -translate-y-1/2" onClick={e => { e.stopPropagation(); go(1); }}><ChevronRight /></Button>

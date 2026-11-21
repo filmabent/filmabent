@@ -43,7 +43,7 @@ import narrative from "@/assets/films/narrative.webp.asset.json";
 import weddings from "@/assets/films/weddings.webp.asset.json";
 import music from "@/assets/films/music.webp.asset.json";
 import imagefilms from "@/assets/films/imagefilms.webp.asset.json";
-export const heroPhoto = hero;
+export const heroPhoto = { ...hero, fallback: "/bts/000163320033.jpg" };
 export const btsPhotos = {
   "new-000049460017-2": { src: new_000049460017_2_full.url, preview: new_000049460017_2_preview.url, width: 1037, height: 1565 },
   "new-000049460020-2": { src: new_000049460020_2_full.url, preview: new_000049460020_2_preview.url, width: 1565, height: 1037 },
@@ -67,3 +67,8 @@ export const btsPhotos = {
   "new-img_4719-2": { src: new_img_4719_2_full.url, preview: new_img_4719_2_preview.url, width: 640, height: 399 },
 };
 export const filmThumbnails = { narrative, weddings, music, imagefilms };
+
+export function restoreImage(image: HTMLImageElement, fallback: string | null) {
+  // Only switch once; if the independent source also fails, never retry-loop.
+  if (fallback && image.getAttribute("src") !== fallback) image.src = fallback;
+}
