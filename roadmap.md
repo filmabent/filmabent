@@ -1,5 +1,8 @@
 # filmabent site
 
+- [x] Restore video thumbnails when portfolio storage is unavailable.
+- [x] Optimize image delivery and verify photos, playback and load behavior on desktop/mobile.
+
 - [x] Match the supplied projection reference with naturally proportioned, growing letters instead of stretched individual glyphs; verify both languages.
 
 - [x] Connect the projection directly to the lens and fit growing headline letters inside the cone, matching the reference; check English/German at desktop and phone widths.

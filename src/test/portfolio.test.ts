@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { categories, portfolioSchema, videoSource } from "@/lib/portfolio";
+import { categories, portfolioSchema, resolvePortfolio, videoSource } from "@/lib/portfolio";
 
 describe("portfolio links", () => {
+  it("preserves the supplied production films when storage is unavailable", () => {
+    expect(resolvePortfolio([]).map(row => row.featured_url)).toEqual([
+      "https://youtu.be/ifzdD7G0ugA", "https://youtu.be/o9Lz2Zao3Hs",
+      "https://youtu.be/TeE6CvUIg0E", "https://youtu.be/pNX1XCQijRQ",
+    ]);
+  });
+  it("keeps saved edits ahead of outage defaults, including intentional empty links", () => {
+    const row = { slug: "narrative" as const, featured_url: "", gallery_urls: [] };
+    expect(resolvePortfolio([row])[0]).toEqual(row);
+  });
   it("accepts YouTube and normalizes the embed", () => {
     expect(videoSource("https://youtu.be/TeE6CvUIg0E")).toBe("https://www.youtube-nocookie.com/embed/TeE6CvUIg0E?rel=0");
   });

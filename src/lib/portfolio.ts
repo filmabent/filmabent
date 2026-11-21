@@ -31,3 +31,16 @@ export const portfolioSchema = z.object({
   gallery_urls: z.array(videoUrl).max(30),
 });
 export type Portfolio = z.infer<typeof portfolioSchema>;
+
+// Previously supplied production links, not demo data. Keep the films available
+// during a storage outage; successful stored rows always take precedence.
+export const publishedPortfolio: Portfolio[] = [
+  { slug: "narrative", featured_url: "https://youtu.be/ifzdD7G0ugA", gallery_urls: [] },
+  { slug: "weddings", featured_url: "https://youtu.be/o9Lz2Zao3Hs", gallery_urls: [] },
+  { slug: "music", featured_url: "https://youtu.be/TeE6CvUIg0E", gallery_urls: [] },
+  { slug: "imagefilms", featured_url: "https://youtu.be/pNX1XCQijRQ", gallery_urls: [] },
+];
+
+export function resolvePortfolio(rows: Portfolio[]): Portfolio[] {
+  return publishedPortfolio.map(fallback => rows.find(row => row.slug === fallback.slug) ?? fallback);
+}

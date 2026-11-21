@@ -9,6 +9,7 @@ import { ContactForm } from "@/components/contact-form";
 import { portfolioQuery } from "@/lib/portfolio.functions";
 import { LanguageSwitch, useLanguage } from "@/components/language";
 import { ScrollLightLeak } from "@/components/scroll-light-leak";
+import { btsPhotos, heroPhoto } from "@/lib/media";
 
 function TikTokIcon({ className }: { className?: string }) {
   return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
@@ -16,7 +17,7 @@ function TikTokIcon({ className }: { className?: string }) {
   </svg>;
 }
 
-const bts7 = { url: "/bts/000163320033.jpg" };
+const bts7 = heroPhoto;
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(portfolioQuery),
@@ -41,31 +42,31 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "/" }, { rel: "preload", as: "image", href: heroPhoto.url, fetchpriority: "high" }],
   }),
 });
 
 const gallery = [
-  { src: "/bts/new-dsc8801.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-1.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000049460017-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8469.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc7497.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000163320024-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000049460020-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8894.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-img_4676-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000049460021-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8471.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8596.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000163320022-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000163320033-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8814.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dscf8670.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-img_4677-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-000163320027-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-img_4719-2.jpg", alt: "Behind the scenes on a filmabent set" },
-  { src: "/bts/new-dsc8808.jpg", alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8801"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-1"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000049460017-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8469"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc7497"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000163320024-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000049460020-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8894"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-img_4676-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000049460021-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8471"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8596"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000163320022-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000163320033-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8814"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dscf8670"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-img_4677-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-000163320027-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-img_4719-2"], alt: "Behind the scenes on a filmabent set" },
+  { ...btsPhotos["new-dsc8808"], alt: "Behind the scenes on a filmabent set" },
 ];
 
 function Index() {
@@ -100,7 +101,7 @@ function Index() {
 
       {/* Hero */}
       <section id="top" className="relative flex min-h-screen items-end overflow-hidden">
-        <img src={bts7.url} alt={t("Two cinema cameras in red light", "Zwei Filmkameras in rotem Licht")} className="animate-flicker absolute inset-0 h-full w-full object-cover" />
+        <img src={bts7.url} fetchPriority="high" width={1565} height={1037} alt={t("Two cinema cameras in red light", "Zwei Filmkameras in rotem Licht")} className="animate-flicker absolute inset-0 h-full w-full object-cover" />
         <div className="vignette absolute inset-0 opacity-50" />
         <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div className="relative mx-auto w-full max-w-6xl px-6 pb-10">
@@ -191,7 +192,7 @@ function Index() {
       <footer className="border-t border-border bg-reel py-8 text-reel-foreground">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-8 px-6 md:flex-row">
           <span className="font-display text-3xl">filmabent</span>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <a
               href="https://www.instagram.com/filmabent"
               target="_blank"
@@ -308,7 +309,7 @@ function BehindTheScenes() {
       <div className="bts-track">
         {[0, 1, 2].map(copy => <div ref={copy === 1 ? group : undefined} className="bts-group" key={copy} aria-hidden={copy !== 1}>
           {gallery.map((img, i) => <Button variant="ghost" key={img.src} type="button" tabIndex={copy !== 1 ? -1 : 0} onClick={() => setOpen(i)} aria-label={t(`Open photo ${i + 1}`, `Foto ${i + 1} öffnen`)} className="h-auto shrink-0 cursor-zoom-in rounded-none p-0">
-            <img src={img.src} alt={copy === 1 ? t(img.alt, "Hinter den Kulissen am filmabent-Set") : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
+            <img src={img.preview} loading="lazy" decoding="async" width={img.width} height={img.height} alt={copy === 1 ? t(img.alt, "Hinter den Kulissen am filmabent-Set") : ""} className="h-44 w-auto max-w-none object-contain md:h-56" />
           </Button>)}
         </div>)}
       </div>

@@ -3,27 +3,35 @@ import { createClient } from "@supabase/supabase-js";
 import { queryOptions } from "@tanstack/react-query";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
-import { portfolioSchema } from "./portfolio";
+import { portfolioSchema, resolvePortfolio } from "./portfolio";
 
 export const getPortfolio = createServerFn({ method: "GET" }).handler(async () => {
   const key = process.env['SUPABASE_PUBLISHABLE_KEY'] ?? import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'];
   const url = process.env['SUPABASE_URL'] ?? import.meta.env['VITE_SUPABASE_URL'];
-  if (!key || !url) return [];
+   if (!key || !url) return resolvePortfolio([]);
   const client = createClient<Database>(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },
     global: { fetch: (input, init) => {
       const headers = new Headers(init?.headers);
       if (key.startsWith("sb_") && headers.get("Authorization") === `Bearer ${key}`) headers.delete("Authorization");
       headers.set("apikey", key);
-      return fetch(input, { ...init, headers });
+       return fetch(input, { ...init, headers, signal: AbortSignal.timeout(2500) });
     } },
   });
-  const { data, error } = await client.from("portfolio_categories").select("slug,featured_url,gallery_urls");
-  if (error) return [];
-  return (data ?? []).map(row => portfolioSchema.parse(row));
+   try {
+     const { data, error } = await client.from("portfolio_categories").select("slug,featured_url,gallery_urls");
+     if (error) return resolvePortfolio([]);
+     const rows = (data ?? []).flatMap(row => {
+       const parsed = portfolioSchema.safeParse(row);
+       return parsed.success ? [parsed.data] : [];
+     });
+     return resolvePortfolio(rows);
+   } catch {
+     return resolvePortfolio([]);
+   }
 });
 
-export const portfolioQuery = queryOptions({ queryKey: ["portfolio"], queryFn: () => getPortfolio() });
+export const portfolioQuery = queryOptions({ queryKey: ["portfolio"], queryFn: () => getPortfolio(), staleTime: 5 * 60 * 1000 });
 
 export const savePortfolio = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
