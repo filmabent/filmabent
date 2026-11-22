@@ -1,7 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="12" fill="#0d1729"/>
-  <g fill="#d3202a" fill-rule="evenodd">
-    <path d="M32 6a26 26 0 1 1 0 52a26 26 0 0 1 0-52Zm0 21a5 5 0 1 0 0 10a5 5 0 0 0 0-10Zm0-15a7 7 0 1 0 0 14a7 7 0 0 0 0-14Zm0 26a7 7 0 1 0 0 14a7 7 0 0 0 0-14Zm-13-13a7 7 0 1 0 0 14a7 7 0 0 0 0-14Zm26 0a7 7 0 1 0 0 14a7 7 0 0 0 0-14Z"/>
+  <defs>
+    <clipPath id="arm"><rect x="8" y="13" width="48" height="10" rx="2"/></clipPath>
+  </defs>
+  <rect x="8" y="26" width="48" height="29" rx="3" fill="#d3202a"/>
+  <g transform="rotate(-12 9 23)">
+    <rect x="8" y="13" width="48" height="10" rx="2" fill="#d3202a"/>
+    <path d="M12 12 19 24M27 12 34 24M42 12 49 24" stroke="#0d1729" stroke-width="7" clip-path="url(#arm)"/>
   </g>
-  <circle cx="32" cy="32" r="2" fill="#0d1729"/>
+  <path d="M17 35h30M17 44h18" stroke="#0d1729" stroke-width="4" stroke-linecap="round"/>
 </svg>
