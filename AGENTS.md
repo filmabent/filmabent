@@ -13,6 +13,7 @@
 - Public portfolio reads use a publishable-key server function with Query loaders; writes use authenticated server functions and owner-role RLS to prevent visitor edits.
 - Public portfolio reads have a bounded upstream timeout and production-link fallback so storage outages cannot blank video previews or indefinitely delay the page; saved rows take precedence.
 - Photo media uses CDN asset pointers, lightweight lazy-loaded banner previews with intrinsic dimensions, and full-size viewer assets; prioritize the hero image, and fall back once to existing public originals on delivery failure so preview-host asset outages cannot hide photos.
+- ReliableImage checks already-failed SSR images after hydration as well as new error events, so failures before React attaches listeners also recover.
 - Owner roles live in a protected role table and are assigned only after the designated account email is verified, preventing self-assigned privileges.
 - Authentication identity events are subscribed to once in the root; owner views receive scoped events rather than competing auth subscriptions.
 - BTS autoplay and manual arrows share one scrollLeft-based animation loop with duplicated image groups, so manual movement and seamless looping never compete.

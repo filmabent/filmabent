@@ -4,8 +4,9 @@ import { Clapperboard, Heart, Music, Stars, Film, Play, Youtube } from "lucide-r
 import { Button } from "@/components/ui/button";
 import { categories, videoSource } from "@/lib/portfolio";
 import { portfolioQuery } from "@/lib/portfolio.functions";
-import { filmThumbnails, restoreImage } from "@/lib/media";
+import { filmThumbnails } from "@/lib/media";
 import { publishedPortfolio } from "@/lib/portfolio";
+import { ReliableImage } from "@/components/reliable-image";
 
 import { useLanguage } from "@/components/language";
 
@@ -62,7 +63,7 @@ function CategoryGallery({ category, featured }: { category: { slug: typeof cate
       </div>
       <div className="w-full max-w-md md:justify-self-end">
         <div className="relative aspect-video w-full border border-border bg-reel">
-          {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={t(`Play ${category.title}`, `${category.title} abspielen`)} className="group relative h-full w-full overflow-hidden rounded-none p-0">{thumbnail && <img src={thumbnail} alt="" loading="lazy" decoding="async" width={480} height={360} className="absolute inset-0 h-full w-full object-cover" />}<span className="relative flex size-14 items-center justify-center rounded-full bg-reel/70 transition-transform group-hover:scale-110"><Play className="size-7 text-primary" /></span></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
+          {playing && source ? source.includes(".mp4") ? <video src={source} controls autoPlay className="h-full w-full" /> : <iframe src={source} title={`${category.title} spec film`} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen className="h-full w-full" /> : source ? <Button variant="ghost" onClick={() => setPlaying(true)} aria-label={t(`Play ${category.title}`, `${category.title} abspielen`)} className="group relative h-full w-full overflow-hidden rounded-none p-0">{thumbnail && <ReliableImage src={thumbnail} fallback={thumb(featured)} alt="" loading="lazy" decoding="async" width={480} height={360} className="absolute inset-0 h-full w-full object-cover" />}<span className="relative flex size-14 items-center justify-center rounded-full bg-reel/70 transition-transform group-hover:scale-110"><Play className="size-7 text-primary" /></span></Button> : <div className="flex h-full flex-col items-center justify-center gap-4 text-muted-foreground"><Film className="size-9" strokeWidth={1} /></div>}
         </div>
         {category.slug !== "imagefilms" && <a
           href="https://www.youtube.com/@filmabent"
